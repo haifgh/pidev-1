@@ -36,12 +36,18 @@
                             </div>
                         </div>
                         <div class="ht-right">
-                            <a href="#" class="login-panel" >Sign up</a>
-                            <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                        {% if is_granted('ROLE_USER') %}
 
-                            <div class="top-social">
-                                <a href="#"><i class="ti-facebook"></i></a>                                     {#todo#}
-                            </div>
+                            <a href="{{ path('fos_user_security_logout') }}" class="login-panel" ><i class="fa fa-sign-out"></i>Log out</a>
+                            <h1 class="login-panel">|</h1>
+                            <a href="{{ path('fos_user_profile_show') }}" class="login-panel" ><i class="fa fa-user-circle"></i>Profil</a>
+                        {% else %}
+
+                                <a href="{{ path('fos_user_registration_register') }}" class="login-panel" ><i class="fa fa-user-plus"></i>Sign up</a>
+                                <h1 class="login-panel">|</h1>
+                                <a href="{{ path('fos_user_security_login') }}" class="login-panel"><i class="fa fa-user"></i>Login</a>
+
+                        {% endif %}
                         </div>
                     </div>
                 </div>
@@ -132,6 +138,9 @@
                                 <li><a href="#">Events</a></li>
                                 <li><a href="#">Blog</a></li>
                                 <li><a href="#">Contact</a></li>
+                                {% if is_granted('ROLE_USER') %}
+                                    <li><a href="#">Special PROMO !</a></li>
+                                {% endif %}
                             </ul>
                         </nav>
                     <div id="mobile-menu-wrap"></div>

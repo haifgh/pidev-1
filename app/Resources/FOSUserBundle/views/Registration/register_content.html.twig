@@ -1,0 +1,21 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="register-form">
+                    <h2>Register</h2>
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                        <div class="group-input">{{ form_row(form.email) }}</div>
+                        <div class="group-input"> {{ form_row(form.username) }}</div>
+                        <div class="group-input"> {{ form_row(form.plainPassword) }}</div>
+                        <div><input type="submit" class="site-btn register-btn" value="{{ 'registration.submit'|trans }}" /></div>
+                    {{ form_end(form) }}
+                    <div class="switch-login">
+                        <a href="{{path('fos_user_security_login')}}" class="or-login">Or Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
