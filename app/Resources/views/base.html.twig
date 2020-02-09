@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Hunt Kingdom{% endblock %}</title>
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}" type="text/css">
@@ -15,7 +15,7 @@
             <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/icon.png') }}" />
     </head>
     <body>
         {% block body %}
@@ -36,6 +36,10 @@
                             </div>
                         </div>
                         <div class="ht-right">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('admin') }}" class="login-panel" ><i class="fa fa-at"></i>Admin Dashboard</a>
+                                <h1 class="login-panel">|</h1>
+                            {% endif %}
                         {% if is_granted('ROLE_USER') %}
 
                             <a href="{{ path('fos_user_security_logout') }}" class="login-panel" ><i class="fa fa-sign-out"></i>Log out</a>
@@ -133,7 +137,7 @@
                 <div class="nav-item">
                         <nav class="nav-menu  mobile-menu mx-auto">
                             <ul>
-                                <li class="active"><a href="#">Home</a></li>
+                                <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
                                 <li><a href="#">Shop</a></li>
                                 <li><a href="#">Events</a></li>
                                 <li><a href="#">Blog</a></li>
@@ -144,7 +148,6 @@
                             </ul>
                         </nav>
                     <div id="mobile-menu-wrap"></div>
-
                 </div>
             </header>
             <br>
@@ -156,16 +159,14 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="footer-left">
-
                                 <ul>
-                                    <li>Address: 60-49 Road 11378 New York</li>
-                                    <li>Phone: +65 11.188.888</li>
-                                    <li>Email: hello.colorlib@gmail.com</li>
+                                    <li>Address: Z.I. Chotrana II - B.P. 160 - 2083 Pôle Technologique - El Ghazala</li>
+                                    <li>Phone: +216 ** *** ***</li>
+                                    <li>Email: Contact@huntkingdom.tn</li>
                                 </ul>
                                 <div class="footer-social">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
-
                                 </div>
                             </div>
                         </div>
@@ -176,7 +177,7 @@
                                     <li><a href="#">About Us</a></li>
                                     <li><a href="#">Checkout</a></li>
                                     <li><a href="#">Contact</a></li>
-                                    <li><a href="#">Serivius</a></li>
+                                    <li><a href="#">Services</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -191,13 +192,10 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="copyright-reserved">
-
-                            <p class="text-center">Copyright &copy; 2020 All rights reserved</p>
-
+                    <p class="text-center">Copyright &copy; 2020 All rights reserved</p>
                 </div>
 
             </footer>
