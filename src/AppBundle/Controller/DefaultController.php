@@ -17,12 +17,13 @@ class DefaultController extends Controller
         return $this->render('base.html.twig');
     }
     /**
-     * @Route("/l", name="l")
+     * @Route("/admin/", name="admin")
      */
-    public function lAction(Request $request)
+    public function adminAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('login.html.twig');
+        return $this->render('adminBase.html.twig');
     }
+
 
 }
