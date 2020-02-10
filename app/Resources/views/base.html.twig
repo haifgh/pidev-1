@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8"  />
         <title>{% block title %}Hunt Kingdom{% endblock %}</title>
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/icon.png') }}" />
     </head>
     <body>
-        {% block body %}
+
             <div id="preloder">
                 <div class="loader"></div>
             </div>
@@ -60,8 +60,8 @@
                         <div class="row">
                             <div class="col-lg-2 col-md-2">
                                 <div class="logo">
-                                    <a href="./index.html">
-                                        <img src="img/logo.png" alt="">
+                                    <a href="#">
+                                        <img src="{{ asset('img/logo.png') }}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                                 <table>
                                                     <tbody>
                                                     <tr>
-                                                        <td class="si-pic"><img src="img/select-product-1.jpg" alt=""></td>
+                                                        <td class="si-pic"><img src="{{asset('img/select-product-1.jpg')}}" alt=""></td>
                                                         <td class="si-text">
                                                             <div class="product-selected">
                                                                 <p>$60.00 x 1</p>
@@ -104,7 +104,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="si-pic"><img src="img/select-product-2.jpg" alt=""></td>
+                                                        <td class="si-pic"><img src="{{'asset(img/select-product-2.jpg')}}" alt=""></td>
                                                         <td class="si-text">
                                                             <div class="product-selected">
                                                                 <p>$60.00 x 1</p>
@@ -150,10 +150,8 @@
                     <div id="mobile-menu-wrap"></div>
                 </div>
             </header>
-            <br>
-            {% block content %}
+         {% block content %}
             {% endblock %}
-            <br>
             <footer class="footer-section">
                 <div class="container">
                     <div class="row">
@@ -199,7 +197,7 @@
                 </div>
 
             </footer>
-            </div>{% endblock %}
+
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -212,5 +210,6 @@
             <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
             <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
+
     </body>
 </html>
