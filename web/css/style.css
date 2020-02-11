@@ -4311,3 +4311,9 @@ ol {
 		padding-right: 15px;
 	}
 }
+.primary-btn:hover{
+	background-color: #343a40;
+}
+a.primary-btn.view-card:hover{
+	background-color: #343a40!important;
+}

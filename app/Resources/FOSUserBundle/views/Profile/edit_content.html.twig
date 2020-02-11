@@ -1,0 +1,12 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="register-form">
+    <h2>Edit profile</h2>
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+<div class="group-input">{{ form_row(form.email) }}</div>
+<div class="group-input">{{ form_row(form.username) }}</div>
+<div class="group-input">{{ form_row(form.current_password) }}</div>
+    <div>
+        <input type="submit" class="site-btn register-btn" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+</div>
+{{ form_end(form) }}

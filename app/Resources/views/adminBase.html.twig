@@ -15,7 +15,7 @@
     <link href="{{asset('assets/js/plugins/nucleo/css/nucleo.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
-    <link href="{{asset('assets/css/argon-dashboard.css?v=1.1.2')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/argon-dashboard.css')}}" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -44,7 +44,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome!</h6>
                     </div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{{ path('fos_user_profile_show') }}" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>My profile</span>
                     </a>

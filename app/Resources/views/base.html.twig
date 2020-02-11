@@ -37,7 +37,7 @@
                         </div>
                         <div class="ht-right">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('admin') }}" class="login-panel" ><i class="fa fa-at"></i>Admin Dashboard</a>
+                                <a href="{{ path('admin') }}" class="login-panel" ><i class="fa fa-address-card"></i>Admin Dashboard</a>
                                 <h1 class="login-panel">|</h1>
                             {% endif %}
                         {% if is_granted('ROLE_USER') %}
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 text-right col-md-3">
+                            <div class="col-md-3 text-right">
                                 <ul class="nav-right">
                                     <li class="heart-icon">
                                         <a href="#">
@@ -142,12 +142,12 @@
                                 <li><a href="#">Events</a></li>
                                 <li><a href="#">Blog</a></li>
                                 <li><a href="#">Contact</a></li>
-                                {% if is_granted('ROLE_USER') %}
+                                {% if is_granted('ROLE_ADMIN') == false and is_granted('ROLE_USER')%}
                                     <li><a href="#">Special PROMO !</a></li>
                                 {% endif %}
                             </ul>
                         </nav>
-                    <div id="mobile-menu-wrap"></div>
+                    <div id="mobile-menu-wrap" class="mt-5"></div>
                 </div>
             </header>
          {% block content %}
