@@ -182,6 +182,22 @@ class User extends BaseUser
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getParticipations()
+    {
+        return $this->participations;
+    }
+
+    /**
+     * @param ArrayCollection $participations
+     */
+    public function setParticipations($participations)
+    {
+        $this->participations = $participations;
+    }
+
+    /**
      * @param ArrayCollection $evenements
      */
     public function setEvenements($evenements)
