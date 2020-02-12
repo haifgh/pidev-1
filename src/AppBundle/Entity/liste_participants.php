@@ -70,6 +70,12 @@ class liste_participants
      * @JoinColumn(name="evenement_id", referencedColumnName="id")
      */
     private $evenement;
+    /**
+     * Many features have one product. This is the owning side.
+     * @ManyToOne(targetEntity="User", inversedBy="participations")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * @return mixed

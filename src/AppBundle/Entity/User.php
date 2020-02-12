@@ -139,13 +139,22 @@ class User extends BaseUser
      * One product has many features. This is the inverse side.
      * @OneToMany(targetEntity="Post", mappedBy="user")
      */
+
     private $posts;
+
+    /**
+     *
+     * @OneToMany(targetEntity="liste_participants", mappedBy="user")
+     */
+    private $participations;
+
     public function __construct() {
         parent::__construct();
         $this->commandes = new ArrayCollection();
         $this->evenements = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->reclamations = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     /**
