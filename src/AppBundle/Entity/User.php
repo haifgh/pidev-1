@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -13,6 +15,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+
     /**
      * @var int
      *
@@ -21,6 +24,86 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @ORM\Column(name="nom", type="string",nullable=true)
+    */
+    private $nom;
+    /**
+     * @ORM\Column(name="prenom", type="string",nullable=true)
+     */
+    private $prenom;
+    /**
+     * @ORM\Column(name="tel", type="string",nullable=true)
+     */
+    private $tel;
+    /**
+     * @ORM\Column(name="adresse", type="string",nullable=true)
+     */
+    private $adresse;
+
+    /**
+     * @return mixed
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param mixed $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param mixed $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * @param mixed $prenom
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param mixed $tel
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    }
 
 
     /**
@@ -32,5 +115,102 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+
+
+
+    /**
+     * One product has many features. This is the inverse side.
+     * @OneToMany(targetEntity="commande", mappedBy="user")
+     */
+    private $commandes;
+
+    /**
+     * One product has many features. This is the inverse side.
+     * @OneToMany(targetEntity="Evenement", mappedBy="user")
+     */
+    private $evenements;
+    /**
+     * One product has many features. This is the inverse side.
+     * @OneToMany(targetEntity="reclamation", mappedBy="user")
+     */
+    private $reclamations;
+    /**
+     * One product has many features. This is the inverse side.
+     * @OneToMany(targetEntity="Post", mappedBy="user")
+     */
+    private $posts;
+    public function __construct() {
+        parent::__construct();
+        $this->commandes = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->reclamations = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+
+    /**
+     * @param ArrayCollection $commandes
+     */
+    public function setCommandes($commandes)
+    {
+        $this->commandes = $commandes;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEvenements()
+    {
+        return $this->evenements;
+    }
+
+    /**
+     * @param ArrayCollection $evenements
+     */
+    public function setEvenements($evenements)
+    {
+        $this->evenements = $evenements;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReclamations()
+    {
+        return $this->reclamations;
+    }
+
+    /**
+     * @param ArrayCollection $reclamations
+     */
+    public function setReclamations($reclamations)
+    {
+        $this->reclamations = $reclamations;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param ArrayCollection $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
 }
 

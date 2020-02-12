@@ -140,11 +140,9 @@
                                 <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
                                 <li><a href="#">Shop</a></li>
                                 <li><a href="#">Events</a></li>
-                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Guides</a></li>
                                 <li><a href="#">Contact</a></li>
-                                {% if is_granted('ROLE_ADMIN') == false and is_granted('ROLE_USER')%}
-                                    <li><a href="#">Special PROMO !</a></li>
-                                {% endif %}
+
                             </ul>
                         </nav>
                     <div id="mobile-menu-wrap" class="mt-5"></div>
