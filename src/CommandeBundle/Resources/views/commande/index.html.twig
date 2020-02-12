@@ -1,0 +1,57 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block content %}
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+    <h3>Commandes list</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Datelivraison</th>
+                <th>Status</th>
+                <th>Adresse</th>
+                <th>Prixtotal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
+                <td>{% if commande.date %}{{ commande.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if commande.dateLivraison %}{{ commande.dateLivraison|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ commande.status }}</td>
+                <td>{{ commande.adresse }}</td>
+                <td>{{ commande.prixTotal }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commande_show', { 'id': commande.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commande_edit', { 'id': commande.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commande_new') }}">Create a new commande</a>
+        </li>
+    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
