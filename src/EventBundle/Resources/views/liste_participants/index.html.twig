@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Liste_participants list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dateparticipation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for liste_participant in liste_participants %}
+            <tr>
+                <td><a href="{{ path('liste_participants_show', { 'id': liste_participant.id }) }}">{{ liste_participant.id }}</a></td>
+                <td>{% if liste_participant.dateParticipation %}{{ liste_participant.dateParticipation|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('liste_participants_show', { 'id': liste_participant.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('liste_participants_edit', { 'id': liste_participant.id }) }}">edit</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('liste_participants_new') }}">Create a new liste_participant</a>
+        </li>
+    </ul>
+{% endblock %}

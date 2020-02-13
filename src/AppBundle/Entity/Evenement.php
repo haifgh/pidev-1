@@ -229,7 +229,7 @@ class Evenement
     private $user;
     /**
      *
-     * @OneToMany(targetEntity="liste_participants", mappedBy="evenement")
+     * @OneToMany(targetEntity="liste_participants", mappedBy="evenement",cascade="remove")
      */
     private $listes_participants;
     // ...

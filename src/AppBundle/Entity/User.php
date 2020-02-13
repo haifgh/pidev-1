@@ -121,30 +121,30 @@ class User extends BaseUser
 
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="commande", mappedBy="user")
+     * @OneToMany(targetEntity="commande", mappedBy="user",cascade="remove")
      */
     private $commandes;
 
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="Evenement", mappedBy="user")
+     * @OneToMany(targetEntity="Evenement", mappedBy="user",cascade="remove")
      */
     private $evenements;
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="reclamation", mappedBy="user")
+     * @OneToMany(targetEntity="reclamation", mappedBy="user",cascade="remove")
      */
     private $reclamations;
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="Post", mappedBy="user")
+     * @OneToMany(targetEntity="Post", mappedBy="user",cascade="remove")
      */
 
     private $posts;
 
     /**
      *
-     * @OneToMany(targetEntity="liste_participants", mappedBy="user")
+     * @OneToMany(targetEntity="liste_participants", mappedBy="user",cascade="remove")
      */
     private $participations;
 
