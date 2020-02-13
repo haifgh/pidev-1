@@ -193,7 +193,7 @@ class Guide
     }
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="Commentaire", mappedBy="guide")
+     * @OneToMany(targetEntity="Commentaire", mappedBy="guide",cascade="remove")
      */
     private $commentaires;
     // ...

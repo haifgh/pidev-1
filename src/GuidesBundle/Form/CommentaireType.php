@@ -2,7 +2,9 @@
 
 namespace   GuidesBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,14 @@ class CommentaireType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('contenu')->add('date')->add('guide')->add('user');
+        $builder->add('contenu')
+            ->add('date')
+            ->add('user')
+            ->add('guide',EntityType::class,array(
+                'class'=>'AppBundle\Entity\Guide',
+                'choice_label'=>'titre',
+                'multiple'=>false
+            ));
     }/**
      * {@inheritdoc}
      */
