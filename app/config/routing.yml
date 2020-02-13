@@ -1,3 +1,7 @@
+produit:
+    resource: "@ProduitBundle/Controller/"
+    type: annotation
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation

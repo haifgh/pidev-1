@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Categorie</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ categorie.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorie_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('categorie_edit', { 'id': categorie.id }) }}">Edit</a>
+        </li>
+        <li>
+            <a href="{{ path('categorie_delete', { 'id': categorie.id }) }}">delete</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -160,7 +160,7 @@ class Produit
 
     /**
      * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="categorie", inversedBy="produits")
+     * @ManyToOne(targetEntity="categorie", inversedBy="produits",cascade="remove")
      * @JoinColumn(name="categorie_id", referencedColumnName="id")
      */
     private $categorie;

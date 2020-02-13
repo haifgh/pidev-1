@@ -66,7 +66,7 @@ class categorie
     }
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="Produit", mappedBy="categorie")
+     * @OneToMany(targetEntity="Produit", mappedBy="categorie",cascade="remove")
      */
     private $produits;
     // ...
