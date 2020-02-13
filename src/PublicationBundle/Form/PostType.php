@@ -2,7 +2,6 @@
 
 namespace PublicationBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,9 +13,7 @@ class PostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('dateCreation')
-            ->add('contenu')
-            ->add('user');
+        $builder->add('dateCreation')->add('contenu')->add('user');
     }/**
      * {@inheritdoc}
      */
