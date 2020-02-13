@@ -1,6 +1,6 @@
 commande:
     resource: "@CommandeBundle/Resources/config/routing.yml"
-    prefix:   /admin/commande
+    prefix:   /commande
 
 app:
     resource: '@AppBundle/Controller/'

@@ -5,6 +5,7 @@ namespace CommandeBundle\Controller;
 use AppBundle\Entity\commande;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Commande controller.
@@ -38,6 +39,9 @@ class commandeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date= new \DateTime();
+            $commande->setDate($date);
+            $commande->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($commande);
             $em->flush();
@@ -57,11 +61,11 @@ class commandeController extends Controller
      */
     public function showAction(commande $commande)
     {
-        $deleteForm = $this->createDeleteForm($commande);
+
 
         return $this->render('@Commande/commande/show.html.twig', array(
-            'commande' => $commande,
-            'delete_form' => $deleteForm->createView(),
+            'commande' => $commande
+
         ));
     }
 
@@ -71,20 +75,20 @@ class commandeController extends Controller
      */
     public function editAction(Request $request, commande $commande)
     {
-        $deleteForm = $this->createDeleteForm($commande);
+
         $editForm = $this->createForm('CommandeBundle\Form\commandeType', $commande);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commande_edit', array('id' => $commande->getId()));
+            return $this->redirectToRoute('commande_index');
         }
 
         return $this->render('@Commande/commande/edit.html.twig', array(
             'commande' => $commande,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
@@ -92,33 +96,14 @@ class commandeController extends Controller
      * Deletes a commande entity.
      *
      */
-    public function deleteAction(Request $request, commande $commande)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($commande);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($commande);
-            $em->flush();
-        }
-
+        $cmd=$this->getDoctrine()->getRepository(commande::class)->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($cmd);
+        $em->flush();
         return $this->redirectToRoute('commande_index');
     }
 
-    /**
-     * Creates a form to delete a commande entity.
-     *
-     * @param commande $commande The commande entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(commande $commande)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commande_delete', array('id' => $commande->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 }

@@ -1,57 +1,81 @@
 {% extends 'adminBase.html.twig' %}
 
 {% block content %}
-<div class="register-login-section spad">
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-    <h3>Commandes list</h3>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Datelivraison</th>
-                <th>Status</th>
-                <th>Adresse</th>
-                <th>Prixtotal</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for commande in commandes %}
-            <tr>
-                <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
-                <td>{% if commande.date %}{{ commande.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if commande.dateLivraison %}{{ commande.dateLivraison|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ commande.status }}</td>
-                <td>{{ commande.adresse }}</td>
-                <td>{{ commande.prixTotal }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('commande_show', { 'id': commande.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('commande_edit', { 'id': commande.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('commande_new') }}">Create a new commande</a>
-        </li>
-    </ul>
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Orders</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Order</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Order date</th>
+                            <th scope="col">Delivered at</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Total price</th>
+                            <th scope="col" class="text-center">Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commande in commandes %}
+                        <tr>
+                            <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">
+                                    {{commande.id}}</a>
+                            </td>
+                            <td>
+                                {{ commande.user.username }}
+                            </td>
+                            <td>
+                                {{ commande.date | date('d/m/Y') }}
+                            </td>
+                            <td>
+                                {{ commande.dateLivraison | date('d/m/Y') }}
+                            </td>
+                            {% if commande.status == 'Pending' %}
+                            <td class="text-danger">
+
+                                  {{commande.status}}
+                            </td>
+                                {% else %}
+                                <td class="text-success">
+
+                                    {{commande.status}}
+                                </td>
+                            {% endif %}
+                            <td>
+                                {{ commande.adresse }}
+                            </td>
+                            <td>
+                                {{ commande.prixTotal }} T.N.D
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-primary" href="{{ path('commande_show', { 'id': commande.id }) }}">show</a>
+                                <a class="btn btn-sm btn-warning" href="{{ path('commande_edit', { 'id': commande.id }) }}">edit</a>
+                                <a class="btn btn-sm btn-danger" href="{{ path('commande_delete', { 'id': commande.id }) }}">delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4 text-center">
+                    <a href="{{ path('commande_new') }}">Create a new commande</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
 {% endblock %}

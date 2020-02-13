@@ -101,12 +101,17 @@
             <ul class="navbar-nav">                                                 {#add navigation here#}
                 <li class="nav-item  active ">
                     <a class="nav-link  active " href="#">
-                        <i class="ni ni-tv-2 text-primary"></i> Dashboard
+                        <i class="ni ni-tv-2 text-blue"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
-                        <i class="ni ni-single-02 text-yellow"></i> Users
+                    <a class="nav-link " href="{{ path('users') }}">
+                        <i class="ni ni-single-02 text-blue"></i> Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('commande_index') }}">
+                        <i class="ni ni-cart text-blue"></i> Orders
                     </a>
                 </li>
 
@@ -271,14 +276,12 @@
             </div>
         </div>
     </div>
+
+
+                    {% block content %}
+                    {% endblock %}
+
 </div>
-<div class="container-fluid mt--7">
-{% block content %}
-{% endblock %}
-</div>
-
-
-
 
 
 

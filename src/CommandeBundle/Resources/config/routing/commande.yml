@@ -21,4 +21,4 @@ commande_edit:
 commande_delete:
     path:     /{id}/delete
     defaults: { _controller: "CommandeBundle:commande:delete" }
-    methods:  DELETE
+

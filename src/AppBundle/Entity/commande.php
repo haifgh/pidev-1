@@ -35,7 +35,7 @@ class commande
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_livraison", type="date")
+     * @ORM\Column(name="date_livraison", type="date",nullable=true)
      */
     private $dateLivraison;
 
@@ -56,9 +56,24 @@ class commande
     /**
      * @var float
      *
-     * @ORM\Column(name="prix_total", type="float")
+     * @ORM\Column(name="prix_total", type="float",nullable=true)
      */
     private $prixTotal;
+
+    /**
+     * @ManyToOne(targetEntity="User", inversedBy="commandes")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    /**
+     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",cascade="remove")
+     */
+    private $lignes_commande;
+
+
+    public function __construct() {
+        $this->lignes_commande = new ArrayCollection();
+    }
 
 
     /**
@@ -190,22 +205,7 @@ class commande
     {
         return $this->prixTotal;
     }
-    /**
-     * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="User", inversedBy="commandes")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-    /**
-     *
-     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande")
-     */
-    private $lignes_commande;
-    // ...
 
-    public function __construct() {
-        $this->lignes_commande = new ArrayCollection();
-    }
 
     /**
      * @return mixed

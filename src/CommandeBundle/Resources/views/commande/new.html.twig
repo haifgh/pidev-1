@@ -9,7 +9,8 @@
     <h3>Commande creation</h3>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.status) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
