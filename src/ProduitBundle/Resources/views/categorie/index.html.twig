@@ -1,10 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Categories list</h1>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h1>Categories list</h1>
 
-    <table>
-        <thead>
+            </div>
+            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
+
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
@@ -27,9 +34,14 @@
                     </ul>
                 </td>
             </tr>
-        {% endfor %}
+
         </tbody>
-    </table>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
     <ul>
         <li>
