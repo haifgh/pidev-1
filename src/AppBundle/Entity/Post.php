@@ -98,7 +98,7 @@ class Post
 
     /**
      * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="User", inversedBy="posts")
+     * @ManyToOne(targetEntity="User", inversedBy="posts",cascade="remove")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

@@ -128,7 +128,7 @@ class reclamation
     }
     /**
      *
-     * @ManyToOne(targetEntity="User", inversedBy="reclamations")
+     * @ManyToOne(targetEntity="User", inversedBy="reclamations",cascade="remove")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
