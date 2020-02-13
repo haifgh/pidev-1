@@ -118,7 +118,5 @@ class GuideController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('guide_delete', array('id' => $guide->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
-}
+            ->getForm();
+    }}
