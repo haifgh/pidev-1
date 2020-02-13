@@ -1,0 +1,24 @@
+commentaire_index:
+    path:     /
+    defaults: { _controller: "GuidesBundle:Commentaire:index" }
+    methods:  GET
+
+commentaire_show:
+    path:     /{id}/show
+    defaults: { _controller: "GuidesBundle:Commentaire:show" }
+    methods:  GET
+
+commentaire_new:
+    path:     /new
+    defaults: { _controller: "GuidesBundle:Commentaire:new" }
+    methods:  [GET, POST]
+
+commentaire_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GuidesBundle:Commentaire:edit" }
+    methods:  [GET, POST]
+
+commentaire_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GuidesBundle:Commentaire:delete" }
+    methods:  DELETE

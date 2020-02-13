@@ -1,0 +1,24 @@
+guide_index:
+    path:     /
+    defaults: { _controller: "GuidesBundle:Guide:index" }
+    methods:  GET
+
+guide_show:
+    path:     /{id}/show
+    defaults: { _controller: "GuidesBundle:Guide:show" }
+    methods:  GET
+
+guide_new:
+    path:     /new
+    defaults: { _controller: "GuidesBundle:Guide:new" }
+    methods:  [GET, POST]
+
+guide_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GuidesBundle:Guide:edit" }
+    methods:  [GET, POST]
+
+guide_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GuidesBundle:Guide:delete" }
+    methods:  DELETE

@@ -1,3 +1,7 @@
+guides:
+    resource: "@GuidesBundle/Resources/config/routing.yml"
+    prefix:   /guides
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
