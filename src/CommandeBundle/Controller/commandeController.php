@@ -41,6 +41,7 @@ class commandeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $date= new \DateTime();
             $commande->setDate($date);
+            $commande->setStatus('Pending');
             $commande->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($commande);
@@ -76,7 +77,7 @@ class commandeController extends Controller
     public function editAction(Request $request, commande $commande)
     {
 
-        $editForm = $this->createForm('CommandeBundle\Form\commandeType', $commande);
+        $editForm = $this->createForm('CommandeBundle\Form\editcommandeType', $commande);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

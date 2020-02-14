@@ -4,17 +4,26 @@ namespace CommandeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class commandeType extends AbstractType
+class editcommandeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('adresse');
+        $builder->add('status',ChoiceType::class, [
+        'choices'  => [
+
+            'Delivered'=>'Delivered',
+            'Pending'=>'Pending',
+
+        ],
+    ])->add('adresse')
+        ->add('dateLivraison', DateType::class, ['widget'=>'single_text']);
     }/**
      * {@inheritdoc}
      */
@@ -30,7 +39,7 @@ class commandeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'commandebundle_commande';
+        return 'commandebundle_commandeedit';
     }
 
 

@@ -1,54 +1,122 @@
 {% extends 'adminBase.html.twig' %}
 
 {% block content %}
-<div class="register-login-section spad">
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-    <h3>Commande</h3>
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Orders</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Order</th>
+                                <th scope="col">Client</th>
+                                <th scope="col">Order date</th>
+                                <th scope="col">Delivered at</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Total price</th>
+                            </tr>
+                            </thead>
 
-    <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ commande.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{% if commande.date %}{{ commande.date|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Datelivraison</th>
-                <td>{% if commande.dateLivraison %}{{ commande.dateLivraison|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ commande.status }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ commande.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Prixtotal</th>
-                <td>{{ commande.prixTotal }}</td>
-            </tr>
+        <tr>
+            <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">
+                    {{commande.id}}</a>
+            </td>
+            <td>
+                {{ commande.user.username }}
+            </td>
+            <td>
+                {{ commande.date | date('d/m/Y') }}
+            </td>
+            <td>
+                {% if commande.dateLivraison == null %}
+                    pending
+                {% else %}
+                    {{ commande.dateLivraison | date('d/m/Y') }}
+                {% endif %}
+            </td>
+            {% if commande.status == 'Pending' %}
+                <td class="text-danger">
+
+                    {{commande.status}}
+                </td>
+            {% else %}
+                <td class="text-success">
+
+                    {{commande.status}}
+                </td>
+            {% endif %}
+            <td>
+                {{ commande.adresse }}
+            </td>
+            <td>
+                {{ commande.prixTotal }} T.N.D
+            </td>
+
+        </tr>
         </tbody>
     </table>
+                        <div class="card-footer py-4 text-center">
+                        <a href="{{ path('commande_index') }}" class="btn btn-sm btn-success">Back to the list</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('commande_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('commande_edit', { 'id': commande.id }) }}">Edit</a>
-        </li>
+                        <a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="btn btn-sm btn-info">Edit</a>
+                            <a class="btn btn-sm btn-danger" href="{{ path('commande_delete', { 'id': commande.id }) }}">delete</a>
 
-    </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Products</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Unit price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for lc in commande.lignesCommande %}
+                            <tr>
+                                <td>
+                                        {{lc.id}}
+                                </td>
+                                <td>
+                                    {{ lc.produit.nom}}
+                                </td>
+                                <td>
+                                    {{ lc.produit.prix}}
+                                </td>
+                                <td>
+                                    {{ lc.quantite }}
+                                </td>
+                                <td>
+                                    {{ lc.prix}}
+                                </td>
+                            </tr>{% endfor %}
+                            </tbody>
+                        </table>
+    <div class="card-footer py-4 text-center">
+
+
+    </div>
+
 {% endblock %}

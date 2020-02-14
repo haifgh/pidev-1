@@ -84,5 +84,3 @@ fos_user:
     registration:
         confirmation:
             enabled: true
-    resetting:
-        token_ttl: 300

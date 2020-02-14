@@ -66,7 +66,7 @@ class commande
      */
     private $user;
     /**
-     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",cascade="remove")
+     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",orphanRemoval=true)
      */
     private $lignes_commande;
 

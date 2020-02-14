@@ -38,7 +38,11 @@
                                 {{ commande.date | date('d/m/Y') }}
                             </td>
                             <td>
+                                {% if commande.dateLivraison == null %}
+                                    pending
+                                {% else %}
                                 {{ commande.dateLivraison | date('d/m/Y') }}
+                                    {% endif %}
                             </td>
                             {% if commande.status == 'Pending' %}
                             <td class="text-danger">
@@ -68,7 +72,8 @@
                     </table>
                 </div>
                 <div class="card-footer py-4 text-center">
-                    <a href="{{ path('commande_new') }}">Create a new commande</a>
+                    <a href="{{ path('commande_new') }}" class="btn btn-sm btn-success">Create a new order</a>
+                    <a href="{{ path('ligne_commande_new') }}" class="btn btn-sm btn-info">Add a product</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,42 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block content %}
+    <div class="container  mt--7">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+    <div class="card bg-secondary shadow">
+    <h1>Ligne_commandes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_commande in ligne_commandes %}
+            <tr>
+                <td><a href="{{ path('ligne_commande_show', { 'id': ligne_commande.id }) }}">{{ ligne_commande.id }}</a></td>
+                <td>{{ ligne_commande.prix }}</td>
+                <td>{{ ligne_commande.quantite }}</td>
+                <td>
+                    <a href="{{ path('ligne_commande_show', { 'id': ligne_commande.id }) }}" class="btn btn-success">show</a>
+                    <a href="{{ path('ligne_commande_edit', { 'id': ligne_commande.id }) }}" class="btn btn-info">edit</a>
+                    <a href="{{ path('ligne_commande_delete', { 'id': ligne_commande.id }) }}" class="btn btn-danger">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ligne_commande_new') }}">Create a new ligne_commande</a>
+        </li>
+    </ul>
+    </div></div></div></div>
+{% endblock %}
