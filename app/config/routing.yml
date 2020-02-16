@@ -5,6 +5,9 @@ app_ligne.commande:
 commande:
     resource: "@CommandeBundle/Resources/config/routing.yml"
     prefix:   /admin/commande
+panier:
+    resource: '@CommandeBundle/Controller/panierController.php'
+    type: annotation
 
 app:
     resource: '@AppBundle/Controller/'

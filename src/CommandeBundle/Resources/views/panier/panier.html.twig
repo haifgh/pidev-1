@@ -1,0 +1,39 @@
+<li class="cart-icon">
+{% set prix = 0 %}
+    <a href="#">
+        <i class="icon_bag_alt"></i>
+        <span>{{ items|length }}</span>
+    </a>
+
+    <div class="cart-hover">
+        <div class="select-items">
+            <table>
+                <tbody>
+                {% for item in items %}
+                <tr>
+                    <td class="si-pic"><img src="{{asset('img/select-product-2.jpg')}}" alt=""></td>
+                    <td class="si-text">
+                        <div class="product-selected">
+                            <p>{{item.product.prix}} T.N.D x {{ item.quantity }}</p>
+                            <h6>{{item.product.nom}}</h6>
+                        </div>
+                    </td>
+                    <td class="si-close">
+                       <a href="{{ path('panier_remove',{'id':item.product.id}) }}"><i class="ti-close"></i></a>
+                    </td>
+                </tr>
+                    {% set prix = prix+ item.product.prix*item.quantity %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="select-total">
+            <span>total:</span>
+            <h5>{{ prix }} T.N.D</h5>
+        </div>
+        <div class="select-button">
+            <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+        </div>
+    </div>
+</li>
+<li class="cart-price">{{ prix }} T.N.D</li>

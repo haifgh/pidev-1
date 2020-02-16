@@ -69,10 +69,52 @@ class commande
      * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",orphanRemoval=true)
      */
     private $lignes_commande;
+    /**
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    protected $chargeId;
+    /**
+     * @ORM\Column(name="paid", type="boolean")
+     */
+    protected $paid;
+
+    /**
+     * @return mixed
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * @param mixed $paid
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getChargeId()
+    {
+        return $this->chargeId;
+    }
+
+    /**
+     * @param mixed $chargeId
+     */
+    public function setChargeId($chargeId)
+    {
+        $this->chargeId = $chargeId;
+    }
 
 
     public function __construct() {
         $this->lignes_commande = new ArrayCollection();
+        $this->paid=false;
     }
 
 
