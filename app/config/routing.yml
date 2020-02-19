@@ -4,7 +4,7 @@ app_ligne.commande:
 
 commande:
     resource: "@CommandeBundle/Resources/config/routing.yml"
-    prefix:   /admin/commande
+    prefix:   /
 panier:
     resource: '@CommandeBundle/Controller/panierController.php'
     type: annotation

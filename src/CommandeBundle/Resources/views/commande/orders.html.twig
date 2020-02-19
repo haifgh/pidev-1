@@ -1,0 +1,68 @@
+{% extends 'Base.html.twig' %}
+
+{% block content %}
+    {% if commandes is empty %}
+        <div class="container">
+            <h2 class="text-dark text-center mt-5 p-5">No Orders found!</h2>
+            <h3 class="text-info text-center m-2 mb-5 pb-5"></i>Shop now
+                <a href="{{ path('shop') }}" class="btn btn-outline-info">Here!<i class="fa fa-arrow-circle-right ml-2"></i></a></h3>
+        </div>
+    {% else%}
+    <div class="container-fluid my-2">
+<table class="table align-items-center table-flush">
+    <thead class="thead-light">
+    <tr>
+
+        <th scope="col">Order date</th>
+        <th scope="col">Delivered at</th>
+        <th scope="col">Status</th>
+        <th scope="col">Address</th>
+        <th scope="col">Total price</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        {% for commande in commandes %}
+            {% if commande.chargeId is not null %}
+        <tr>
+
+            <td>{{ commande.date|date('d/m/Y') }}</td>
+            <td>
+                {% if commande.status == 'Cancelled' %}
+                    <span class="text-danger">Cancelled</span>
+                {% else %}
+                {% if commande.status == 'Pending' %}
+                    <span class="text-warning">Pending</span>
+                {% else %}
+                    {{ commande.dateLivraison | date('d/m/Y') }}
+                {% endif %}
+                    {% endif %}
+            </td>
+            {% if commande.status == 'Pending' %}
+                <td class="text-warning">
+
+                    {{commande.status}}
+                </td>
+            {% elseif commande.status == 'Cancelled' %}
+                <td class="text-danger">
+
+                    {{commande.status}}
+                </td>
+            {% else %}
+                <td class="text-success">
+
+                    {{commande.status}}
+                </td>
+            {% endif %}
+            <td>{{ commande.adresse}}</td>
+            <td>{{ commande.prixTotal }}</td>
+
+        </tr>{% endif %}
+        {% endfor %}
+
+    </tbody>
+</table>
+    </div>
+    {% endif %}
+{% endblock %}
+

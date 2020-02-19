@@ -22,14 +22,16 @@
                             <th scope="col">Status</th>
                             <th scope="col">Address</th>
                             <th scope="col">Total price</th>
+
                             <th scope="col" class="text-center">Options</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for commande in commandes %}
+                            {% if commande.chargeId is not null %}
                         <tr>
                             <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">
-                                    {{commande.id}}</a>
+                                    n°: {{commande.id}}</a>
                             </td>
                             <td>
                                 {{ commande.user.username }}
@@ -38,18 +40,27 @@
                                 {{ commande.date | date('d/m/Y') }}
                             </td>
                             <td>
-                                {% if commande.dateLivraison == null %}
-                                    pending
+                                {% if commande.status == 'Cancelled' %}
+                                    <span class="text-danger">Cancelled</span>
                                 {% else %}
-                                {{ commande.dateLivraison | date('d/m/Y') }}
+                                    {% if commande.status == 'Pending' %}
+                                        <span class="text-warning">Pending</span>
+                                    {% else %}
+                                        {{ commande.dateLivraison | date('d/m/Y') }}
                                     {% endif %}
+                                {% endif %}
                             </td>
                             {% if commande.status == 'Pending' %}
-                            <td class="text-danger">
+                                <td class="text-warning">
 
-                                  {{commande.status}}
-                            </td>
-                                {% else %}
+                                    {{commande.status}}
+                                </td>
+                            {% elseif commande.status == 'Cancelled' %}
+                                <td class="text-danger">
+
+                                    {{commande.status}}
+                                </td>
+                            {% else %}
                                 <td class="text-success">
 
                                     {{commande.status}}
@@ -61,19 +72,19 @@
                             <td>
                                 {{ commande.prixTotal }} T.N.D
                             </td>
+
                             <td class="text-center">
-                                <a class="btn btn-sm btn-primary" href="{{ path('commande_show', { 'id': commande.id }) }}">show</a>
-                                <a class="btn btn-sm btn-warning" href="{{ path('commande_edit', { 'id': commande.id }) }}">edit</a>
-                                <a class="btn btn-sm btn-danger" href="{{ path('commande_delete', { 'id': commande.id }) }}">delete</a>
+                                <a class="btn btn-sm btn-danger" href="{{ path('commande_edit', { 'id': commande.id,'type':'Cancelled' }) }}">Cancel</a>
+                                <a class="btn btn-sm btn-success" href="{{ path('commande_edit', { 'id': commande.id,'type':'Delivered' }) }}">Delivered</a>
+                                <a class="btn btn-sm btn-warning" href="{{ path('commande_edit', { 'id': commande.id,'type':'Pending' }) }}">Pending</a>
                             </td>
-                        </tr>
+                        </tr>{% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer py-4 text-center">
-                    <a href="{{ path('commande_new') }}" class="btn btn-sm btn-success">Create a new order</a>
-                    <a href="{{ path('ligne_commande_new') }}" class="btn btn-sm btn-info">Add a product</a>
+
                 </div>
             </div>
         </div>

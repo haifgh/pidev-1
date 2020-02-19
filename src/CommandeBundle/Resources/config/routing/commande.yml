@@ -1,24 +1,26 @@
 commande_index:
-    path:     /
+    path:     /admin/commande
     defaults: { _controller: "CommandeBundle:commande:index" }
     methods:  GET
 
 commande_show:
-    path:     /{id}/show
+    path:     /admin/commande/{id}/show
     defaults: { _controller: "CommandeBundle:commande:show" }
     methods:  GET
 
 commande_new:
-    path:     /new
+    path:     /admin/commande/new
     defaults: { _controller: "CommandeBundle:commande:new" }
     methods:  [GET, POST]
 
 commande_edit:
-    path:     /{id}/edit
+    path:     /admin/commande/{id}/edit/{type}
     defaults: { _controller: "CommandeBundle:commande:edit" }
     methods:  [GET, POST]
 
 commande_delete:
-    path:     /{id}/delete
+    path:     /admin/commande/{id}/delete
     defaults: { _controller: "CommandeBundle:commande:delete" }
-
+orders:
+    path:  /user/orders
+    defaults: { _controller: "CommandeBundle:commande:orders" }

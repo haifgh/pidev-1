@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8"  />
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Hunt Kingdom{% endblock %}</title>
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -15,6 +17,7 @@
             <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/icon.png') }}" />
 
 
@@ -90,6 +93,7 @@
                 <div class="nav-item">
                         <nav class="nav-menu  mobile-menu mx-auto">
                             <ul>
+
                                 <li class="{{ app.request.attributes.get('_route') == 'homepage' ? 'active' }}">
                                     <a href="{{ path('homepage') }}">Home</a>
                                 </li>

@@ -49,7 +49,7 @@ class commande
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
 
@@ -73,26 +73,7 @@ class commande
      * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
      */
     protected $chargeId;
-    /**
-     * @ORM\Column(name="paid", type="boolean")
-     */
-    protected $paid;
 
-    /**
-     * @return mixed
-     */
-    public function getPaid()
-    {
-        return $this->paid;
-    }
-
-    /**
-     * @param mixed $paid
-     */
-    public function setPaid($paid)
-    {
-        $this->paid = $paid;
-    }
 
 
     /**

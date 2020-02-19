@@ -6,13 +6,11 @@ use AppBundle\Entity\commande;
 use AppBundle\Entity\ligne_commande;
 use AppBundle\Entity\Produit;
 
+use Stripe\Error\Base;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class panierController extends Controller
 {
@@ -32,6 +30,9 @@ class panierController extends Controller
         }
         return $this->render('@Commande/panier/panier.html.twig',['items'=>$panierWithData]);
     }
+
+
+
     /**
      * @Route("/panier/add/{id}", name="panier_add")
      */
@@ -47,6 +48,9 @@ class panierController extends Controller
         $session->set('panier',$panier);
         return $this->redirectToRoute('shop');
     }
+
+
+
     /**
      * @Route("/panier/remove/{id}", name="panier_remove")
      */
@@ -60,23 +64,75 @@ class panierController extends Controller
         $session->set('panier',$panier);
         return $this->redirectToRoute('shop');
     }
+
+
+
+
     /**
-     * @Route("/payer", name="payer")
+     * @Route("/user/checkout", name="checkout")
+     */
+    public function checkoutAction(Request $request)
+    {
+        $session = $request->getSession();
+        $panier = $session->get('panier',[]);
+        $panierWithData=[];
+        foreach ($panier as $id => $qte){
+            $panierWithData[]=[
+                'product'=>$this->getDoctrine()->getRepository(Produit::class)->find($id),
+                'quantity'=>$qte
+            ];
+        }
+        return $this->render('@Commande/panier/checkout.html.twig',['panier'=>$panierWithData]);
+    }
+
+
+
+
+    /**
+     * @Route("/user/payer", name="payer")
      */
     public function payerAction(Request $request)
-    {
-        return $this->render('@Commande/panier/pay.html.twig');
+    {   $em = $this->getDoctrine()->getManager();
+        $add = $request->query->get('adresse');
+        if ($request->getSession()->get('panier',[])==[]){
+            return $this->redirectToRoute('checkout');
+        }
+        $commande=$this->createOrder($request);
+        $commande->setAdresse($add);
+        $em->persist($commande);
+        $em->flush();
+        return $this->render('@Commande/panier/pay.html.twig',['commande'=>$commande]);
     }
+
+
+
     /**
-     * @Route("/charge", name="charge")
+     * @Route("/user/charge", name="charge")
      */
     public function chargeAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $token=$request->request->get('stripeToken');
+        $commande_id=$request->request->get('commande');
+        $commande=$this->getDoctrine()->getRepository(commande::class)->find($commande_id);
         $stripeClient = $this->get('flosch.stripe.client');
-        $stripeClient->createCharge(100, 'usd', $token,'','','hello');
+        $p=intval($commande->getPrixTotal());
+        try{
+            $charge=$stripeClient->createCharge( $p, 'usd', $token,'','','test');
+            $commande->setChargeId($charge->id);
 
-        return $this->render('@Commande/panier/charge.html.twig',['token'=>$token]);
+            $em->persist($commande);
+            $em->flush();
+        }
+        catch (Base $e){
+
+            return $this->render('@Commande/panier/charge.html.twig',['charge'=>[],'error'=>$e]);
+        }
+
+
+        $session = $request->getSession();
+        $session->set('panier',[]);
+        return $this->render('@Commande/panier/charge.html.twig',['charge'=>$charge,'error'=>[]]);
     }
 
     private function createOrder(Request $request){
@@ -88,6 +144,7 @@ class panierController extends Controller
             $commande->setDate($date);
             $commande->setStatus('Pending');
             $commande->setUser($this->getUser());
+
             $em->persist($commande);
             $em->flush();
             foreach ($panier as $id => $qte){
@@ -96,11 +153,13 @@ class panierController extends Controller
                 $lq->setProduit($produit);
                 $lq->setQuantite($qte);
                 $lq->setPrix($produit->getPrix()*$qte);
+                $commande->setPrixTotal($commande->getPrixTotal()+$lq->getPrix());
                 $lq->setCommande($commande);
                 $em->persist($lq);
                 $em->flush();
             }
-
+        $em->persist($commande);
+        $em->flush();
 
             return $commande;
         }

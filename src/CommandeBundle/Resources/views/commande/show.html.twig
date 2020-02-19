@@ -4,69 +4,79 @@
     <div class="container-fluid mt--7">
         <!-- Table -->
         <div class="row">
-            <div class="col">
+            <div class="col-3"></div>
+            <div class="col-6">
                 <div class="card shadow">
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Orders</h3>
+                        <a href="{{ path('commande_index') }}" class="btn btn-sm btn-success float-right">Back to the list</a>
+                        <h3 class="mb-0">Order n° {{commande.id}} </h3>
+
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                             <tr>
-                                <th scope="col">Order</th>
                                 <th scope="col">Client</th>
-                                <th scope="col">Order date</th>
-                                <th scope="col">Delivered at</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Total price</th>
+                                <td>{{commande.user.nom}}</td>
                             </tr>
+                            <tr>
+                                <th scope="col">Order date</th>
+                                <td> {{ commande.date | date('d/m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Delivered at</th>
+                                <td>
+                                {% if commande.status == 'Cancelled' %}
+                                    <span class="text-danger">Cancelled</span>
+                                {% else %}
+                                    {% if commande.status == 'Pending' %}
+                                        <span class="text-warning">Pending</span>
+                                    {% else %}
+                                        {{ commande.dateLivraison | date('d/m/Y') }}
+                                    {% endif %}
+                                {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Status</th>
+                                {% if commande.status == 'Pending' %}
+                                    <td class="text-warning">
+
+                                        {{commande.status}}
+                                    </td>
+                                {% elseif commande.status == 'Cancelled' %}
+                                    <td class="text-danger">
+
+                                        {{commande.status}}
+                                    </td>
+                                {% else %}
+                                    <td class="text-success">
+
+                                        {{commande.status}}
+                                    </td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <th scope="col">Adresse</th>
+                                <td>{{commande.adresse}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Total price</th>
+                                <td>{{commande.prixTotal}} T.N.D</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">payment id</th>
+                                <td>{{commande.chargeId}}</td>
+                            </tr>
+
                             </thead>
 
-        <tbody>
-        <tr>
-            <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">
-                    {{commande.id}}</a>
-            </td>
-            <td>
-                {{ commande.user.username }}
-            </td>
-            <td>
-                {{ commande.date | date('d/m/Y') }}
-            </td>
-            <td>
-                {% if commande.dateLivraison == null %}
-                    pending
-                {% else %}
-                    {{ commande.dateLivraison | date('d/m/Y') }}
-                {% endif %}
-            </td>
-            {% if commande.status == 'Pending' %}
-                <td class="text-danger">
-
-                    {{commande.status}}
-                </td>
-            {% else %}
-                <td class="text-success">
-
-                    {{commande.status}}
-                </td>
-            {% endif %}
-            <td>
-                {{ commande.adresse }}
-            </td>
-            <td>
-                {{ commande.prixTotal }} T.N.D
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
+                            </table>
                         <div class="card-footer py-4 text-center">
-                        <a href="{{ path('commande_index') }}" class="btn btn-sm btn-success">Back to the list</a>
 
-                        <a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="btn btn-sm btn-info">Edit</a>
-                            <a class="btn btn-sm btn-danger" href="{{ path('commande_delete', { 'id': commande.id }) }}">delete</a>
+                                <a class="btn btn-sm btn-danger" href="{{ path('commande_edit', { 'id': commande.id,'type':'Cancelled' }) }}">Cancel</a>
+                                <a class="btn btn-sm btn-success" href="{{ path('commande_edit', { 'id': commande.id,'type':'Delivered' }) }}">Delivered</a>
+                                <a class="btn btn-sm btn-warning" href="{{ path('commande_edit', { 'id': commande.id,'type':'Pending' }) }}">Pending</a>
 
                     </div>
                 </div>
@@ -109,14 +119,13 @@
                                     {{ lc.quantite }}
                                 </td>
                                 <td>
-                                    {{ lc.prix}}
+                                    {{ lc.prix}} T.N.D
                                 </td>
                             </tr>{% endfor %}
                             </tbody>
                         </table>
-    <div class="card-footer py-4 text-center">
+                    </div></div></div></div></div>
+    <div class="container p-5"></div>
 
-
-    </div>
 
 {% endblock %}

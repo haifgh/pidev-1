@@ -3,6 +3,7 @@
 namespace CommandeBundle\Controller;
 
 use AppBundle\Entity\commande;
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -69,28 +70,35 @@ class commandeController extends Controller
 
         ));
     }
+    public function ordersAction(Request $request)
+    {
+
+        $user=$this->getUser();
+        $commandes=$user->getCommandes();
+
+        return $this->render('@Commande/commande/orders.html.twig', array(
+            'commandes' => $commandes
+
+        ));
+    }
 
     /**
      * Displays a form to edit an existing commande entity.
      *
      */
-    public function editAction(Request $request, commande $commande)
+    public function editAction($id,$type)
     {
-
-        $editForm = $this->createForm('CommandeBundle\Form\editcommandeType', $commande);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('commande_index');
+        $commande=$this->getDoctrine()->getRepository(commande::class)->find($id);
+        if(in_array($type,['Pending','Cancelled','Delivered']))
+            $commande->setStatus($type);
+        if($type=='Delivered')
+        {
+            $date=new \DateTime();
+            $commande->setDateLivraison($date);
         }
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('commande_index');
 
-        return $this->render('@Commande/commande/edit.html.twig', array(
-            'commande' => $commande,
-            'edit_form' => $editForm->createView(),
-
-        ));
     }
 
     /**

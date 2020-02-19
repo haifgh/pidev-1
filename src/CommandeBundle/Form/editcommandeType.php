@@ -20,6 +20,7 @@ class editcommandeType extends AbstractType
 
             'Delivered'=>'Delivered',
             'Pending'=>'Pending',
+            'Cancelled'=>'Cancelled',
 
         ],
     ])->add('adresse')
