@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+<html>
+<head>
+    <title>Events</title>
+</head>
+<body>
+<center>
+    {{ socialButtons() }}
+    <h1>Liste des Events</h1>
+    <table border="1">
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>DateDebut</th>
+            <th>DateFin</th>
+            <th>Nombres de Places</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+
+                <td>{{ event.nom }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.dateDebut|date('Y-m-d')  }}</td>
+                <td>{{ event.dateFin|date('Y-m-d')  }}</td>
+                <td>{{ event.nbrePlaces }}</td>
+                <td><img src="{{asset('images/')}}{{ event.photo }}" alt="" style="width: 20%;height: 20%"></td>
+                {% set x=false  %}
+                {% for lp in event.getListesParticipants() %}
+                    {% if lp.user == app.user %}
+                        {% set x=true  %}
+                    {% endif %}
+                {% endfor %}
+                {% if x %}
+                    <td><button><a href="{{ path('quitter', {'id': event.id}) }}" id="part">leave</a></button></td>
+                {% else %}
+                    <td><button><a href="{{ path('participer', {'id': event.id}) }}" id="part">join</a></button></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</center>
+</body>
+<script>
+
+</script>
+</html>
+{% endblock %}

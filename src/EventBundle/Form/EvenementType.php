@@ -3,6 +3,9 @@
 namespace EventBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,11 +19,9 @@ class EvenementType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-            ->add('dateDebut')
-            ->add('dateFin')
-            ->add('validite')
+            ->add('dateFin', DateTimeType::class)
             ->add('nbrePlaces')
-            ->add('user');
+            ->add('photo',fileType::class, array('data_class' => null));
     }/**
      * {@inheritdoc}
      */

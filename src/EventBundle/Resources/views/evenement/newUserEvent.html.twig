@@ -5,18 +5,12 @@
 
     {{ form_start(form) }}
 
-        {{ form_row(form.nom) }}
+    {{ form_row(form.nom) }}
     {{ form_row(form.description) }}
     {{ form_label(form.dateFin , 'Date Evenement') }}
     {{ form_widget(form.dateFin) }}
     {{ form_row(form.nbrePlaces) }}
     {{ form_row(form.photo) }}
-    <input type="submit" value="Create" />
+    <input href="{{ path('evenement_view') }}" type="submit" value="Create" />
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('evenement_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

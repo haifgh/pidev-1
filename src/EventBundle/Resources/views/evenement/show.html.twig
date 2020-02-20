@@ -33,9 +33,18 @@
                 <th>Nbreplaces</th>
                 <td>{{ evenement.nbrePlaces }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{asset('images/')}}{{ evenement.photo }}" alt="" style="width: 20%;height: 20%"></td>
+            </tr>
+
         </tbody>
     </table>
-
+<ul>
+    {% for e in evenement.listesParticipants %}
+        <li>{{ e.user.username }}</li>
+    {% endfor %}
+</ul>
     <ul>
         <li>
             <a href="{{ path('evenement_index') }}">Back to the list</a>
