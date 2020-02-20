@@ -1,5 +1,6 @@
 <?php
 
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -19,6 +20,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new AppBundle\AppBundle(),
             new GuidesBundle\GuidesBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

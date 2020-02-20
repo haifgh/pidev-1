@@ -34,21 +34,17 @@ class CommentaireController extends Controller
     public function newAction(Request $request)
     {
         $commentaire = new Commentaire();
-        $form = $this->createForm('GuidesBundle\Form\CommentaireType', $commentaire);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $commentaire->setDate(new \DateTime('now'));
+        $commentaire->setUser($this->getUser());
+        $commentaire->setContenu($request->get('comment'));
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaire);
             $em->flush();
 
             return $this->redirectToRoute('commentaire_show', array('id' => $commentaire->getId()));
-        }
 
-        return $this->render('@Guides/commentaire/new.html.twig', array(
-            'commentaire' => $commentaire,
-            'form' => $form->createView(),
-        ));
+
+
     }
 
     /**

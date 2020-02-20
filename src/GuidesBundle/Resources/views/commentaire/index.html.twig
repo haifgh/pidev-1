@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig.' %}
 
 {% block content %}
     <h1>Commentaires list</h1>
@@ -15,16 +15,17 @@
                 <th>Id</th>
                 <th>Contenu</th>
                 <th>Date</th>
+                <th>username</th>
                 <th>Actions</th>
             </tr>
-        </thead>
         <tbody>
         {% for commentaire in commentaires %}
             <tr>
                 <td><a href="{{ path('commentaire_show', { 'id': commentaire.id }) }}">{{ commentaire.id }}</a></td>
-                <td>{{ commentaire.contenu }}</td>
-                <td>{% if commentaire.date %}{{ commentaire.date|date('Y-m-d') }}{% endif %}</td>
-                <td>
+                <td>{{  commentaire.contenu  }}</td>
+                <td>{% if  commentaire.date %}{{  commentaire.date|date('Y-m-d') }}{% endif %}</td>
+                <td> {{commentaire.user}}</td>
+               <td>
                     <ul>
                         <li>
                             <a href="{{ path('commentaire_show', { 'id': commentaire.id }) }}">show comment</a>

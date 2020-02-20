@@ -16,8 +16,7 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('contenu')
-            ->add('date')
-            ->add('user')
+
             ->add('guide',EntityType::class,array(
                 'class'=>'AppBundle\Entity\Guide',
                 'choice_label'=>'titre',
