@@ -23,6 +23,7 @@
                             <th scope="col">Delivered at</th>
                             <th scope="col">Status</th>
                             <th scope="col">Address</th>
+                            <th scope="col">Phone n°</th>
                             <th scope="col">Total price</th>
 
                             <th scope="col" class="text-center">Options</th>
@@ -70,6 +71,9 @@
                             {% endif %}
                             <td>
                                 {{ commande.adresse }}
+                            </td>
+                            <td>
+                                {{ commande.tel }}
                             </td>
                             <td>
                                 {{ commande.prixTotal }} T.N.D
