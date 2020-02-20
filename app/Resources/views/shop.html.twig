@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-
-    <table>
+<div class="container-fluid my-2">
+    <table class="table align-items-center table-flush">
         <thead>
         <tr>
             <th>name</th>
@@ -17,12 +17,12 @@
             <td>{{ produit.qte }}</td>
             <td>{{ produit.description }}</td>
             <td>{{ produit.prix }}</td>
-            <td ><a class="add" href="{{ path('panier_add',{'id': produit.id} )}}">add</a></td>
+            <td ><button class="add btn btn-outline-info" href="{{ path('panier_add',{'id': produit.id} )}}">add</button></td>
         </tr>
     {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}
 {% block customscript %}
     <script>

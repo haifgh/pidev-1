@@ -28,14 +28,14 @@ class commande
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_livraison", type="date",nullable=true)
+     * @ORM\Column(name="date_livraison", type="datetime",nullable=true)
      */
     private $dateLivraison;
 
@@ -52,6 +52,28 @@ class commande
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tel", type="string", length=255, nullable=true)
+     */
+    private $tel;
+
+    /**
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param string $tel
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    }
 
     /**
      * @var float

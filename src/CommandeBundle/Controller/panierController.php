@@ -14,9 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class panierController extends Controller
 {
-    /**
-     * @Route("/panier", name="panier")
-     */
+
     public function indexAction(Request $request)
     {
         $session = $request->getSession();
@@ -40,10 +38,14 @@ class panierController extends Controller
     {
         $session = $request->getSession();
         $panier= $session->get('panier',[]);
+        $product=$this->getDoctrine()->getRepository(Produit::class)->find($id);
+        if($product->getQte()>0){
         if(!empty($panier[$id])){
+            if($product->getQte()>$panier[$id])
             $panier[$id]+=1;
         }else{
             $panier[$id]=1;
+        }
         }
         $session->set('panier',$panier);
         return $this->redirectToRoute('shop');
@@ -82,27 +84,26 @@ class panierController extends Controller
                 'quantity'=>$qte
             ];
         }
-        return $this->render('@Commande/panier/checkout.html.twig',['panier'=>$panierWithData]);
-    }
+        $em = $this->getDoctrine()->getManager();
+        $commande = new commande();
+        $form = $this->createForm('CommandeBundle\Form\commandeType', $commande);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commande=$this->createOrder($request,$commande);
 
-
-
-
-    /**
-     * @Route("/user/payer", name="payer")
-     */
-    public function payerAction(Request $request)
-    {   $em = $this->getDoctrine()->getManager();
-        $add = $request->query->get('adresse');
-        if ($request->getSession()->get('panier',[])==[]){
-            return $this->redirectToRoute('checkout');
+            return $this->render('@Commande/panier/pay.html.twig',['commande'=>$commande]);
         }
-        $commande=$this->createOrder($request);
-        $commande->setAdresse($add);
-        $em->persist($commande);
-        $em->flush();
-        return $this->render('@Commande/panier/pay.html.twig',['commande'=>$commande]);
+
+
+
+
+        return $this->render('@Commande/panier/checkout.html.twig',['panier'=>$panierWithData,'form'=>$form->createView()]);
     }
+
+
+
+
+
 
 
 
@@ -120,7 +121,10 @@ class panierController extends Controller
         try{
             $charge=$stripeClient->createCharge( $p, 'usd', $token,'','','test');
             $commande->setChargeId($charge->id);
-
+            foreach ($commande->getLignesCommande() as $lc){
+                $pd=$lc->getProduit();
+                $pd->setQte($pd->getQte()-$lc->getQuantite());
+            }
             $em->persist($commande);
             $em->flush();
         }
@@ -135,18 +139,17 @@ class panierController extends Controller
         return $this->render('@Commande/panier/charge.html.twig',['charge'=>$charge,'error'=>[]]);
     }
 
-    private function createOrder(Request $request){
-            $em = $this->getDoctrine()->getManager();
+    private function createOrder(Request $request,commande $commande){
+        $em = $this->getDoctrine()->getManager();
             $session = $request->getSession();
             $panier = $session->get('panier',[]);
-            $commande = new commande();
             $date= new \DateTime();
             $commande->setDate($date);
             $commande->setStatus('Pending');
             $commande->setUser($this->getUser());
+        $em->persist($commande);
+        $em->flush();
 
-            $em->persist($commande);
-            $em->flush();
             foreach ($panier as $id => $qte){
                 $lq= new ligne_commande();
                 $produit=$this->getDoctrine()->getRepository(Produit::class)->find($id);

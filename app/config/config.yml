@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi: ~
-    translator: ~
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -38,7 +38,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-
+    form_themes: ['bootstrap_4_layout.html.twig']
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -86,3 +86,6 @@ fos_user:
             enabled: true
 flosch_stripe:
     stripe_api_key: "%stripe_api_key%"
+knp_paginator:
+    template:
+        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'

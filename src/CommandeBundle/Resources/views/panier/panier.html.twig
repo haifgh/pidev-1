@@ -19,7 +19,7 @@
                         </div>
                     </td>
                     <td class="si-close">
-                       <a href="{{ path('panier_remove',{'id':item.product.id}) }}"><i class="ti-close"></i></a>
+                       <a class="remove" href="{{ path('panier_remove',{'id':item.product.id}) }}"><i class="ti-close"></i></a>
                     </td>
                 </tr>
                     {% set prix = prix+ item.product.prix*item.quantity %}

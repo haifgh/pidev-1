@@ -22,36 +22,38 @@
     {% else %}
         <section class="checkout-section spad">
             <div class="container">
-                <form action="{{ path('payer') }}" class="checkout-form">
+                {{ form_start(form, {'attr': {'class':'checkout-form'} } ) }}
                     <div class="row">
                         <div class="col-lg-6">
 
                             <h4>Billing Details</h4>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <label for="fir">First Name<span>*</span></label>
-                                    <input type="text" id="fir" value="{{ app.user.nom }}">
+                                    <label for="fir">First Name</label>
+                                    <input type="text" id="fir" value="{{ app.user.nom }}" disabled>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="last">Last Name<span>*</span></label>
-                                    <input type="text" id="last" value="{{ app.user.prenom}}">
+                                    <label for="last">Last Name</label>
+                                    <input type="text" id="last" value="{{ app.user.prenom}}" disabled>
                                 </div>
 
 
-                                <div class="col-lg-12">
-                                    <label for="street">Address<span>*</span></label>
-                                    <input type="text"  name="adresse" class="street-first" value="{{ app.user.adresse}}">
 
-                                </div>
 
                                 <div class="col-lg-6">
-                                    <label for="email">Email Address<span>*</span></label>
-                                    <input type="text" id="email" value="{{ app.user.email }}">
+                                    <label for="email">Email Address</label>
+                                    <input type="text" id="email" value="{{ app.user.email }}" disabled>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="phone">Phone<span>*</span></label>
-                                    <input type="text" id="phone" value="{{ app.user.tel }}">
+                                    {{form_widget(form.tel,{'attr': {'value':app.user.tel} })}}
                                 </div>
+                                <div class="col-lg-12">
+                                    <label for="street">Address<span>*</span></label>
+
+                                    {{ form_widget(form.adresse,{'attr': {'value':app.user.adresse} }) }}
+                                </div>
+
 
                             </div>
                         </div>
@@ -77,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                {{ form_end(form) }}
             </div>
         </section>
     {% endif %}

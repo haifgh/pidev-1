@@ -19,7 +19,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new AppBundle\AppBundle(),
             new CommandeBundle\CommandeBundle(),
-            new Flosch\Bundle\StripeBundle\FloschStripeBundle()
+            new Flosch\Bundle\StripeBundle\FloschStripeBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

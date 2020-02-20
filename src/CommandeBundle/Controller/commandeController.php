@@ -3,10 +3,9 @@
 namespace CommandeBundle\Controller;
 
 use AppBundle\Entity\commande;
-use http\Env\Response;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Commande controller.
@@ -16,16 +15,24 @@ class commandeController extends Controller
 {
     /**
      * Lists all commande entities.
-     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $paginator=$this->get(PaginatorInterface::class);
+        $em=$this->getDoctrine()->getManager();
+        $qb=$em->createQuery('select u from AppBundle:commande u where u.chargeId is not null order by u.date desc ');
+        $pagination = $paginator->paginate($qb
+            , /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
 
-        $commandes = $em->getRepository('AppBundle:commande')->findAll();
 
         return $this->render('@Commande/commande/index.html.twig', array(
-            'commandes' => $commandes,
+            'pagination' => $pagination,
         ));
     }
 
@@ -76,8 +83,18 @@ class commandeController extends Controller
         $user=$this->getUser();
         $commandes=$user->getCommandes();
 
+        $paginator=$this->get(PaginatorInterface::class);
+        $em=$this->getDoctrine()->getManager();
+        $qb=$em->createQuery('select u from AppBundle:commande u where u.user=:x and u.chargeId is not null ');
+            $qb->setParameter('x',$user);
+        $pagination = $paginator->paginate($qb
+            , /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            4/*limit per page*/
+        );
+
         return $this->render('@Commande/commande/orders.html.twig', array(
-            'commandes' => $commandes
+            'pagination' => $pagination
 
         ));
     }
