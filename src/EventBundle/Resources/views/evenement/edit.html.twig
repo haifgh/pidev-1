@@ -1,19 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
 {% block content %}
+<div class="container mt--7 ">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 ">
+            <div class="card shadow border-0">
     <h1>Evenement edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn btn-sm btn-primary" type="submit" value="Edit" />
+                <button class="btn btn-sm btn-primary"><a style="color: white" href="{{ path('evenement_index') }}">Back to the list</a></button>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('evenement_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('evenement_delete', { 'id': evenement.id }) }}">delete</a>
-        </li>
-    </ul>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

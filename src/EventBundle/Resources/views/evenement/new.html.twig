@@ -1,22 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block content %}
-    <h1>Evenement creation</h1>
 
+    <div class="container mt--7 ">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 ">
+                <div class="card shadow border-0">
     {{ form_start(form) }}
-
-        {{ form_row(form.nom) }}
+    {{ form_row(form.nom) }}
     {{ form_row(form.description) }}
     {{ form_label(form.dateFin , 'Date Evenement') }}
     {{ form_widget(form.dateFin) }}
     {{ form_row(form.nbrePlaces) }}
     {{ form_row(form.photo) }}
-    <input type="submit" value="Create" />
+    <input class="btn btn-sm btn-primary" type="submit" value="Create Event" />
+                    <button class="btn btn-sm btn-primary"><a style="color: white" href="{{ path('evenement_index') }}">Back to the list</a></button>
     {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('evenement_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

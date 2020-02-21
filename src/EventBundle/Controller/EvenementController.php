@@ -68,7 +68,7 @@ class EvenementController extends Controller
     /**
      * Creates a new evenement entity by user
      *
-     * @Route("/evenement/new", name="evenement_newUser")
+     * @Route("/user/evenement/new", name="evenement_newUser")
      * @Method({"GET", "POST"})
      */
     public function newUserEventAction(Request $request)
@@ -183,11 +183,12 @@ class EvenementController extends Controller
     /**
      * Deletes a evenement entity.
      *
-     * @Route("/delete/{id}", name="evenement_delete")
+     * @Route("/admin/delete/{id}", name="evenement_delete")
      *
      */
     public function deleteAction($id)
     {
+
 
         $em = $this->getDoctrine()->getManager();
         $event= $em->getRepository(Evenement::class)->find($id);
@@ -200,7 +201,7 @@ class EvenementController extends Controller
     /**
      *  a evenement entity.
      *
-     * @Route("/evenement", name="evenement_view")
+     * @Route("/user/evenement", name="evenement_view")
      *
      */
     public function afficheAction()

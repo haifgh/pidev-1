@@ -1,6 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
 {% block content %}
+<div class="container mt--7 ">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 ">
+            <div class="card shadow border-0">
     <h1>Evenement</h1>
 
     <table>
@@ -26,10 +30,6 @@
                 <td>{% if evenement.dateFin %}{{ evenement.dateFin|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Validite</th>
-                <td>{{ evenement.validite }}</td>
-            </tr>
-            <tr>
                 <th>Nbreplaces</th>
                 <td>{{ evenement.nbrePlaces }}</td>
             </tr>
@@ -40,20 +40,25 @@
 
         </tbody>
     </table>
-<ul>
+    <h3>Liste Participants</h3>
+   <table>
     {% for e in evenement.listesParticipants %}
-        <li>{{ e.user.username }}</li>
+        <tr>
+            <th>User Name</th>
+            <td>{{ e.user.username }}</td>
+        </tr>
+        <tr>
+            <th>Date Participation</th>
+            <td>{{ e.dateParticipation |date('Y-m-d') }}</td>
+        </tr>
     {% endfor %}
-</ul>
-    <ul>
-        <li>
-            <a href="{{ path('evenement_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('evenement_edit', { 'id': evenement.id }) }}">Edit</a>
-        </li>
-        <li>
-            <a href="{{ path('evenement_delete', { 'id': evenement.id }) }}">delete</a>
-        </li>
-    </ul>
+    </table>
+
+
+         <button class="btn btn-sm btn-primary">   <a style="color: white" href="{{ path('evenement_index') }}">Back to the list</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
