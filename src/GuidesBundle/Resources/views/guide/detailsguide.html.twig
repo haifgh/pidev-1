@@ -155,20 +155,39 @@
                             </div>
                         </div>
                     </div>
+                    <a href="{{ path('PDF',{'id':id}) }}" class="btn btn-primary">PDF</a>
                     <div class="like">
                         <a href="" class="fa fa fa-thumbs-up unliked" id="like-guide"
                            data-href="{{ path('guide_aimer', {'id':id}) }}" style="display: {{ isGuideLiked == true ? 'none' : 'block' }}">Like</a>
 
                         <a href="" class="fa fa fa-thumbs-up liked" id="unlike-guide"
-                           data-href="{{ path('guide_aimer', {'id':id}) }}" style="display: {{ isGuideLiked == true ? 'block' : 'none' }}">Unlike</a>
+                           data-href="{{ path('guide_pasaimer', {'id':id}) }}" style="display: {{ isGuideLiked == true ? 'block' : 'none' }}">Unlike</a>
                     </div>
-
+                    {% for c in commentaire %}
+                    <div class="posted-by">
+                        <div class="pb-pic">
+                            <img src="img/blog/post-by.png" alt="">
+                        </div>
+                        <div class="pb-text">
+                            <a href="#">
+                                <h5>{{ app.user.username }}</h5>
+                            </a>
+                            <p>{{ c.contenu }}</p>
+                            <a href="{{ path('commentaire_edit', {'id':c.id}) }}">
+                                <h5> Editer</h5>
+                            </a>
+                            <a href="{{ path('commentaire_delete',{'id':c.id}) }}">
+                                <h5> Delete</h5>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <div class="card my-4">
                         <h5 class="card-header">Leave a Comment:</h5>
                         <div class="card-body">
                             <form action="{{ path('commentaire_new') }}" method="POST" id="comment">
                                 <div class="form-group">
-
+                                    <input type="text" name="id" value="{{ id }}" style="display: none">
                                     <textarea class="form-control" rows="3" name="comment"
                                               placeholder="Comment here"></textarea>
 

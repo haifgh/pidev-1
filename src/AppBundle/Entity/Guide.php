@@ -59,6 +59,7 @@ class Guide
      * @ORM\Column(name="lien", type="string", length=255)
      */
     private $lien;
+
     /**
      * @var double
      *
@@ -284,6 +285,10 @@ class Guide
     {
         $this->note = $note;
     }
+
+
+
+
 
 }
 

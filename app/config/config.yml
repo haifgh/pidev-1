@@ -97,3 +97,14 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:    []
+    image:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        options:    []
+    temporary_folder: "%kernel.cache_dir%/snappy"
+    process_timeout: 20

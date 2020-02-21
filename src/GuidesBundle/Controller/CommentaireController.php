@@ -3,6 +3,7 @@
 namespace GuidesBundle\Controller;
 
 use AppBundle\Entity\Commentaire;
+use AppBundle\Entity\Guide;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -33,15 +34,20 @@ class CommentaireController extends Controller
      */
     public function newAction(Request $request)
     {
+
         $commentaire = new Commentaire();
-        $commentaire->setDate(new \DateTime('now'));
-        $commentaire->setUser($this->getUser());
-        $commentaire->setContenu($request->get('comment'));
+        $guide = $this->getDoctrine()->getRepository(Guide::class)->find($request->get('id'));
+            $commentaire->setDate(new \DateTime('now'));
+            $commentaire->setGuide($guide);
+            $commentaire->setUser($this->getUser());
+            $commentaire->setContenu($request->get('comment'));
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaire);
             $em->flush();
 
-            return $this->redirectToRoute('commentaire_show', array('id' => $commentaire->getId()));
+            return $this->redirectToRoute('guide_details', array('id' => $request->get('id')));
+
+
 
 
 
@@ -72,7 +78,9 @@ class CommentaireController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
+
 
             return $this->redirectToRoute('commentaire_edit', array('id' => $commentaire->getId()));
         }
@@ -88,16 +96,14 @@ class CommentaireController extends Controller
      * Deletes a commentaire entity.
      *
      */
-    public function deleteAction(Request $request, Commentaire $commentaire)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($commentaire);
-        $form->handleRequest($request);
+$em=$this->getDoctrine()->getManager();
+$commentaire=$em->getRepository(Commentaire::class)->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($commentaire);
             $em->flush();
-        }
+
 
         return $this->redirectToRoute('commentaire_index');
     }

@@ -21,4 +21,4 @@ commentaire_edit:
 commentaire_delete:
     path:     /{id}/delete
     defaults: { _controller: "GuidesBundle:Commentaire:delete" }
-    methods:  DELETE
+    methods:  [GET, POST]

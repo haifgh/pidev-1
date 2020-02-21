@@ -48,7 +48,7 @@ class GuideController extends Controller
         $pagination=$paginator->paginate(
             $guides,
             $request->query->getInt('page',1),
-            $request->query->getInt('limit',3)
+            $request->query->getInt('limit',2)
         );
         return $this->render('@Guides/guide/index2.html.twig', array(
             'guides' => $pagination
@@ -109,7 +109,7 @@ class GuideController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('guide_edit', array('id' => $guide->getId()));
+            return $this->redirectToRoute('guide_show', array('id' => $guide->getId()));
         }
 
         return $this->render('@Guides/guide/edit.html.twig', array(
@@ -141,12 +141,13 @@ class GuideController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $guide = $em->getRepository('AppBundle:Guide')->find($id);
-
+        $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy(array('guide'=>$guide));
         $isGuideLiked = $em->getRepository(Likes::class)->findOneBy(array('guide' => $guide, 'user' => $this->getUser()));
 
         return $this->render('@Guides/guide/detailsguide.html.twig', array('titre' => $guide->getTitre(),
             'datecreation' => $guide->getDateCreation(),
             'description' => $guide->getDescription(),
+            'commentaire'=>$commentaire,
             'id' => $guide->getId(),
             'lien' => $guide->getLien(),
             'photos' => $guide->getPhoto(),
@@ -226,12 +227,13 @@ class GuideController extends Controller
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
             //$guide = $em->getRepository("AppBundle:Guide")->find($id);
-            $isGuideLiked = $em->getRepository(Likes::class)->findOneBy(array('guide' => $guide, 'user' => $user));
+            $isGuideLiked = $this->getDoctrine()->getRepository(Likes::class)->findOneBy(array('guide' => $guide, 'user' => $user));
             if (!$isGuideLiked) {
                 $like = new Likes();
                 $like->setUser($user);
                 $like->setGuide($guide);
                 $em->persist($like);
+                //$em->persist($guide);
                 $em->flush();
                 return new JsonResponse();
             }
@@ -246,12 +248,14 @@ class GuideController extends Controller
     public function DislikeAction(Request $request, $id)
     {
         if ($request->isXmlHttpRequest()) {
+            //$guide->setLike($guide->getLike()-1);
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
             $like = $em->getRepository("AppBundle:Guide")->findOneBy(array(
                 'idGuide' => $id,
                 'idUser' => $user->getUsername()
             ));
+            //$em->persist($guide);
             $em->remove($like);
             $em->flush();
             return new JsonResponse($like);
@@ -293,5 +297,32 @@ class GuideController extends Controller
             return new Response("error");
         }
 
+    }
+    public function returnPDFAction($id){
+        $guide = $this->getDoctrine()->getRepository(Guide::class)->find($id);
+        $name = md5(uniqid());
+
+        $this->get('knp_snappy.pdf')->generateFromHtml(
+            $this->renderView(
+                '@Guides/guide/PDF.html.twig',array('guide'=>$guide)
+
+            ),
+            "C:/Users/haifa/Desktop/".$name.".pdf"
+        );
+        return $this->redirectToRoute('guide_details', array('id' => $id));
+    }
+    public function rechercherAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+
+        $guides = $em->getRepository('AppBundle:Guide')->findBy(array('titre'=>$request->get('titre')));
+        $paginator=$this->get('knp_paginator');
+        $pagination=$paginator->paginate(
+            $guides,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',3)
+        );
+        return $this->render('@Guides/guide/index2.html.twig', array(
+            'guides' => $pagination
+        ));
     }
 }

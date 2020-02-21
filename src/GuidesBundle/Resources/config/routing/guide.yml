@@ -44,4 +44,9 @@ guide_pasaimer:
 guide_rate:
   path:   /rate/{id}/{g}/{note}
   defaults: { _controller: "GuidesBundle:Guide:addRate" }
-
+PDF:
+    path:     /PDF/{id}
+    defaults: { _controller: "GuidesBundle:Guide:returnPDF"}
+rechercher:
+    path:     /rechercher
+    defaults: { _controller: "GuidesBundle:Guide:rechercher"}

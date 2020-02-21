@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commentaire
@@ -97,12 +98,12 @@ class Commentaire
     }
     /**
      *
-     * @ManyToOne(targetEntity="Guide", inversedBy="commentaires")
+     * @ManyToOne(targetEntity="Guide", inversedBy="commentaires",cascade="remove")
      * @JoinColumn(name="guide_id", referencedColumnName="id")
      */
     private $guide;
     /**
-     * @ManyToOne(targetEntity="User")
+     * @ManyToOne(targetEntity="User",cascade="remove" )
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

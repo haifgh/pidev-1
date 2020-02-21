@@ -22,12 +22,12 @@ class Rate
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade="remove")
      * @ORM\JoinColumn(name="id_user",referencedColumnName="id")
      */
     private $user;
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Guide")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Guide",cascade="remove")
      * @ORM\JoinColumn(name="id_guide",referencedColumnName="id")
      */
     private $guide;
