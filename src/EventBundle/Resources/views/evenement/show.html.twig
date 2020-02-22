@@ -43,14 +43,14 @@
     <h3>Liste Participants</h3>
    <table>
     {% for e in evenement.listesParticipants %}
-        <tr>
-            <th>User Name</th>
-            <td>{{ e.user.username }}</td>
-        </tr>
-        <tr>
-            <th>Date Participation</th>
-            <td>{{ e.dateParticipation |date('Y-m-d') }}</td>
-        </tr>
+           <tr>
+               <th>User Name</th>
+               <td>{{ e.user.username }}</td>
+           </tr>
+           <tr>
+               <th>Date Participation</th>
+               <td>{{ e.dateParticipation |date('Y-m-d') }}</td>
+           </tr>
     {% endfor %}
     </table>
 
