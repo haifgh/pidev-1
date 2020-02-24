@@ -171,14 +171,13 @@
             <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
             <script src="{{ asset('js/main.js') }}"></script>
             <script>
+
                 $('.remove').click(function (e) {
                     e.preventDefault();
                     $.ajax({url: $(this).attr('href'), success: function(){
 
                             $('#refresh').load(document.URL +  ' #refresh ul');
                         }});
-
-
                 });
 
             </script>

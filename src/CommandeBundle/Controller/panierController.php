@@ -120,19 +120,19 @@ class panierController extends Controller
         $p=intval($commande->getPrixTotal());
         try{
             $charge=$stripeClient->createCharge( $p, 'usd', $token,'','','test');
-            $commande->setChargeId($charge->id);
-            foreach ($commande->getLignesCommande() as $lc){
-                $pd=$lc->getProduit();
-                $pd->setQte($pd->getQte()-$lc->getQuantite());
-            }
-            $em->persist($commande);
-            $em->flush();
+
         }
         catch (Base $e){
 
             return $this->render('@Commande/panier/charge.html.twig',['charge'=>[],'error'=>$e]);
         }
-
+        $commande->setChargeId($charge->id);
+        foreach ($commande->getLignesCommande() as $lc){
+            $pd=$lc->getProduit();
+            $pd->setQte($pd->getQte()-$lc->getQuantite());
+        }
+        $em->persist($commande);
+        $em->flush();
 
         $session = $request->getSession();
         $session->set('panier',[]);

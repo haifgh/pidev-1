@@ -15,7 +15,8 @@ class commandeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('adresse', TextType::class)->add('tel',TextType::class);
+        $builder->add('adresse', TextType::class)->add('tel', TextType::class);
+       
     }/**
      * {@inheritdoc}
      */

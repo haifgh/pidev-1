@@ -4,8 +4,8 @@
     <div class="container-fluid mt--7">
         <!-- Table -->
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <a href="{{ path('commande_index') }}" class="btn btn-sm btn-success float-right">Back to the list</a>
@@ -78,9 +78,9 @@
                             </table>
                         <div class="card-footer py-4 text-center">
 
-                                <a class="btn btn-sm btn-danger" href="{{ path('commande_edit', { 'id': commande.id,'type':'Cancelled' }) }}">Cancel</a>
-                                <a class="btn btn-sm btn-success" href="{{ path('commande_edit', { 'id': commande.id,'type':'Delivered' }) }}">Delivered</a>
-                                <a class="btn btn-sm btn-warning" href="{{ path('commande_edit', { 'id': commande.id,'type':'Pending' }) }}">Pending</a>
+                                <a class="btn btn-sm btn-danger ajax" href="{{ path('commande_edit', { 'id': commande.id,'type':'Cancelled' }) }}">Cancel</a>
+                                <a class="btn btn-sm btn-success ajax" href="{{ path('commande_edit', { 'id': commande.id,'type':'Delivered' }) }}">Delivered</a>
+                                <a class="btn btn-sm btn-warning ajax" href="{{ path('commande_edit', { 'id': commande.id,'type':'Pending' }) }}">Pending</a>
 
                     </div>
                 </div>
@@ -130,6 +130,21 @@
                         </table>
                     </div></div></div></div></div>
     <div class="container p-5"></div>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
+<script>
 
+    $('.ajax').click(function (e) {
+        e.preventDefault();
+        $.ajax({url: $(this).attr('href'), success: function(){
+
+                location.reload();
+            }});
+
+
+    });
+</script>
 
 {% endblock %}

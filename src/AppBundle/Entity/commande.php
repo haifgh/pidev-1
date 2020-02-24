@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * commande
  *
@@ -48,13 +48,15 @@ class commande
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="12")
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="8",max="8")
      * @ORM\Column(name="tel", type="string", length=255, nullable=true)
      */
     private $tel;
