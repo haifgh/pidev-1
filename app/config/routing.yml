@@ -1,6 +1,6 @@
 guides:
     resource: "@GuidesBundle/Resources/config/routing.yml"
-    prefix:   /guides
+    prefix:   /
 
 app:
     resource: '@AppBundle/Controller/'

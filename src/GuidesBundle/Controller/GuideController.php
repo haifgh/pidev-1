@@ -28,11 +28,11 @@ class GuideController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $guides = $em->getRepository('AppBundle:Guide')->findAll();
-        $paginator=$this->get('knp_paginator');
-        $pagination=$paginator->paginate(
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
             $guides,
-            $request->query->getInt('page',1),
-            $request->query->getInt('limit',3)
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 3)
         );
         return $this->render('@Guides/guide/index.html.twig', array(
             'guides' => $pagination
@@ -44,11 +44,11 @@ class GuideController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $guides = $em->getRepository('AppBundle:Guide')->findAll();
-        $paginator=$this->get('knp_paginator');
-        $pagination=$paginator->paginate(
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
             $guides,
-            $request->query->getInt('page',1),
-            $request->query->getInt('limit',2)
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 2)
         );
         return $this->render('@Guides/guide/index2.html.twig', array(
             'guides' => $pagination
@@ -141,17 +141,19 @@ class GuideController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $guide = $em->getRepository('AppBundle:Guide')->find($id);
-        $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy(array('guide'=>$guide));
+        $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy(array('guide' => $guide));
         $isGuideLiked = $em->getRepository(Likes::class)->findOneBy(array('guide' => $guide, 'user' => $this->getUser()));
+        $nbLikes = $em->getRepository(Likes::class)->countByGuide($guide);
 
         return $this->render('@Guides/guide/detailsguide.html.twig', array('titre' => $guide->getTitre(),
             'datecreation' => $guide->getDateCreation(),
             'description' => $guide->getDescription(),
-            'commentaire'=>$commentaire,
+            'commentaire' => $commentaire,
             'id' => $guide->getId(),
             'lien' => $guide->getLien(),
             'photos' => $guide->getPhoto(),
-            'isGuideLiked'=> $isGuideLiked
+            'isGuideLiked' => $isGuideLiked,
+            'nbLikes'=> $nbLikes
         ));
 
     }
@@ -194,33 +196,33 @@ class GuideController extends Controller
     }
 
     /**public function addCommentAction(Request $request, UserInterface $user)
-    {
-
-
-        $ref = $request->headers->get('referer');
-
-        $guide = $this->getDoctrine()
-            ->getRepository(Guide::class)
-            ->findGuideByid($request->request->get('guide_id'));
-
-        $comment = new commentaire();
-
-        $comment->setUser($user);
-        $comment->setGuide($guide);
-        $comment->setDate(new \DateTime('now'));
-        $comment->setContenu($request->request->get('comment'));
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($comment);
-        $em->flush();
-
-        $this->addFlash(
-            'info', 'Comment published !.'
-        );
-
-        return $this->redirect($ref);
-
-    }
-**/
+     * {
+     *
+     *
+     * $ref = $request->headers->get('referer');
+     *
+     * $guide = $this->getDoctrine()
+     * ->getRepository(Guide::class)
+     * ->findGuideByid($request->request->get('guide_id'));
+     *
+     * $comment = new commentaire();
+     *
+     * $comment->setUser($user);
+     * $comment->setGuide($guide);
+     * $comment->setDate(new \DateTime('now'));
+     * $comment->setContenu($request->request->get('comment'));
+     * $em = $this->getDoctrine()->getManager();
+     * $em->persist($comment);
+     * $em->flush();
+     *
+     * $this->addFlash(
+     * 'info', 'Comment published !.'
+     * );
+     *
+     * return $this->redirect($ref);
+     *
+     * }
+     **/
     public function LikeAction(Request $request, Guide $guide)
     {
         if ($request->isXmlHttpRequest()) {
@@ -237,89 +239,88 @@ class GuideController extends Controller
                 $em->flush();
                 return new JsonResponse();
             }
-            else{
-                $em->remove($isGuideLiked);
-                $em->flush();
-            }
         } else
             return new Response('Error!', 400);
     }
 
-    public function DislikeAction(Request $request, $id)
+    public function DislikeAction(Request $request, Guide $guide)
     {
         if ($request->isXmlHttpRequest()) {
             //$guide->setLike($guide->getLike()-1);
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
-            $like = $em->getRepository("AppBundle:Guide")->findOneBy(array(
-                'idGuide' => $id,
-                'idUser' => $user->getUsername()
-            ));
+            $like = $em->getRepository(Likes::class)->findOneBy(array('guide' => $guide, 'user' => $user));
             //$em->persist($guide);
+            if($like)
             $em->remove($like);
             $em->flush();
             return new JsonResponse($like);
         } else
             return new Response('Error!', 400);
     }
-    public function addRateAction($id,$g,$note){
+
+    public function addRateAction($id, $g, $note)
+    {
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
         $guide = $this->getDoctrine()->getRepository(Guide::class)->find($g);
-        $rate=$this->getDoctrine()->getRepository(Rate::class)->findOneBy(array('user'=>$user,'guide'=>$guide));
-        $rates=$this->getDoctrine()->getRepository(Rate::class)->findBy(array('guide'=>$guide));
-        if(!$rate){
-            $avis = 0 ;
-            $moyenne =0 ;
-            if($rates){
-                foreach ($rates->getNote() as $n){
-                    $avis = $avis + $n ;
+        $rate = $this->getDoctrine()->getRepository(Rate::class)->findOneBy(array('user' => $user, 'guide' => $guide));
+        $rates = $this->getDoctrine()->getRepository(Rate::class)->findBy(array('guide' => $guide));
+        if (!$rate) {
+            $avis = 0;
+            $moyenne = 0;
+            if ($rates) {
+                foreach ($rates->getNote() as $n) {
+                    $avis = $avis + $n;
 
                 }
-                $moyenne = (($avis + $note)/(count($rates)+1));
+                $moyenne = (($avis + $note) / (count($rates) + 1));
+            } else {
+
+                $moyenne = (($note) / (count($rates) + 1));
             }
-            else{
-
-                $moyenne = (($note)/(count($rates)+1));
-            }
 
 
-           $rate = new Rate();
-           $rate->setGuide($guide);
-           $rate->setUser($user);
-           $rate->setNote($note);
-           $guide->setNote($moyenne);
-           $em = $this->getDoctrine()->getManager();
-           $em->persist($guide);
-           $em->persist($rate);
-           $em->flush();
-           return new Response("Done");
-        }else{
+            $rate = new Rate();
+            $rate->setGuide($guide);
+            $rate->setUser($user);
+            $rate->setNote($note);
+            $guide->setNote($moyenne);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($guide);
+            $em->persist($rate);
+            $em->flush();
+            return new Response("Done");
+        } else {
             return new Response("error");
         }
 
     }
-    public function returnPDFAction($id){
+
+    public function returnPDFAction($id)
+    {
         $guide = $this->getDoctrine()->getRepository(Guide::class)->find($id);
         $name = md5(uniqid());
 
         $this->get('knp_snappy.pdf')->generateFromHtml(
             $this->renderView(
-                '@Guides/guide/PDF.html.twig',array('guide'=>$guide)
+                '@Guides/guide/PDF.html.twig', array('guide' => $guide)
 
             ),
-            "C:/Users/haifa/Desktop/".$name.".pdf"
+            "C:/Users/haifa/Desktop/" . $name . ".pdf"
         );
         return $this->redirectToRoute('guide_details', array('id' => $id));
     }
-    public function rechercherAction(Request $request){
+
+    public function rechercherAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
-        $guides = $em->getRepository('AppBundle:Guide')->findBy(array('titre'=>$request->get('titre')));
-        $paginator=$this->get('knp_paginator');
-        $pagination=$paginator->paginate(
+        $guides = $em->getRepository('AppBundle:Guide')->findBy(array('titre' => $request->get('titre')));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
             $guides,
-            $request->query->getInt('page',1),
-            $request->query->getInt('limit',3)
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 3)
         );
         return $this->render('@Guides/guide/index2.html.twig', array(
             'guides' => $pagination

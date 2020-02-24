@@ -37,18 +37,15 @@ class CommentaireController extends Controller
 
         $commentaire = new Commentaire();
         $guide = $this->getDoctrine()->getRepository(Guide::class)->find($request->get('id'));
-            $commentaire->setDate(new \DateTime('now'));
-            $commentaire->setGuide($guide);
-            $commentaire->setUser($this->getUser());
-            $commentaire->setContenu($request->get('comment'));
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commentaire);
-            $em->flush();
+        $commentaire->setDate(new \DateTime('now'));
+        $commentaire->setGuide($guide);
+        $commentaire->setUser($this->getUser());
+        $commentaire->setContenu($request->get('comment'));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($commentaire);
+        $em->flush();
 
-            return $this->redirectToRoute('guide_details', array('id' => $request->get('id')));
-
-
-
+        return $this->redirectToRoute('guide_details', array('id' => $request->get('id')));
 
 
     }
@@ -98,14 +95,26 @@ class CommentaireController extends Controller
      */
     public function deleteAction($id)
     {
-$em=$this->getDoctrine()->getManager();
-$commentaire=$em->getRepository(Commentaire::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $commentaire = $em->getRepository(Commentaire::class)->find($id);
 
-            $em->remove($commentaire);
-            $em->flush();
+        $em->remove($commentaire);
+        $em->flush();
 
 
         return $this->redirectToRoute('commentaire_index');
+    }
+
+    public function delete2Action($id, $idGuide)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $commentaire = $em->getRepository(Commentaire::class)->find($id);
+
+        $em->remove($commentaire);
+        $em->flush();
+
+
+        return $this->redirectToRoute('guide_details', array('id'=>$idGuide));
     }
 
     /**
@@ -119,8 +128,7 @@ $commentaire=$em->getRepository(Commentaire::class)->find($id);
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('commentaire_delete', array('id' => $commentaire->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->setMethod('POST')
+            ->getForm();
     }
 }

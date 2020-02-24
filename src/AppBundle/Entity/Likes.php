@@ -26,7 +26,7 @@ class Likes
      */
     private $user;
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Guide")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Guide", inversedBy="likes")
      * @ORM\JoinColumn(name="id_guide",referencedColumnName="id")
      */
     private $guide;

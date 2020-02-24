@@ -75,6 +75,11 @@ class Guide
     private $photo ;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Likes", mappedBy="guide")
+     */
+    private $likes;
+
+    /**
      * @return string
      */
     public function getPhoto()
@@ -228,6 +233,10 @@ class Guide
     private $commentaires;
     // ...
 
+    public function getCountLikes()
+    {
+        return count($this->getLikes());
+    }
     public function __construct() {
         $this->commentaires = new ArrayCollection();
         $this->likes = new ArrayCollection();
@@ -284,6 +293,22 @@ class Guide
     public function setNote($note)
     {
         $this->note = $note;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
     }
 
 

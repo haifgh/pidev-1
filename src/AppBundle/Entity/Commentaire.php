@@ -98,12 +98,12 @@ class Commentaire
     }
     /**
      *
-     * @ManyToOne(targetEntity="Guide", inversedBy="commentaires",cascade="remove")
+     * @ManyToOne(targetEntity="Guide", inversedBy="commentaires")
      * @JoinColumn(name="guide_id", referencedColumnName="id")
      */
     private $guide;
     /**
-     * @ManyToOne(targetEntity="User",cascade="remove" )
+     * @ManyToOne(targetEntity="User")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

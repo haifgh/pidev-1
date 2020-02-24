@@ -39,10 +39,11 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('guide_show', { 'id': guide.id }) }}">show guide</a>
+                            <a href="{{ path('guide_show', { 'id': guide.id }) }}" class="btn btn-primary btn-lg">show guide</a>
                         </li>
+                        <br> </br>
                         <li>
-                            <a href="{{ path('guide_edit', { 'id': guide.id }) }}">edit guide</a>
+                            <a href="{{ path('guide_edit', { 'id': guide.id }) }}" class="btn btn-primary btn-lg">edit guide</a>
                         </li>
                     </ul>
                 </td>
@@ -60,7 +61,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('guide_new') }}">Create a new guide</a>
+            <a href="{{ path('guide_new') }}" class="btn btn-primary btn-lg">Create a new guide</a>
         </li>
     </ul>
 

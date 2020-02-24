@@ -1,48 +1,48 @@
 guide_index:
-    path:     /admin
+    path:     /admin/guides/
     defaults: { _controller: "GuidesBundle:Guide:index" }
     methods:  GET
 guide_index2:
-    path:     /
+    path:     /guide/
     defaults: { _controller: "GuidesBundle:Guide:index2" }
     methods:  GET
 
 guide_show:
-    path:     /{id}/show
+    path:     /guide/{id}/show
     defaults: { _controller: "GuidesBundle:Guide:show" }
     methods:  GET
 
 guide_new:
-    path:    /admin/new
+    path:    /admin/guide/new
     defaults: { _controller: "GuidesBundle:Guide:new" }
     methods:  [GET, POST]
 
 guide_edit:
-    path:     /admin/{id}/edit
+    path:     /admin/guide/{id}/edit
     defaults: { _controller: "GuidesBundle:Guide:edit" }
     methods:  [GET, POST]
 
 guide_delete:
-    path:     /admin/{id}/delete
+    path:     /admin/guide/{id}/delete
     defaults: { _controller: "GuidesBundle:Guide:delete" }
     methods:  DELETE
 
 guide_details:
-    path:     /{id}/details
+    path:     /guide/{id}/details
     defaults: { _controller: "GuidesBundle:Guide:details" }
     methods:  [GET, POST]
 ajax_search:
     path:     /search
     defaults: { _controller: "GuidesBundle:Guide:search"}
 guide_aimer:
-    path:   /Aimer{id}
+    path:   /Aimer/{id}
     defaults: { _controller: "GuidesBundle:Guide:Like" }
 
 guide_pasaimer:
-    path:   /PasAimer{id}
+    path:   /PasAimer/{id}
     defaults: { _controller: "GuidesBundle:Guide:Dislike" }
 guide_rate:
-  path:   /rate/{id}/{g}/{note}
+  path:   /guide/rate/{id}/{g}/{note}
   defaults: { _controller: "GuidesBundle:Guide:addRate" }
 PDF:
     path:     /PDF/{id}

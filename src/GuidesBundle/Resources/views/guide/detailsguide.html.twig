@@ -10,7 +10,7 @@
             color: cornflowerblue;
         }
     </style>
-    <div class="container">
+    <br class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="blog-details-inner">
@@ -26,6 +26,7 @@
                             {{ description }}
                         </p>
                     </div>
+
                     <div class="tag-share">
                         <div class="details-tag">
                             <ul>
@@ -35,16 +36,7 @@
                                 <li>Hunt</li>
                             </ul>
                         </div>
-                        <div class="blog-share">
-                            <span>Share:</span>
-                            <div class="social-links">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="blog-post">
                         <div class="row">
@@ -63,9 +55,7 @@
                             <div class="col-lg-5 offset-lg-2 col-md-6">
                                 <a href="#" class="next-blog">
                                     <div class="nb-pic">
-                                        <
-                                        <td><img alt="" src="{{ asset('img/blog/') }}{{ photos }}"
-                                                 style="width: 50px;height: 50px"></td>
+                                        <img src="img/blog/next-blog.png" alt="">
                                         <i class="ti-arrow-right"></i>
                                     </div>
                                     <div class="nb-text">
@@ -76,6 +66,15 @@
                             </div>
                         </div>
                     </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="detailsInfoBox" align="right">
                             <h3>Donner une note</h3>
                             <div class="listingReview">
@@ -125,13 +124,6 @@
                                             </ul>
                             </div>
                     </div>
-                    <div class="media mb-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">{{ description }}</h5>
-                            <p>{{ description }}</p>
-                        </div>
-                    </div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,8 +147,14 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ path('PDF',{'id':id}) }}" class="btn btn-primary">PDF</a>
+                    <a href="{{ path('PDF',{'id':id}) }}" >
+                        <button type="button" class="btn btn-danger">PDF</button>
+                    </a>
+
+                    <br>  <br>
+
                     <div class="like">
+                       <span id="nbLikes"> {{ nbLikes }}</span>
                         <a href="" class="fa fa fa-thumbs-up unliked" id="like-guide"
                            data-href="{{ path('guide_aimer', {'id':id}) }}" style="display: {{ isGuideLiked == true ? 'none' : 'block' }}">Like</a>
 
@@ -170,15 +168,19 @@
                         </div>
                         <div class="pb-text">
                             <a href="#">
-                                <h5>{{ app.user.username }}</h5>
+                                <h5>{{ c.user.username }}</h5>
                             </a>
                             <p>{{ c.contenu }}</p>
+
+                            {% if app.user.id==c.user.id %}
+
                             <a href="{{ path('commentaire_edit', {'id':c.id}) }}">
-                                <h5> Editer</h5>
+                                <button type="button" class="btn btn-primary">Edit Comment</button>
                             </a>
-                            <a href="{{ path('commentaire_delete',{'id':c.id}) }}">
-                                <h5> Delete</h5>
+                            <a href="{{ path('commentaire_delete_2',{'id':c.id, 'idGuide':id}) }}">
+                                <button type="button" class="btn btn-primary">Delete Comment</button>
                             </a>
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}
@@ -192,7 +194,7 @@
                                               placeholder="Comment here"></textarea>
 
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -208,10 +210,14 @@
     {{ parent() }}
 
     <script>
+        var originalNbLikes = parseInt($('#nbLikes').text());
 
         $(document).on('click', "#like-guide", function (e) {
             e.preventDefault();
             var url = $(this).attr('data-href');
+            var nbLikes = parseInt($('#nbLikes').text());
+
+            $('#nbLikes').text(nbLikes + 1);
             $(this).hide();
             $('#unlike-guide').show();
             $.ajax({
@@ -222,7 +228,9 @@
                     console.log('Success');
                 },
                 error: function () {
-
+                    $('#nbLikes').text(originalNbLikes);
+                    $('#unlike-guide').hide();
+                    $(this).show();
                 }
             });
         });
@@ -230,6 +238,9 @@
         $(document).on('click', "#unlike-guide", function (e) {
             e.preventDefault();
             var url = $(this).attr('data-href');
+            var nbLikes = parseInt($('#nbLikes').text());
+
+            $('#nbLikes').text(nbLikes - 1);
             $(this).hide();
             $('#like-guide').show();
             $.ajax({
@@ -240,7 +251,9 @@
                     console.log('Success');
                 },
                 error: function () {
-
+                    $('#like-guide').hide();
+                    $(this).show();
+                    $('#nbLikes').text(originalNbLikes);
                 }
             });
         });
@@ -251,7 +264,7 @@
         $("#star-2")
             .click(function () {
                 valeur = 2 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guides/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -268,7 +281,7 @@
         $("#star-3")
             .click(function () {
                 valeur = 3 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guides/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -284,7 +297,7 @@
         $("#star-4")
             .click(function () {
                 valeur = 4 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guides/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -300,7 +313,7 @@
         $("#star-5")
             .click(function () {
                 valeur = 5 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guides/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -315,7 +328,7 @@
         $("#star-1")
             .click(function () {
                 valeur = 1 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guides/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
 
                     console.log(data);
                     if(data == "error"){

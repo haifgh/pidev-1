@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class LikesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countByGuide($guide)
+    {
+       return $this->createQueryBuilder('l')
+            ->select('COUNT(l)')
+            ->where('l.guide = :guide')
+            ->setParameter('guide', $guide)
+            ->getQuery()->getSingleScalarResult();
+    }
 }

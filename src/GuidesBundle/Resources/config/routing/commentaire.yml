@@ -1,5 +1,5 @@
 commentaire_index:
-    path:     /
+    path:     /commentaire
     defaults: { _controller: "GuidesBundle:Commentaire:index" }
     methods:  GET
 
@@ -21,4 +21,9 @@ commentaire_edit:
 commentaire_delete:
     path:     /{id}/delete
     defaults: { _controller: "GuidesBundle:Commentaire:delete" }
+    methods:  [GET, POST]
+
+commentaire_delete_2:
+    path:     /{id}/{idGuide}/delete2
+    defaults: { _controller: "GuidesBundle:Commentaire:delete2" }
     methods:  [GET, POST]
