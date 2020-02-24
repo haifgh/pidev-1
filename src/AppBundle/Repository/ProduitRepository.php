@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllProduct($promotion){
+      $query=$this->getEntityManager()->createQuery( "select p.nom ,lp.id,lp.quantite
+    FROM AppBundle:Produit as p INNER JOIN AppBundle:ligne_promotion as lp with lp.produit=p.id
+    INNER JOIN AppBundle:promotion as x with lp.promotion=x.id
+    WHERE lp.promotion= :promotion")
+          ->setParameter('promotion',$promotion);
+      return $query->getResult();
+    }
 }

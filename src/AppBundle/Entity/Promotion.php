@@ -2,12 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Promotion
  *
@@ -24,73 +25,40 @@ class Promotion
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @var DateTime
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @ORM\Column(name="date_debut", type="datetime")
+     */
+    private $dateDebut;
 
+    /**
+     * @var DateTime
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @Assert\GreaterThan(propertyPath="dateDebut")
+     * @ORM\Column(name="date_fin", type="datetime")
+     */
+    private $dateFin;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="taux_reduction", type="float")
+     */
+    private $tauxReduction;
     /**
      * @var string
      *
-     * @ORM\Column(name="pts_fidelite", type="string", length=255)
+     * @ORM\Column(name="nom", type="string")
      */
-    private $ptsFidelite;
+    private $nom;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set ptsFidelite
-     *
-     * @param string $ptsFidelite
-     *
-     * @return Promotion
-     */
-    public function setPtsFidelite($ptsFidelite)
-    {
-        $this->ptsFidelite = $ptsFidelite;
-
-        return $this;
-    }
-
-    /**
-     * Get ptsFidelite
-     *
-     * @return string
-     */
-    public function getPtsFidelite()
-    {
-        return $this->ptsFidelite;
-    }
-    /**
-     * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
     /**
      *
-     * @OneToMany(targetEntity="ligne_promotion", mappedBy="promotion")
+     * @OneToMany(targetEntity="ligne_promotion", mappedBy="promotion",cascade="remove")
      */
     private $lignes_promotion;
     // ...
@@ -98,6 +66,30 @@ class Promotion
     public function __construct() {
         $this->lignes_promotion = new ArrayCollection();
     }
+
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
 
     /**
      * @return ArrayCollection
@@ -113,6 +105,54 @@ class Promotion
     public function setLignesPromotion($lignes_promotion)
     {
         $this->lignes_promotion = $lignes_promotion;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * @param \DateTime $dateDebut
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * @param \DateTime $dateFin
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTauxReduction()
+    {
+        return $this->tauxReduction;
+    }
+
+    /**
+     * @param float $tauxReduction
+     */
+    public function setTauxReduction($tauxReduction)
+    {
+        $this->tauxReduction = $tauxReduction;
     }
 }
 

@@ -1,0 +1,47 @@
+
+
+
+
+
+{% extends 'adminBase.html.twig' %} {# this #}
+
+{% block content %}
+<div class="container-fluid mt--7"> {# this #}
+    <div class="row"> {# this #}
+        <div class="col"> {# this #}
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Promotion List Product</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Actions</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+        {% for x in promotion.getLignesPromotion %}
+            <tr>
+                <td>{{ x.produit.nom }}</td>
+                <td>{{ x.quantite }}</td>
+               <td> <button><a href="{{ path('promotion_edit', { 'id': x.id }) }}">Edit</a></button>
+                 <button><a href="{{ path('prod_delete', { 'id': x.id }) }}">Remove</a></button></td>
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+
+            <button><a href="{{ path('promotion_index') }}">Back</a></button></td>
+
+    </ul>
+{% endblock %}

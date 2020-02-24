@@ -2,9 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Produit
@@ -43,7 +45,28 @@ class Produit
      * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="$prix_promo", type="float",nullable=true)
+     */
+    private $prix_promo;
 
+    /**
+     * @return float
+     */
+    public function getPrixPromo()
+    {
+        return $this->prix_promo;
+    }
+
+    /**
+     * @param float $prix_promo
+     */
+    public function setPrixPromo($prix_promo)
+    {
+        $this->prix_promo = $prix_promo;
+    }
     /**
      * @var string
      *
