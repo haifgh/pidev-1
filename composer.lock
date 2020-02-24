@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4df9705415a226dfc87aa92ebebaa8b2",
-    "content-hash": "b850ae3e51a359d6f4d06870ef216c35",
+    "content-hash": "a52c425b954501986352b04d416d4ea1",
     "packages": [
         {
             "name": "cmen/google-charts-bundle",
@@ -2752,7 +2751,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-11-11T16:49:32+00:00"
+            "time": "2020-02-11T05:59:23+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -2861,7 +2860,6 @@
             ],
             "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
-            "time": "2020-02-11T05:59:23+00:00"
         }
     ],
     "packages-dev": [

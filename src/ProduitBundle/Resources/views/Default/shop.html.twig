@@ -57,7 +57,7 @@
                                             <div class="sale pp-sale">Sale</div>
 
                                             <ul>
-                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                                <li class="w-icon active "><a href="{{ path('panier_add',{'id': product.id} )}}" class="add"><i class="icon_bag_alt"></i></a></li>
 
                                             </ul>
                                         </div>
@@ -91,5 +91,18 @@
 
 {% endblock %}
 
+{% block customscript %}
+    <script>
+        $('.add').click(function (e) {
+            e.preventDefault();
+            $.ajax({url: $(this).attr('href'), success: function(){
 
+                    $('#refresh').load(document.URL +  ' #refresh ul');
+                }});
+
+
+        });
+
+    </script>
+{% endblock %}
 

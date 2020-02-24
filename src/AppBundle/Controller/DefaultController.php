@@ -143,7 +143,7 @@ class DefaultController extends Controller
 
 
 
-
+    /**
      * @Route("/search", name="searchProduct")
      */
     public function searchByNameAction(Request $request){
