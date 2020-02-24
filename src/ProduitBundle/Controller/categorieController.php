@@ -6,7 +6,8 @@ use AppBundle\Entity\categorie;
 use AppBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Categorie controller.
@@ -18,19 +19,26 @@ class categorieController extends Controller
     /**
      * Lists all categorie entities.
      *
-     * @Route("/", name="categorie_index")
+     * @Route("/admin", name="categorie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('AppBundle:categorie')->findAll();
-
+        $paginator=$this->get('knp_paginator');
+        $pagination=$paginator->paginate(
+            $categories,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',2)
+        );
         return $this->render('@Produit/categorie/index.html.twig', array(
-            'categories' => $categories,
+            'categories' => $pagination,
         ));
     }
+
+
 
     /**
      * Creates a new categorie entity.
@@ -61,16 +69,14 @@ class categorieController extends Controller
     /**
      * Finds and displays a categorie entity.
      *
-     * @Route("/{id}", name="categorie_show")
+     * @Route("/show/{id}", name="categorie_show")
      * @Method("GET")
      */
-    public function showAction(categorie $categorie)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($categorie);
-
+        $categorie=$this->getDoctrine()->getRepository(categorie::class)->find($id);
         return $this->render('@Produit/categorie/show.html.twig', array(
-            'categorie' => $categorie,
-            'delete_form' => $deleteForm->createView(),
+            'categorie' => $categorie
         ));
     }
 
@@ -82,7 +88,7 @@ class categorieController extends Controller
      */
     public function editAction(Request $request, categorie $categorie)
     {
-        $deleteForm = $this->createDeleteForm($categorie);
+
         $editForm = $this->createForm('ProduitBundle\Form\categorieType', $categorie);
         $editForm->handleRequest($request);
 
@@ -95,7 +101,7 @@ class categorieController extends Controller
         return $this->render('@Produit/categorie/edit.html.twig', array(
             'categorie' => $categorie,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
@@ -114,19 +120,10 @@ class categorieController extends Controller
         return $this->redirectToRoute('categorie_index');
     }
 
-    /**
-     * Creates a form to delete a categorie entity.
-     *
-     * @param categorie $categorie The categorie entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(categorie $categorie)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('categorie_delete', array('id' => $categorie->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
+
+
+
+
+
 }

@@ -61,16 +61,17 @@
                             <div class="col-lg-2 col-md-2">
                                 <div class="logo">
                                     <a href="#">
-                                        <img src="{{ asset('img/logo.png') }}" alt="">
+                                        <img src="{{ asset('logo.png') }}" alt="" style="width:1.5cm ">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-7">
                                 <div class="advanced-search">                                               {#todo#}
-                                    <button type="button" class="category-btn">All Categories</button>
                                     <div class="input-group">
-                                        <input type="text" placeholder="What do you need?">
-                                        <button type="button"><i class="ti-search"></i></button>
+                                        <form method="post" action="{{ path('searchProduct') }}">
+                                        <input type="text" placeholder="What do you need?" name="nom">
+                                        <button type="submit"><i class="ti-search"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

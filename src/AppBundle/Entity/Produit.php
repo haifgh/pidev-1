@@ -50,8 +50,29 @@ class Produit
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255)
+     */
 
+    private $photo;
 
+    /**
+     * @return mixed
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param mixed $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
     /**
      * Get id
      *
@@ -160,7 +181,7 @@ class Produit
 
     /**
      * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="categorie", inversedBy="produits",cascade="remove")
+     * @ManyToOne(targetEntity="categorie", inversedBy="produits")
      * @JoinColumn(name="categorie_id", referencedColumnName="id")
      */
     private $categorie;
@@ -181,5 +202,23 @@ class Produit
         $this->categorie = $categorie;
     }
     // ...
+    public function getWebPath()
+    {
+        return null===$this->photo ? null : $this->getUploadDir().'/'.$this->photo;
+    }
+    protected function getUploadRootDir()
+    {
+        return dirname(__FILE__).'/../../../web/'.$this->getUploadDir();
+    }
+    protected function getUploadDir()
+    {
+        return 'images';
+    }
+    public function UploadProfilePicture()
+    {
+        $this->photo->move($this->getUploadRootDir(),$this->photo->getClientOriginalName());
+        $this->photo=$this->photo->getClientOriginalName();
+        $this->file=null;
+    }
 }
 

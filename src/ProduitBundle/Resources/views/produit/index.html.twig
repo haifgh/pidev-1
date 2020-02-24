@@ -1,17 +1,25 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'adminBase.html.twig' %}
 {% block content %}
-    <h1>Produits list</h1>
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="container">
 
-    <table>
-        <thead>
-            <tr>
+                <div class="row clearfix">
+                    <h1>Products list</h1>
+               </div>
+                <div class="body table-responsive">
+                    <table class="table">
+                        <thead>
+              <tr>
                 <th>Id</th>
-                <th>Nom</th>
-                <th>Qte</th>
-                <th>Prix</th>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                 <th>Photo</th>
                 <th>Description</th>
-                <th>Actions</th>
+                  <th>Category</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -21,25 +29,32 @@
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.qte }}</td>
                 <td>{{ produit.prix }}</td>
+                <td><img alt="" src="{{ asset(produit.photo) }}" style="width:50px;height: 50px" ></td>
                 <td>{{ produit.description }}</td>
+                <td>{{ produit.categorie.nom }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('produit_edit', { 'id': produit.id }) }}">edit</a>
-                        </li>
-                    </ul>
+
+                            <a href="{{ path('produit_show', { 'id': produit.id }) }}" class="btn btn-primary btn-lg">show</a>
+
+                            <a href="{{ path('produit_edit', { 'id': produit.id }) }}" class="btn btn-primary btn-lg">edit</a>
+                    <a href="{{ path('produit_delete', { 'id': produit.id }) }}" class="btn btn-primary btn-lg">delete</a>
+
                 </td>
             </tr>
-        {% endfor %}
         </tbody>
+                        {% endfor %}
     </table>
 
-    <ul>
+     {{knp_pagination_render(produits)}}
+    <td>
         <li>
             <a href="{{ path('produit_new') }}">Create a new produit</a>
         </li>
-    </ul>
+    </td>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+
 {% endblock %}

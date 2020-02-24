@@ -1,13 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig.' %}
 
 {% block content %}
-    <h1>Categories list</h1>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h1>Categories list</h1>
 
-    <table>
-        <thead>
+            </div>
+            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
+
             <tr>
                 <th>Id</th>
-                <th>Nom</th>
+                <th>Name</th>
+                <th>N° of products</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,24 +24,29 @@
             <tr>
                 <td><a href="{{ path('categorie_show', { 'id': categorie.id }) }}">{{ categorie.id }}</a></td>
                 <td>{{ categorie.nom }}</td>
+                <td>{{ categorie.produits|length }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('categorie_show', { 'id': categorie.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('categorie_edit', { 'id': categorie.id }) }}">edit</a>
-                        </li>
-                    </ul>
+
+                            <a href="{{ path('categorie_show', { 'id': categorie.id }) }}" class="btn btn-dark">show</a>
+
+                            <a href="{{ path('categorie_edit', { 'id': categorie.id }) }}" class="btn btn-warning">edit</a>
+                    <a href="{{ path('categorie_delete', { 'id': categorie.id }) }}" class="btn btn-danger">delete</a>
+
+
+
                 </td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('categorie_new') }}">Create a new categorie</a>
-        </li>
-    </ul>
+        </tbody>
+                    {% endfor %}
+                </table>
+                {{ knp_pagination_render(categories) }}
+
+                <a href="{{ path('categorie_new') }}"  class="btn btn-success">Create a new categorie</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

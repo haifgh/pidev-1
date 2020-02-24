@@ -30,6 +30,14 @@ class categorie
      */
     private $nom;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="produit", type="integer", nullable=true)
+     */
+    private $produit;
+
+
 
     /**
      * Get id
@@ -89,6 +97,22 @@ class categorie
     public function setProduits($produits)
     {
         $this->produits = $produits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * @param int $produit
+     */
+    public function setProduit($produit)
+    {
+        $this->produit = $produit;
     }
 
 }

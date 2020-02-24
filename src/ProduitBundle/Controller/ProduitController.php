@@ -2,10 +2,15 @@
 
 namespace ProduitBundle\Controller;
 
+use AppBundle\Entity\categorie;
 use AppBundle\Entity\Produit;
+use AppBundle\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Produit controller.
@@ -18,24 +23,31 @@ class ProduitController extends Controller
      * Lists all produit entities.
      *
      * @Route("/", name="produit_index")
-     * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
-
+		$paginator=$this->get('knp_paginator');
+		$pagination=$paginator->paginate(
+		$produits,
+		$request->query->getInt('page',1),
+		$request->query->getInt('limit',2)
+		);
         return $this->render('@Produit/produit/index.html.twig', array(
-            'produits' => $produits,
+            'produits' => $pagination,
+            'produit'=>$produits
         ));
     }
+
+
+
 
     /**
      * Creates a new produit entity.
      *
      * @Route("/new", name="produit_new")
-     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -45,6 +57,8 @@ class ProduitController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $produit->UploadProfilePicture();
+            $produit->setPhoto("images/".$produit->getPhoto());
             $em->persist($produit);
             $em->flush();
 
@@ -61,15 +75,12 @@ class ProduitController extends Controller
      * Finds and displays a produit entity.
      *
      * @Route("/{id}", name="produit_show")
-     * @Method("GET")
      */
     public function showAction(Produit $produit)
     {
-        $deleteForm = $this->createDeleteForm($produit);
 
         return $this->render('@Produit/produit/show.html.twig', array(
             'produit' => $produit,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -77,11 +88,9 @@ class ProduitController extends Controller
      * Displays a form to edit an existing produit entity.
      *
      * @Route("/{id}/edit", name="produit_edit")
-     * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Produit $produit)
     {
-        $deleteForm = $this->createDeleteForm($produit);
         $editForm = $this->createForm('ProduitBundle\Form\ProduitType', $produit);
         $editForm->handleRequest($request);
 
@@ -94,7 +103,7 @@ class ProduitController extends Controller
         return $this->render('@Produit/produit/edit.html.twig', array(
             'produit' => $produit,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
@@ -102,7 +111,6 @@ class ProduitController extends Controller
      * Deletes a produit entity.
      *
      * @Route("/delete/{id}", name="produit_delete")
-     * @Method("DELETE")
      */
     public function deleteAction($id)
     {
@@ -113,19 +121,5 @@ class ProduitController extends Controller
         return $this->redirectToRoute('produit_index');
     }
 
-    /**
-     * Creates a form to delete a produit entity.
-     *
-     * @param Produit $produit The produit entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Produit $produit)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('produit_delete', array('id' => $produit->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 }

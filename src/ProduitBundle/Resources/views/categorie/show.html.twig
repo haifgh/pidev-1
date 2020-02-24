@@ -1,6 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
 {% block content %}
+    <div class="container-fluid mt--7">
+<div class="row clearfix">
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="card">
     <h1>Categorie</h1>
 
     <table>
@@ -27,4 +31,61 @@
             <a href="{{ path('categorie_delete', { 'id': categorie.id }) }}">delete</a>
         </li>
     </ul>
+    </div>
+</div>
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="row clearfix">
+                        <h1>Produits list</h1>
+
+                    </div>
+                    <div class="body table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Qte</th>
+                                <th>Prix</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for produit in categorie.produits %}
+                            <tr>
+                                <td><a href="{{ path('produit_show', { 'id': produit.id }) }}">{{ produit.id }}</a></td>
+                                <td>{{ produit.nom }}</td>
+                                <td>{{ produit.qte }}</td>
+                                <td>{{ produit.prix }}</td>
+                                <td>{{ produit.description }}</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('produit_edit', { 'id': produit.id }) }}">edit</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+
+
+                        <td>
+                            <li>
+                                <a href="{{ path('produit_new') }}">Create a new produit</a>
+                            </li>
+                        </td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

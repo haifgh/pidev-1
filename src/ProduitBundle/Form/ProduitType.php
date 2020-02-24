@@ -4,6 +4,7 @@ namespace ProduitBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,12 +15,17 @@ class ProduitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')->add('qte')->add('prix')->add('description')
+        $builder->add('nom')
+            ->add('qte')
+            ->add('prix')
+            ->add('description')
             ->add('categorie',EntityType::class,array(
             'class'=>'AppBundle\Entity\categorie',
             'choice_label'=>'nom',
-            'multiple'=>false
-        ));
+            'multiple'=>false))
+             ->add('photo',FileType::class,array('data_class'=>null))
+
+        ;
     }
     /**
      * {@inheritdoc}
