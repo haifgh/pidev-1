@@ -206,7 +206,8 @@ class EvenementController extends Controller
      */
     public function afficheAction()
     {
-        $q=$this->getDoctrine()->getManager()->createQuery('select n from AppBundle:Evenement n where n.dateFin > CURRENT_DATE()');
+        $q=$this->getDoctrine()->getManager()->createQuery('select n from AppBundle:Evenement n
+        where n.dateFin > CURRENT_DATE() order by n.nbrePlaces desc ') ;
         $events=$q->getResult();
         //$events=$this->getDoctrine()->getRepository(Evenement::class)->findAll();
         return $this->render('@Event/evenement/viewEvents.html.twig', array(

@@ -96,7 +96,6 @@ class Evenement
     private $nbrePlaces;
 
 
-
     /**
      * Get id
      *
