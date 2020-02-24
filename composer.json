@@ -18,6 +18,7 @@
         "cmen/google-charts-bundle": "^3.2",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "flosch/stripe-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "^2.1",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-paginator-bundle": "^3.0",
@@ -32,6 +33,7 @@
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
+
     },
     "scripts": {
         "symfony-scripts": [

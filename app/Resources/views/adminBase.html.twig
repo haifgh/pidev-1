@@ -26,7 +26,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pt-0" href="#">
+        <a class="navbar-brand pt-0" href="{{ path('homepage') }}">
             Hunt Admin
         </a>
         <!-- User -->
@@ -104,13 +104,19 @@
             <!-- Navigation -->
             <ul class="navbar-nav">                                                 {#add navigation here#}
                 <li class="nav-item  active ">
+                    
                     <a class="nav-link  active " href="{{ path('admin') }}">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
-                        <i class="ni ni-single-02 text-yellow"></i> Users
+                    <a class="nav-link " href="{{ path('users') }}">
+                        <i class="ni ni-single-02 text-blue"></i> Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('commande_index') }}">
+                        <i class="ni ni-cart text-blue"></i> Orders
                     </a>
                 </li>
                 <li class="nav-item">
@@ -333,7 +339,10 @@
 
 
 
+                    {% block content %}
+                    {% endblock %}
 
+</div>
 
 
 

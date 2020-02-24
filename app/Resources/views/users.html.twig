@@ -1,0 +1,76 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block content %}
+
+
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Orders</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col" class="text-center">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td><a href="#">
+                                            {{user.username}}</a>
+                                    </td>
+                                    <td>
+                                        {{user.email}}
+                                    </td>
+                                    <td>
+                                        {{user.nom }}
+                                    </td>
+                                    <td>
+                                        {{ user.tel }}
+                                    </td>
+
+                                    <td>
+                                        {{ user.adresse }}
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a class="btn btn-sm btn-warning" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                                        {% if user.isEnabled %}
+                                        <a class="btn btn-sm btn-danger" href="{{ path('user_disable', { 'id': user.id }) }}">ban</a>
+                                            {% else %}
+                                                <a class="btn btn-sm btn-success" href="{{ path('user_enable', { 'id': user.id }) }}">unban</a>
+                                        {% endif %}
+                                        {% if 'ROLE_ADMIN' in user.getRoles %}
+                                            <a class="btn btn-sm btn-primary" href="{{ path('user_not_set_admin', { 'id': user.id }) }}">set as simple user</a>
+                                        {% else %}
+                                            <a class="btn btn-sm btn-info" href="{{ path('user_set_admin', { 'id': user.id }) }}">set as admin</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer py-4 text-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block content %}
+
+
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <span class="float-right">{{ knp_pagination_render(pagination) }}</span>
+                    <h3 class="mb-0">Orders</h3>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Order</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Order date</th>
+                            <th scope="col">Delivered at</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Phone n°</th>
+                            <th scope="col">Total price</th>
+
+                            <th scope="col" class="text-center">Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commande in pagination %}
+                            {% if commande.chargeId is not null %}
+                        <tr>
+                            <td><a href="{{ path('commande_show', { 'id': commande.id }) }}">
+                                    n°: {{commande.id}}</a>
+                            </td>
+                            <td>
+                                {{ commande.user.username }}
+                            </td>
+                            <td>
+                                {{ commande.date | date('d/m/Y') }}
+                            </td>
+                            <td>
+                                {% if commande.status == 'Cancelled' %}
+                                    <span class="text-danger">Cancelled</span>
+                                {% else %}
+                                    {% if commande.status == 'Pending' %}
+                                        <span class="text-warning">Pending</span>
+                                    {% else %}
+                                        {{ commande.dateLivraison | date('d/m/Y') }}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            {% if commande.status == 'Pending' %}
+                                <td class="text-warning">
+
+                                    {{commande.status}}
+                                </td>
+                            {% elseif commande.status == 'Cancelled' %}
+                                <td class="text-danger">
+
+                                    {{commande.status}}
+                                </td>
+                            {% else %}
+                                <td class="text-success">
+
+                                    {{commande.status}}
+                                </td>
+                            {% endif %}
+                            <td>
+                                {{ commande.adresse }}
+                            </td>
+                            <td>
+                                {{ commande.tel }}
+                            </td>
+                            <td>
+                                {{ commande.prixTotal }} T.N.D
+                            </td>
+
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" href="{{ path('commande_edit', { 'id': commande.id,'type':'Cancelled' }) }}">Cancel</a>
+                                <a class="btn btn-sm btn-success" href="{{ path('commande_edit', { 'id': commande.id,'type':'Delivered' }) }}">Delivered</a>
+                                <a class="btn btn-sm btn-warning" href="{{ path('commande_edit', { 'id': commande.id,'type':'Pending' }) }}">Pending</a>
+                            </td>
+                        </tr>{% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4 ">
+
+                </div>
+
+            </div>
+            <div class="container mb-5 p-5 "></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

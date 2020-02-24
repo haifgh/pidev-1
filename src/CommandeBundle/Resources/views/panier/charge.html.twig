@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    {% if charge != [] %}
+    <div class="container">
+    <h2 class="text-success text-center mt-5 p-5"><i class="fa fa-check mr-5"></i>Payment completed successfully</h2>
+        <h3 class="text-info text-center m-2 mb-5 pb-5"></i>Check your orders
+        <a href="{{ path('orders') }}" class="btn btn-outline-info">Here!<i class="fa fa-arrow-circle-right ml-2"></i></a></h3>
+    </div>
+
+{% endif %}
+{% if error != [] %}
+    <div class="container">
+        <h2 class="text-danger text-center mt-5 p-5"><i class="fa fa-exclamation-circle mr-5"></i>Payment failed!</h2>
+    </div>
+{% endif %}
+{% endblock %}

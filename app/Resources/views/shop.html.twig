@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+<div class="container-fluid my-2">
+    <table class="table align-items-center table-flush">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>quantity</th>
+            <th>description</th>
+            <th>price</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for produit in produits %}
+        <tr>
+            <td>{{ produit.nom}}</td>
+            <td>{{ produit.qte }}</td>
+            <td>{{ produit.description }}</td>
+            <td>{{ produit.prix }}</td>
+            <td ><button class="add btn btn-outline-info" href="{{ path('panier_add',{'id': produit.id} )}}">add</button></td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block customscript %}
+    <script>
+        $('.add').click(function (e) {
+            e.preventDefault();
+            $.ajax({url: $(this).attr('href'), success: function(){
+
+                    $('#refresh').load(document.URL +  ' #refresh ul');
+                }});
+
+
+        });
+
+    </script>
+{% endblock %}

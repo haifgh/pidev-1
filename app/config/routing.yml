@@ -1,3 +1,12 @@
+app_ligne.commande:
+    resource: "@CommandeBundle/Controller/ligne_commandeController.php"
+    type:     annotation
+
+commande:
+    resource: "@CommandeBundle/Resources/config/routing.yml"
+    prefix:   /
+panier:
+    resource: '@CommandeBundle/Controller/panierController.php'
 produit:
     resource: "@ProduitBundle/Controller/"
     type: annotation

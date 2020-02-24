@@ -28,14 +28,14 @@ class commande
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_livraison", type="date")
+     * @ORM\Column(name="date_livraison", type="datetime",nullable=true)
      */
     private $dateLivraison;
 
@@ -49,16 +49,76 @@ class commande
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tel", type="string", length=255, nullable=true)
+     */
+    private $tel;
+
+    /**
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param string $tel
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    }
 
     /**
      * @var float
      *
-     * @ORM\Column(name="prix_total", type="float")
+     * @ORM\Column(name="prix_total", type="float",nullable=true)
      */
     private $prixTotal;
+
+    /**
+     * @ManyToOne(targetEntity="User", inversedBy="commandes")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    /**
+     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",orphanRemoval=true)
+     */
+    private $lignes_commande;
+    /**
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    protected $chargeId;
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getChargeId()
+    {
+        return $this->chargeId;
+    }
+
+    /**
+     * @param mixed $chargeId
+     */
+    public function setChargeId($chargeId)
+    {
+        $this->chargeId = $chargeId;
+    }
+
+
+    public function __construct() {
+        $this->lignes_commande = new ArrayCollection();
+        $this->paid=false;
+    }
 
 
     /**
@@ -190,22 +250,7 @@ class commande
     {
         return $this->prixTotal;
     }
-    /**
-     * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="User", inversedBy="commandes")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-    /**
-     *
-     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande")
-     */
-    private $lignes_commande;
-    // ...
 
-    public function __construct() {
-        $this->lignes_commande = new ArrayCollection();
-    }
 
     /**
      * @return mixed
