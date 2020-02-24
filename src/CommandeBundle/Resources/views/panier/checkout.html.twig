@@ -47,11 +47,13 @@
                                 <div class="col-lg-6">
                                     <label for="phone">Phone<span>*</span></label>
                                     {{form_widget(form.tel,{'attr': {'value':app.user.tel} })}}
+                                    {{ form_errors(form.tel) }}
                                 </div>
                                 <div class="col-lg-12">
                                     <label for="street">Address<span>*</span></label>
 
                                     {{ form_widget(form.adresse,{'attr': {'value':app.user.adresse} }) }}
+                                    {{ form_errors(form.adresse) }}
                                 </div>
 
 

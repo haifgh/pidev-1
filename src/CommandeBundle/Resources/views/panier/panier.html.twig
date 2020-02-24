@@ -7,11 +7,12 @@
 
     <div class="cart-hover">
         <div class="select-items">
+            {% if items is empty %}EMPTY{% endif %}
             <table>
                 <tbody>
                 {% for item in items %}
                 <tr>
-                    <td class="si-pic"><img src="{{asset('img/select-product-2.jpg')}}" alt=""></td>
+                    <td class="si-pic"><img src="{{asset('img/cart-page/product-2.jpg')}}" width="100px" alt=""></td>
                     <td class="si-text">
                         <div class="product-selected">
                             <p>{{item.product.prix}} T.N.D x {{ item.quantity }}</p>
@@ -33,6 +34,10 @@
         </div>
         <div class="select-button">
             <a href="{{ path('checkout') }}" class="primary-btn checkout-btn">CHECK OUT</a>
+        </div>
+        <br>
+        <div class="select-button">
+            <a href="{{ path('orders') }}" class="btn-secondary checkout-btn">ORDERS</a>
         </div>
     </div>
 </li>
