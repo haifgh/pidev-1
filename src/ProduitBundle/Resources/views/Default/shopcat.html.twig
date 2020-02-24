@@ -41,14 +41,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p>{{ cp.produits|length }} Products</p>
+
+                                <p>{{ cp|length }} Products</p>
                             </div>
                         </div>
                     </div>
                     <div class="product-list">
                         <div class="row">
 
-                            {% for product in cp.produits %}
+                            {% for product in cp %}
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="pi-pic">
@@ -73,6 +74,12 @@
                                     </div>
                                 </div>
                             {% endfor %}
+                        </div>
+                        <br>
+                        <div class="row-cols-1">
+                            <div class="col-4">
+                                {{ knp_pagination_render(cp) }}
+                            </div>
                         </div>
                     </div>
                 </div>
