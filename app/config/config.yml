@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi: ~
-    translator: ~
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -38,7 +38,9 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        - 'bootstrap_4_layout.html.twig'
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -81,6 +83,11 @@ fos_user:
     from_email:
         address: "pidevsmtp@gmail.com"
         sender_name: "pidevmaster"
-    registration:
-        confirmation:
-            enabled: true
+knp_paginator:
+    template:
+        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
+
+fos_message:
+    db_driver: orm
+    thread_class:  FOS\MessageBundle\Entity\Thread
+    message_class: FOS\MessageBundle\Entity\Message

@@ -1,16 +1,29 @@
 {% extends 'base.html.twig' %}
-
 {% block content %}
-    <h1>Post creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('post_index') }}">Back to the list</a>
-        </li>
-    </ul>
+                <div class="col-lg-6">
+                    <div class="main-ws-sec">
+                        <div class="user-tab-sec">
+                            <h3>{{ app.user.username }}</h3>
+                        </div><!--user-tab-sec end-->
+                        <div class="product-feed-tab current" id="feed-dd">
+                            <div class="post-project">
+                                <h3>Post a project</h3>
+                                <div class="post-project-fields">
+                                    <div class="row">
+                                        {{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+                                        {{ form_widget(form) }}
+                                        <input type="submit" value="Create" />
+                                        {{ form_end(form) }}
+                                    </div>
+                                    </form>
+                                </div>
+                                <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
 {% endblock %}

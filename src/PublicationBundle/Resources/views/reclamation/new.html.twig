@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Reclamation creation</h1>
-
+<div class="col-lg-6">
+    <div class="main-ws-sec">
+        <div class="user-tab-sec">
+            <h3>{{ app.user.username }}</h3>
+        </div><!--user-tab-sec end-->
+        <div class="product-feed-tab current" id="feed-dd">
+            <div class="post-project">
+                <h3>new claim</h3>
+                <div class="post-project-fields">
+                    <div class="row">
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('reclamation_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

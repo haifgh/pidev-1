@@ -2,10 +2,14 @@
 
 namespace PublicationBundle\Controller;
 
+use AppBundle\Entity\Follow;
+use AppBundle\Entity\Jaime;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Post controller.
@@ -24,9 +28,9 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $posts = $em->getRepository('AppBundle:Post')->findAll();
+        $posts = $em->getRepository('AppBundle:Post')->findByUser($this->getUser());
 
-        return $this->render('@Publication/post/index.html.twig', array(
+        return $this->render('@Publication/post/prof.html.twig', array(
             'posts' => $posts,
         ));
     }
@@ -40,6 +44,8 @@ class PostController extends Controller
     public function newAction(Request $request)
     {
         $post = new Post();
+        $post->setDateCreation(new \DateTime('now'));
+        $post->setUser($this->getUser());
         $form = $this->createForm('PublicationBundle\Form\PostType', $post);
         $form->handleRequest($request);
 
@@ -48,7 +54,7 @@ class PostController extends Controller
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+            return $this->redirectToRoute('post_index', array('id' => $post->getId()));
         }
 
         return $this->render('@Publication/post/new.html.twig', array(
@@ -56,21 +62,33 @@ class PostController extends Controller
             'form' => $form->createView(),
         ));
     }
+    /**
+     * Creates a new post entity.
+     *
+     * @Route("/search", name="search_user")
+     * @Method({"GET", "POST"})
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $requestString = $request->request->get('search');
+        $users =  $em->getRepository('AppBundle:User')->findByNom($requestString);
+
+        return $this->render('search.html.twig');
+    }
+
 
     /**
      * Finds and displays a post entity.
      *
-     * @Route("/{id}", name="post_show")
+     * @Route("/home", name="home")
      * @Method("GET")
      */
-    public function showAction(Post $post)
+    public function homeAction()
     {
-        $deleteForm = $this->createDeleteForm($post);
-
-        return $this->render('@Publication/post/show.html.twig', array(
-            'post' => $post,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $followed=$this->getDoctrine()->getRepository(Follow::class)->findBy(['follower'=>$this->getUser()]);
+        $q=$this->getDoctrine()->getManager()->createQuery("select u from AppBundle:Follow u where u.follower=:id")->setParameter('id',$this->getUser()->getId());
+        return $this->render('home.html.twig',['followed'=>$followed]);
     }
 
     /**
@@ -88,7 +106,7 @@ class PostController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_edit', array('id' => $post->getId()));
+            return $this->redirectToRoute('post_index', array('id' => $post->getId()));
         }
 
         return $this->render('@Publication/post/edit.html.twig', array(
@@ -126,6 +144,6 @@ class PostController extends Controller
             ->setAction($this->generateUrl('post_delete', array('id' => $post->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
 }

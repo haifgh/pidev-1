@@ -1,23 +1,36 @@
 {% extends 'base.html.twig' %}
-
 {% block content %}
     <h1>Posts list</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Datecreation</th>
-                <th>Contenu</th>
-                <th>Actions</th>
-            </tr>
+<div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+
+                            </div>
+                            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Datecreation</th>
+            <th>username</th>
+            <th>Contenu</th>
+            <th>Actions</th>
+        </tr>
         </thead>
-        <tbody>
+        <td>
         {% for post in posts %}
-            <tr>
+            <td>
                 <td><a href="{{ path('post_show', { 'id': post.id }) }}">{{ post.id }}</a></td>
                 <td>{% if post.dateCreation %}{{ post.dateCreation|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ post.contenu }}</td>
+                <td>{{ post.user.username }}</td>
+            {% set strategy = 'html' %}
+             <td>
+            {% autoescape 'html' %}
+                {{ var|escape( post.contenu)|raw }} {# won't be double-escaped #}
+            {% endautoescape %}</td>
+                <td>{{ post.contenu|escape }}</td>
                 <td>
                     <ul>
                         <li>
@@ -33,8 +46,11 @@
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
     <ul>
         <li>

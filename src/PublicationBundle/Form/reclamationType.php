@@ -14,14 +14,10 @@ class reclamationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('objet')->add('contenu')->add('date')->add('user',EntityType::class,array(
-            'class'=>'AppBundle\Entity\User',
-            'choice_label'=>'id',
-            'multiple'=>false
-        ));
+        $builder->add('objet')->add('contenu');
     }/**
-     * {@inheritdoc}
-     */
+ * {@inheritdoc}
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

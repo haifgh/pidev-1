@@ -128,10 +128,17 @@ class reclamation
     }
     /**
      *
-     * @ManyToOne(targetEntity="User", inversedBy="reclamations",cascade="remove")
+     * @ManyToOne(targetEntity="User", inversedBy="reclamations")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     *
+     * @ManyToOne(targetEntity="User", inversedBy="reclamations")
+     * @JoinColumn(name="reclamer", referencedColumnName="id")
+     */
+    private $reclamer;
 
     /**
      * @return mixed
@@ -148,5 +155,22 @@ class reclamation
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReclamer()
+    {
+        return $this->reclamer;
+    }
+
+    /**
+     * @param mixed $reclamer
+     */
+    public function setReclamer($reclamer)
+    {
+        $this->reclamer = $reclamer;
+    }
+
 }
 

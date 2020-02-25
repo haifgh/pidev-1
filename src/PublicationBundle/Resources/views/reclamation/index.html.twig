@@ -1,9 +1,22 @@
-{% extends 'base.html.twig' %}
-
-{% block content %}
-    <h1>Reclamations list</h1>
-
-    <table>
+{% extends 'search.html.twig' %}
+{% block search %}
+<div class="wrapper">
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <div class="product-feed-tab current" id="feed-dd">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="post-project">
+                        <h3>claim list</h3>
+                        <div class="post-project-fields">
+                            <div class="row">
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-borderless ">
+                    <thead>
         <thead>
             <tr>
                 <th>Id</th>
@@ -35,12 +48,17 @@
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+                </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('reclamation_new') }}">Create a new reclamation</a>
-        </li>
-    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock %}

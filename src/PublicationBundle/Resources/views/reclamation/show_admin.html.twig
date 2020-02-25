@@ -1,40 +1,26 @@
-{% extends 'adminBase' %}
-
+{% extends 'adminBase.html.twig' %}
 {% block content %}
-    <h1>Reclamation</h1>
-
+    <div class="container">
+    <h1>Reclamation {{ reclamation.id }} {% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</h1>
     <table>
         <tbody>
+        <th>from</th>
+        <td>{{ reclamation.user }}</td>
         <tr>
-            <th>Id</th>
-            <td>{{ reclamation.id }}</td>
-        </tr>
-        <tr>
-            <th>Objet</th>
+            <th>about</th>
             <td>{{ reclamation.objet }}</td>
         </tr>
         <tr>
-            <th>Contenu</th>
+            <th>description</th>
             <td>{{ reclamation.contenu }}</td>
         </tr>
         <tr>
-            <th>Date</th>
-            <td>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</td>
-        </tr>
+        <th>target</th>
+        <td>{{ reclamation.reclamer }}</td>
+        <tr>
         </tbody>
     </table>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('reclamation_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('reclamation_edit', { 'id': reclamation.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
 {% endblock %}

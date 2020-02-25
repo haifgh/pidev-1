@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\MessageBundle\Model\ParticipantInterface;
+
 
 /**
  * User
@@ -13,7 +15,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
 
     /**
@@ -40,6 +42,12 @@ class User extends BaseUser
      * @ORM\Column(name="adresse", type="string",nullable=true)
      */
     private $adresse;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="followers", type="integer",options={"default" : 0},nullable=true)
+     */
+    private $follower;
 
     /**
      * @return mixed
@@ -236,6 +244,23 @@ class User extends BaseUser
     {
         $this->posts = $posts;
     }
+
+    /**
+     * @return int
+     */
+    public function getFollower()
+    {
+        return $this->follower;
+    }
+
+    /**
+     * @param int $follower
+     */
+    public function setFollower($follower)
+    {
+        $this->follower = $follower;
+    }
+
 
 }
 

@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
-
 {% block content %}
-    <h1>Reclamation</h1>
+<div class="col-lg-6">
+    <div class="main-ws-sec">
+        <div class="user-tab-sec">
+            <h3>{{ app.user.username }}</h3>
+        </div><!--user-tab-sec end-->
+        <div class="product-feed-tab current" id="feed-dd">
+            <div class="post-project">
+                <h3>claim</h3>
+                <div class="post-project-fields">
+                    <div class="row">
 
-    <table>
+    <table class="table table-borderlesss">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -21,20 +29,15 @@
                 <th>Date</th>
                 <td>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</td>
             </tr>
+            <th>user</th>
+            <td>{{ reclamation.user }}</td>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('reclamation_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('reclamation_edit', { 'id': reclamation.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

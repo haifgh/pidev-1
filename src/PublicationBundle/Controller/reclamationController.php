@@ -4,6 +4,8 @@ namespace PublicationBundle\Controller;
 
 use AppBundle\Entity\Post;
 use AppBundle\Entity\reclamation;
+use AppBundle\Entity\User;
+use AppBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +27,7 @@ class reclamationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $reclamations = $em->getRepository('AppBundle:reclamation')->findAll();
+        $reclamations = $em->getRepository('AppBundle:reclamation')->findByUser($this->getUser());
 
         return $this->render('@Publication/reclamation/index.html.twig', array(
             'reclamations' => $reclamations,
@@ -33,14 +35,41 @@ class reclamationController extends Controller
     }
 
     /**
+     * Lists all reclamation entities.
+     *
+     * @Route("/reclamationShow", name="reclamationa_index")
+     * @Method("GET")
+     */
+    public function indexaAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $reclamations = $em->getRepository(reclamation::class)->findAll();
+        $paginator = $this->get('knp_paginator');
+        $paginator = $paginator->paginate(
+            $reclamations,
+            $request->query->getInt('page',  1),2
+
+        );
+        return $this->render('@Publication/reclamation/reclamationa.html.twig', array(
+            'reclamations' => $paginator,
+        ));
+    }
+
+
+    /**
      * Creates a new reclamation entity.
      *
-     * @Route("/new", name="reclamation_new")
+     * @Route("/new/{id}", name="reclamation_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$id)
     {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
         $reclamation = new Reclamation();
+        $reclamation->setReclamer($user);
+        $reclamation->setDate(new \DateTime('now'));
+        $reclamation->setUser($this->getUser());
         $form = $this->createForm('PublicationBundle\Form\reclamationType', $reclamation);
         $form->handleRequest($request);
 
@@ -57,7 +86,6 @@ class reclamationController extends Controller
             'form' => $form->createView(),
         ));
     }
-
     /**
      * Finds and displays a reclamation entity.
      *
@@ -69,6 +97,21 @@ class reclamationController extends Controller
         $deleteForm = $this->createDeleteForm($reclamation);
 
         return $this->render('@Publication/reclamation/show.html.twig', array(
+            'reclamation' => $reclamation,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    /**
+     * Finds and displays a reclamation entity.
+     *
+     * @Route("/show/{id}", name="reclamationa_show")
+     * @Method("GET")
+     */
+    public function showaAction(reclamation $reclamation)
+    {
+        $deleteForm = $this->createDeleteForm($reclamation);
+
+        return $this->render('@Publication/reclamation/show_admin.html.twig', array(
             'reclamation' => $reclamation,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -89,7 +132,7 @@ class reclamationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('reclamation_edit', array('id' => $reclamation->getId()));
+            return $this->redirectToRoute('reclamation_index', array('id' => $reclamation->getId()));
         }
 
         return $this->render('@Publication/reclamation/edit.html.twig', array(
@@ -127,6 +170,34 @@ class reclamationController extends Controller
             ->setAction($this->generateUrl('reclamation_delete', array('id' => $reclamation->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
+    }
+    /**
+     * Lists all reclamation entities.
+     *
+     * @Route("/block/{id}", name="block_user")
+     * @Method("GET")
+     */
+    public function BlockUserAction($id){
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $user->setEnabled(0);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('reclamationa_index');
+    }
+    /**
+     * Lists all reclamation entities.
+     *
+     * @Route("/unblock/{id}", name="unblock_user")
+     * @Method("GET")
+     */
+    public function UnBlockUserAction($id){
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $user->setEnabled(1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('reclamationa_index');
     }
 }
