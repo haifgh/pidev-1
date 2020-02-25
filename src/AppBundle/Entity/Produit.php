@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
@@ -32,14 +33,14 @@ class Produit
 
     /**
      * @var int
-     *
+     * @Assert\GreaterThan(-1)
      * @ORM\Column(name="qte", type="integer")
      */
     private $qte;
 
     /**
      * @var int
-     *
+     * @Assert\GreaterThan(0)
      * @ORM\Column(name="prix", type="integer")
      */
     private $prix;

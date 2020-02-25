@@ -112,22 +112,22 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('users') }}">
-                        <i class="ni ni-single-02 text-blue"></i> Users
+                        <i class="ni ni-single-02 text-primary"></i> Users
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('commande_index') }}">
-                        <i class="ni ni-cart text-blue"></i> Orders
+                        <i class="ni ni-cart text-success"></i> Orders
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('produit_index') }}">
-                        <i class="ni ni-bullet-list-67 text-red"></i> Gestion Produits
+                        <i class="ni ni-shop text-red"></i> Gestion Produits
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('categorie_index') }}">
-                        <i class="ni ni-bullet-list-67 text-red"></i> Gestion categories
+                        <i class="ni ni-shop text-red"></i> Gestion categories
                     </a>
                 </li>
 
@@ -157,7 +157,10 @@
             </form>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
-                {% if produits is defined %}
+
+
+
+                    {% if produit is defined %}
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="media align-items-center">
@@ -166,8 +169,6 @@
               </span>
                         </div>
                     </a>
-
-                    {% if produit is defined %}
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                             <div class=" dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Welcome!</h6>
@@ -183,9 +184,9 @@
                             {% endfor %}
 
                         </div>
-                    {% endif %}
+
                 </li>
-                {% endif %}
+                    {% endif %}
                 <li class="nav-item dropdown">
                     <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="media align-items-center">
@@ -229,7 +230,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-        <div class="container-fluid">
+       {# <div class="container-fluid">
             <div class="header-body">
                 <!-- Card stats -->
                 <div class="row">
@@ -321,7 +322,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>#}
     </div>
     <div id="div_chart"></div>
 

@@ -61,7 +61,7 @@ class DefaultController extends Controller
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
 
         // replace this example code with whatever you need
-        return $this->render('adminBase.html.twig',array('produits'=>$produits,'piechart' => $pieChart));
+        return $this->render('adminBase.html.twig',array('produit'=>$produits,'piechart' => $pieChart));
     }
     /**
      * @Route("/admin/users", name="users")
