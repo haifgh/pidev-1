@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@PromoBundle/Resources/config/services.yml" }
     - { resource: "@CommandeBundle/Resources/config/services.yml" }
     - { resource: "@ProduitBundle/Resources/config/services.yml" }
 
@@ -100,6 +101,8 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+
+
 flosch_stripe:
     stripe_api_key: "%stripe_api_key%"
 

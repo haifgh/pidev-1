@@ -10,4 +10,8 @@ namespace AppBundle\Repository;
  */
 class PromotionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findProduitsParametre($promotion){
+        $query=$this->getEntityManager()->createQuery("");
+
+    }
 }

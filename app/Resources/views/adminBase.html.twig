@@ -130,6 +130,11 @@
                         <i class="ni ni-shop text-red"></i> Gestion categories
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('promotion_index')}}">
+                        <i class="ni ni-single-02 text-yellow"></i> Promotions
+                    </a>
+                </li>
 
             </ul>                                                                   {#end of navigation#}
             <!-- Divider -->
@@ -229,6 +234,7 @@
         </div>
     </nav>
     <!-- End Navbar -->
+    {% block test %}
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
        {# <div class="container-fluid">
             <div class="header-body">
@@ -254,7 +260,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div>{% endblock %}
                     <div class="col-xl-3 col-lg-6">
                         <div class="card card-stats mb-4 mb-xl-0">
                             <div class="card-body">

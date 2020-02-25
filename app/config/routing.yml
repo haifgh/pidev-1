@@ -11,6 +11,10 @@ panier:
 produit:
     resource: "@ProduitBundle/Controller/"
     type: annotation
+promo:
+    resource: "@PromoBundle/Controller/"
+    type:     annotation
+    prefix:   /promo
 
 app:
     resource: '@AppBundle/Controller/'

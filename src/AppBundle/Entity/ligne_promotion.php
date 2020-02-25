@@ -23,33 +23,7 @@ class ligne_promotion
      */
     private $id;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_debut", type="date")
-     */
-    private $dateDebut;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_fin", type="date")
-     */
-    private $dateFin;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="taux_reduction", type="float")
-     */
-    private $tauxReduction;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="status", type="boolean")
-     */
-    private $status;
 
     /**
      * @var int
@@ -57,8 +31,18 @@ class ligne_promotion
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
-
-
+    /**
+     * Many features have one product. This is the owning side.
+     * @ManyToOne(targetEntity="AppBundle\Entity\Promotion", inversedBy="lignes_promotion")
+     * @JoinColumn(name="Promotion_id", referencedColumnName="id")
+     */
+    private $promotion;
+    /**
+     *
+     * @ManyToOne(targetEntity="Produit", inversedBy="lignes_promotion")
+     * @JoinColumn(name="produit_id", referencedColumnName="id")
+     */
+    private $produit;
     /**
      * Get id
      *
@@ -67,102 +51,6 @@ class ligne_promotion
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set dateDebut
-     *
-     * @param \DateTime $dateDebut
-     *
-     * @return ligne_promotion
-     */
-    public function setDateDebut($dateDebut)
-    {
-        $this->dateDebut = $dateDebut;
-
-        return $this;
-    }
-
-    /**
-     * Get dateDebut
-     *
-     * @return \DateTime
-     */
-    public function getDateDebut()
-    {
-        return $this->dateDebut;
-    }
-
-    /**
-     * Set dateFin
-     *
-     * @param \DateTime $dateFin
-     *
-     * @return ligne_promotion
-     */
-    public function setDateFin($dateFin)
-    {
-        $this->dateFin = $dateFin;
-
-        return $this;
-    }
-
-    /**
-     * Get dateFin
-     *
-     * @return \DateTime
-     */
-    public function getDateFin()
-    {
-        return $this->dateFin;
-    }
-
-    /**
-     * Set tauxReduction
-     *
-     * @param float $tauxReduction
-     *
-     * @return ligne_promotion
-     */
-    public function setTauxReduction($tauxReduction)
-    {
-        $this->tauxReduction = $tauxReduction;
-
-        return $this;
-    }
-
-    /**
-     * Get tauxReduction
-     *
-     * @return float
-     */
-    public function getTauxReduction()
-    {
-        return $this->tauxReduction;
-    }
-
-    /**
-     * Set status
-     *
-     * @param boolean $status
-     *
-     * @return ligne_promotion
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return bool
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
@@ -188,18 +76,6 @@ class ligne_promotion
     {
         return $this->quantite;
     }
-    /**
-     * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="Promotion", inversedBy="lignes_promotion")
-     * @JoinColumn(name="Promotion_id", referencedColumnName="id")
-     */
-    private $promotion;
-    /**
-     *
-     * @ManyToOne(targetEntity="Produit")
-     * @JoinColumn(name="produit_id", referencedColumnName="id")
-     */
-    private $produit;
 
     /**
      * @return mixed

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Ligne_promotion</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_promotion.id }}</td>
+            </tr>
+            <tr>
+                <th>Produit</th>
+
+                <td>{{ ligne_promotion.produit.nom }}</td>
+
+            </tr>
+            <tr>
+                <th>Promotion</th>
+
+                <td>{{ ligne_promotion.promotion.nom }}</td>
+
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ ligne_promotion.quantite}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ligne_promotion_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('ligne_promotion_edit', { 'id': ligne_promotion.id }) }}">Edit</a>
+
+        </li>
+
+    </ul>
+{% endblock %}
