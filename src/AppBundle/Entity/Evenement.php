@@ -90,7 +90,7 @@ class Evenement
 
     /**
      * @var int
-     *
+     * @Assert\GreaterThan(value="10")
      * @ORM\Column(name="nbre_places", type="integer")
      */
     private $nbrePlaces;
