@@ -1,0 +1,48 @@
+{% extends 'adminBase.html.twig' %} {# this #}
+
+{% block content %}
+<div class="container-fluid mt--7"> {# this #}
+    <div class="row"> {# this #}
+        <div class="col"> {# this #}
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Promotions</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">name</th>
+                            <th scope="col">Start date</th>
+                            <th scope="col">End date</th>
+                            <th scope="col">reduction rate</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+           <tbody>
+            {% for promotion in promotions %}
+            <tr>
+                <td><a href="{{ path('promotion_show', { 'id': promotion.id }) }}">{{ promotion.id }}</a></td>
+                <td>{{ promotion.nom }}</td>
+                <td>{{ promotion.dateDebut|date() }}</td>
+                <td>{{ promotion.dateFin|date()}}</td>
+                <td>{{ promotion.tauxReduction}}%</td>
+                <td><button><a href="{{ path('promotion_show', { 'id': promotion.id }) }}">show</a></button>
+                <button><a href="{{ path('promotion_edit', { 'id': promotion.id }) }}">edit</a></button>
+                <button><a href="{{ path('promotion_delete', { 'id': promotion.id }) }}">delete</a></button>
+                <button><a href="{{ path('promotion_AjoutProduct', { 'id': promotion.id }) }}">Add</a></button>
+
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                    <button><a href="{{ path('promotion_new') }}">Create a new promotion</a></button>
+
+
+
+
+                </div></div></div></div></div>
+{% endblock %}
