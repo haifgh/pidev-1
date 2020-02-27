@@ -28,7 +28,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('home.html.twig');
+        return $this->render('mainhome.html.twig');
     }
     /**
      * @Route("/admin", name="admin")
