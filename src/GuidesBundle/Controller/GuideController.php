@@ -43,7 +43,9 @@ class GuideController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $guides = $em->getRepository('AppBundle:Guide')->findAll();
+       $guides = $em->getRepository('AppBundle:Guide')->findAll();
+        $guide = $em->getRepository('AppBundle:Guide')->findAllGuide();
+
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $guides,
@@ -51,7 +53,7 @@ class GuideController extends Controller
             $request->query->getInt('limit', 2)
         );
         return $this->render('@Guides/guide/index2.html.twig', array(
-            'guides' => $pagination
+            'guides' => $pagination,'guide'=>$guide
         ));
     }
 
@@ -314,6 +316,7 @@ class GuideController extends Controller
     public function rechercherAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $guide = $em->getRepository('AppBundle:Guide')->findAllGuide();
 
         $guides = $em->getRepository('AppBundle:Guide')->findBy(array('titre' => $request->get('titre')));
         $paginator = $this->get('knp_paginator');
@@ -323,7 +326,7 @@ class GuideController extends Controller
             $request->query->getInt('limit', 3)
         );
         return $this->render('@Guides/guide/index2.html.twig', array(
-            'guides' => $pagination
+            'guides' => $pagination,'guide'=>$guide
         ));
     }
 }

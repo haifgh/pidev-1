@@ -1,5 +1,5 @@
 commentaire_index:
-    path:     /commentaire
+    path:     /admin/commentaire
     defaults: { _controller: "GuidesBundle:Commentaire:index" }
     methods:  GET
 

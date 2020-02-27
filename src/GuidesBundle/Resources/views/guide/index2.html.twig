@@ -14,30 +14,27 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-
+                        {% if guide is defined %}
                         <div class="recent-post">
-                            <h4>Recent Post</h4>
+                            <h4>Recent Guide</h4>
+
+                            {% for g in guide %}
                             <div class="recent-blog">
-                                <a href="#" class="rb-item">
+                                <a href=" {{ path('guide_details',{'id': g.id}) }} ">
                                     <div class="rb-pic">
-                                        <img src="img/blog/recent-1.jpg" alt="">
+                                        <img src=" {{ asset('img/blog/') }}{{ g.photo}}" alt="">
                                     </div>
                                     <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                        <h6>{{ g.titre }}</h6>
+                                        <p> <span>{{ g.dateCreation|date  }}</span></p>
                                     </div>
                                 </a>
 
                             </div>
-                        </div>
-                        <div class="blog-tags">
-                            <h4>Guides Tags</h4>
-                            <div class="tag-item">
-                                <a href="#">hunt</a>
-                                <a href="#">camping</a>
-                                <a href="#">Fishing</a>
-                            </div>
-                        </div>
+
+                        {% endfor %}</div>{% endif %}
+
+
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">

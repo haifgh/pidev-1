@@ -14,16 +14,7 @@ use Doctrine\ORM\Query;
  */
 class GuideRepository extends EntityRepository
 {
-    public function findEntitiesByString($str){
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT p
-             FROM AppBundle:Guide p
-                WHERE p.titre LIKE :str'
-            )
-            ->setParameter('str', '%'.$str.'%')
-            ->getResult();
-    }
+
     /**
      * get all posts
      *
@@ -36,9 +27,10 @@ class GuideRepository extends EntityRepository
                 'SELECT a
          FROM AppBundle:Guide a
       
-         ORDER BY a.dateCreation DESC'
+         ORDER BY a.dateCreation DESC
+         '
             )
-            ->getArrayResult();
+            ->setMaxResults(2)->getArrayResult();
     }
 
 
