@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Post
@@ -33,7 +34,7 @@ class Post
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank
      * @ORM\Column(name="contenu", type="string", length=255)
      */
     private $contenu;
