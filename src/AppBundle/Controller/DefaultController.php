@@ -55,6 +55,7 @@ class DefaultController extends Controller
      */
     public function followAction($id){
         $followed = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $follower=$this->getDoctrine()->getRepository(User::class)->find($id);
         $follow = $this->getDoctrine()->getRepository(Follow::class)->findOneBy(array("follower"=>$this->getUser(),"followed"=>$followed));
         if(!$follow){
             $suivre = new Follow();
@@ -118,6 +119,5 @@ class DefaultController extends Controller
         }
 
     }
-
 
 }

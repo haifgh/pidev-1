@@ -1,43 +1,41 @@
-{% extends 'base.html.twig' %}
-{% block content %}
-<div class="col-lg-6">
-    <div class="main-ws-sec">
-        <div class="user-tab-sec">
-            <h3>{{ app.user.username }}</h3>
-        </div><!--user-tab-sec end-->
-        <div class="product-feed-tab current" id="feed-dd">
-            <div class="post-project">
-                <h3>claim</h3>
+{% extends 'search.html.twig' %}
+{% block search %}
+<section class="companies-info">
+    <div class="container">
+        <div class="company-title">
+            <h3> ID: {{ reclamation.id }} </h3>
+        </div><!--company-title end-->
+        <div class="companies-list">
+            <div class="row">
                 <div class="post-project-fields">
                     <div class="row">
+                        <div class="post-bar">
+                            <div class="post_topbar">
+                                <div class="usy-dt">
+                                    <div class="usy-name">
+                                        <h1>{{ reclamation.user }}</h1>
+                                        <span><img src={{asset("img/clock.png")}} alt="">{% if reclamation.date %}{{ reclamation.date|date('d-m-Y') }}{% endif %}</span>
+                                    </div>
+                                </div>
 
-    <table class="table table-borderlesss">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reclamation.id }}</td>
-            </tr>
-            <tr>
-                <th>Objet</th>
-                <td>{{ reclamation.objet }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ reclamation.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <th>user</th>
-            <td>{{ reclamation.user }}</td>
-        </tbody>
-    </table>
+                            </div>
+                            <div class="epi-sec">
+                                <ul class="descp">
+                                    <li><img src={{asset("img/icon8.png")}} alt=""><span>{{ reclamation.reclamer }}</span></li>
+                                </ul>
+                            </div>
+                            <div class="job_descp">
+                                <h3>{{ reclamation.objet }}</h3>
+                                <p>{{ reclamation.contenu }} </p>
+
+                            </div>
+
+                        </div><!--post-bar end-->
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

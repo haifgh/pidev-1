@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block content %}
+    <div class="wrapper">
 <div class="heade">
     <div class="container">
         <div class="header-data pb-2">
-            <div class="logo">
-                <a href="index.html" title=""><img src={{ asset('images/logo.png')}} alt=""></a>
-            </div><!--logo end-->
+
             <div class="search-bar">
 <form>
                     <input type="text" id="search" name="nom" placeholder="Search...">
@@ -62,6 +61,9 @@
 
         })
     </script>
+
+
 {% block search %}
 {% endblock %}
+    </div>
 {% endblock %}

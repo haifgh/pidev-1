@@ -722,6 +722,7 @@ main {
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
+        border-top: 1px solid #e5e5e5;
 }
 .username-dt {
 	float: left;
@@ -2549,7 +2550,7 @@ footer {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 28px;
-	margin-top: -95px;
+	margin-top: 0px;
 	position: relative;
 }
 .user-pro-img > a {
@@ -3440,6 +3441,9 @@ a:hover {
 	position: relative;
 	margin-bottom: 20px;
 }
+.no-pd{
+float: left;
+}
 .no-pdd {
 	padding: 0;
 }
@@ -3487,6 +3491,7 @@ a:hover {
 	width: 100%;
 	background-color: #fff;
 	text-align: center;
+        border-top: 1px solid #e4e4e4;
 	border-left: 1px solid #e4e4e4;
 	border-right: 1px solid #e4e4e4;
 	border-bottom: 1px solid #e4e4e4;

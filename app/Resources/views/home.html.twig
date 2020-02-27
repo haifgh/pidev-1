@@ -1,21 +1,53 @@
 {% extends 'search.html.twig' %}
-
 {% block search%}
-    <div class="col-lg-12">
-        <div class="main-ws-sec">
-            <div class="product-feed-tab current" id="feed-dd">
-                <br>
-                <div class="containe">
+<main>
+    <div class="main-section">
+        <div class="container">
+         <div class="main-section-data">
+                 <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+          <div class="main-left-sidebar no-margin">
+              <div class="user-data full-width">
+                  <div class="user_profile">
+                              <div class="username-dt">
+                                  <div class="usr-pic">
+                                      <img src="http://via.placeholder.com/100x100" alt="">
+                                  </div>
+                              </div>
+                              <div class="user-specs">
+                                  <h3>{{ app.user.username }}</h3>
+                              </div>
+                  </div>
+                          {% set count = 0 %}
+                          {% for f in followed %}
+                              {% set count = count + 1 %}
+                          {% endfor %}
+                          <ul class="user-fw-status">
+                              <li>
+                                  <h4>Following</h4>
+                                  <span>{{ count }}</span>
+                              </li>
+                          </ul>
+              </div><!--user-tab-sec end-->
+              <div class="suggestions full-width">
+                                <div class="sd-title">
+                                    <h3>People following</h3>
+                                </div><!--sd-title end-->
+                                <div class="suggestions-list">
+                                    {% for f in followed %}
+                                    <div class="suggestion-usd">
+                                        <img src="http://via.placeholder.com/35x35" alt="">
+                                        <div class="sgt-text">
+                                            <h4> {{ f.followed }}</h4>
 
-                    <div class="col-lg-6">
-                        <div class="main-ws-sec">
-                            <div class="user-tab-sec">
-                                <h3>Nice to see you again  {{ app.user.username }} !! </h3>
-                            </div><!--user-tab-sec end-->
-                        </div>
-                    </div>
-
-
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+              </div>
+          </div><!--main-left-sidebar end-->
+  </div>
+                  <div class="col-lg-8 col-md-8 no-pd">
+    <div class="main-ws-sec">
                 <div class="posts-section">
                     {% for f in followed %}
                         {% for post in f.followed.posts %}
@@ -25,7 +57,7 @@
                                     <img src="http://via.placeholder.com/50x50" alt="">
                                     <div class="usy-name">
                                         <h3>{{ post.user.username }}</h3>
-                                        <span><img src="images/clock.png" alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
+                                        <span><img src="{{ asset('imag/clock.png') }}" alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
                                     </div>
                                 </div>
                             </div>
@@ -47,20 +79,17 @@
                                 </ul>
                             </div>
                         </div><!--post-bar end-->
-{% endfor %}
                     {% endfor %}
-                    <div class="process-comm">
-                        <div class="spinner">
-                            <div class="bounce1"></div>
-                            <div class="bounce2"></div>
-                            <div class="bounce3"></div>
-                        </div>
-                    </div><!--process-comm end-->
-                </div><!--posts-section end-->
-            </div><!--product-feed-tab end-->
-        </div><!--main-ws-sec end-->
-    </div>
-    </div>
+                    {% endfor %}
+                    </div>
+    </div><!--process-comm end-->
+</div>
+            </div>
+          </div>
+        </div>
+</main>
+
+
     <script>
         $(".jaime").click(function (e) {
             let x=$(this);

@@ -1,103 +1,112 @@
 {% extends 'search.html.twig' %}
 {% block search %}
-        <div class="wrapper">
-            <section class="cover-sec">
-                <img src="http://via.placeholder.com/1600x400" alt="">
-                <a href="#" title=""><i class="fa fa-camera"></i> Change Image</a>
-            </section>
-            <main>
+    <div class="wrapper">
+        <main>
             <div class="main-section">
                 <div class="container">
                     <div class="main-section-data">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="main-left-sidebar">
-                                    <div class="user_profile">
-                                        <div class="user-pro-img">
-                                            <img src="http://via.placeholder.com/170x170" alt="">
-                                            <a href="#" title=""><i class="fa fa-camera"></i></a>
-                                        </div><!--user-pro-img end-->
-                                    </div>
-                                </div><!--user_profile end-->
-
-                            </div><!--main-left-sidebar end-->
-
-                                        <div class="col-lg-6">
-                                            <div class="main-ws-sec">
-                                                <div class="user-tab-sec">
-                                                    <h3>{{ app.user.username }}</h3>
-                                            </div><!--user-tab-sec end-->
+                        <div class="col-lg-3">
+                            <div class="main-left-sidebar">
+                                <div class="user_profile">
+                                    <div class="user-pro-img">
+                                        <img src="http://via.placeholder.com/170x170" alt="">
+                                        <a href="#" title=""><i class="fa fa-camera"></i></a>
+                                    </div><!--user-pro-img end-->
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="suggestions ">
+                                        <div class="suggestions-list">
+                                            <div >
+                                                <div >
+                                                    <div class="suggestions full-width">
+                                                        <div class="acc-leftbar">
+                                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                                <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
+                                                                <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>edit</a>
+                                                                <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-lock"></i>change password</a>
+                                                            </div>
+                                                        </div><!--acc-leftbar end-->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                        </div>
-                    <div class="col-lg-12">
-                        <div class="main-ws-sec">
-
-        <div class="product-feed-tab current" id="feed-dd">
-            <div class="posts-section">
-                <div class="post-topbar">
-                    <div class="user-picy">
-                        <img src="http://via.placeholder.com/100x100" alt="">
-                    </div>
-                    <div class="post-st">
-                        <ul>
-                            <li>  <a href="{{ path('post_new') }} " class="btn btn-dark">post</a></li>
-                        </ul>
-                    </div><!--post-st end-->
-                </div>
-                {% for post in posts %}
-                <div class="post-bar">
-                    <div class="post_topbar">
-                        <div class="usy-dt">
-                            <img src="http://via.placeholder.com/50x50" alt="">
-                            <div class="usy-name">
-                                <h3>{{ post.user.username }}</h3>
-                                <span><img src="images/clock.png" alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
+                                    </div>
+                                </div><!--main-left-sidebar end-->
                             </div>
                         </div>
-                        <div class="ed-opts">
-                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                            <ul class="ed-options">
-                                <li><a href="{{ path('post_edit', { 'id': post.id }) }}">Edit</a></li>
-                                <li><a href="{{ path('post_delete', { 'id': post.id }) }}" title="">delete</a></li>
-                            </ul>
+                        <div class="col-lg-8 col-md-8 no-pd">
+                            <div class="main-ws-sec">
+                                <div class="user-tab-sec">
+                                    <h3>{{app.user.username}}</h3>
+                                </div>
+
+                                <div class="product-feed-tab current" id="feed-dd">
+                                    <div class="posts-section">
+                                        <div class="post-topbar">
+                                            <div class="user-picy">
+                                                <img src="http://via.placeholder.com/100x100" alt="">
+                                            </div>
+                                            <div class="post-st">
+                                                <ul>
+                                                    <li>  <a href="{{ path('post_new') }} " class="btn btn-dark">post</a></li>
+                                                </ul>
+                                            </div><!--post-st end-->
+                                        </div>
+                                        {% for post in posts %}
+                                            <div class="post-bar">
+                                                <div class="post_topbar">
+                                                    <div class="usy-dt">
+                                                        <img src="http://via.placeholder.com/50x50" alt="">
+                                                        <div class="usy-name">
+                                                            <h3>{{ post.user.username }}</h3>
+                                                            <span><img src="images/clock.png" alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ed-opts">
+                                                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                        <ul class="ed-options">
+                                                            <li><a href="{{ path('post_edit', { 'id': post.id }) }}">Edit</a></li>
+                                                            <li><a href="{{ path('post_delete', { 'id': post.id }) }}" title="">delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="job_descp">
+                                                    <p>{{ post.contenu|raw}}<a href="#" title=""></a></p>
+                                                </div>
+                                                <div class="job-status-bar">
+                                                    <ul class="like-com">
+                                                        <li>
+                                                            {% set x=0 %}
+                                                            {% for jaime in post.jaimes %}
+                                                                {% if jaime.user == app.user %}
+                                                                    {% set x=1 %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <a class="jaime" href="{{ path('jaime', {'id': post.id}) }}">
+                                                                <i class="la la-heart {% if x==1 %}text-danger{% endif %}"></i><p>{{ post.jaimes|length }}</p></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!--post-bar end-->
+                                        {% endfor %}
+                                        <div class="process-comm">
+                                            <div class="spinner">
+                                                <div class="bounce1"></div>
+                                                <div class="bounce2"></div>
+                                                <div class="bounce3"></div>
+                                            </div>
+                                        </div><!--process-comm end-->
+                                    </div><!--posts-section end-->
+                                </div><!--product-feed-tab end-->
+                            </div><!--main-ws-sec end-->
                         </div>
                     </div>
-                    <div class="job_descp">
-                        <p>{{ post.contenu|raw}}<a href="#" title=""></a></p>
-                    </div>
-                    <div class="job-status-bar">
-                        <ul class="like-com">
-                            <li>
-                                {% set x=0 %}
-                                {% for jaime in post.jaimes %}
-                                    {% if jaime.user == app.user %}
-                                        {% set x=1 %}
-                                    {% endif %}
-                                {% endfor %}
-                                <a class="jaime" href="{{ path('jaime', {'id': post.id}) }}">
-                                    <i class="la la-heart {% if x==1 %}text-danger{% endif %}"></i><p>{{ post.jaimes|length }}</p></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div><!--post-bar end-->
-                {% endfor %}
-                <div class="process-comm">
-                    <div class="spinner">
-                        <div class="bounce1"></div>
-                        <div class="bounce2"></div>
-                        <div class="bounce3"></div>
-                    </div>
-                </div><!--process-comm end-->
-            </div><!--posts-section end-->
-        </div><!--product-feed-tab end-->
-    </div><!--main-ws-sec end-->
-</div>
                 </div>
             </div>
-        </div>
-</main>
-</div>
+        </main>
+    </div>
     <script>
         $(".jaime").click(function (e) {
             let x=$(this);
@@ -119,4 +128,3 @@
 
 
 {% endblock %}
-

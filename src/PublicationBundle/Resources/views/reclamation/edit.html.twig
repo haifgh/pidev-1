@@ -1,16 +1,18 @@
-{% extends 'base.html.twig' %}
-{% block content %}
-    <h1>edit claim s</h1>
+{% extends 'search.html.twig' %}
+{% block search %}
+<section class="companies-info">
+    <div class="container">
+        <div class="company-title">
+            <h3>  ID: {{ reclamation.id }} </h3>
+        </div><!--company-title end-->
+        <div class="companies-list">
+            <div class="row">
+                <div class="post-project-fields">
 <div class="col-lg-6">
     <div class="main-ws-sec">
-        <div class="user-tab-sec">
-            <h3>{{ app.user.username }}</h3>
-        </div><!--user-tab-sec end-->
         <div class="product-feed-tab current" id="feed-dd">
             <div class="post-project">
-                <h3>Post edit</h3>
                 <div class="post-project-fields">
-                    <div class="row">
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
@@ -22,5 +24,10 @@
         </div>
     </div>
 </div>
-
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

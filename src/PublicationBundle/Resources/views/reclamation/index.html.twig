@@ -1,64 +1,36 @@
 {% extends 'search.html.twig' %}
 {% block search %}
-<div class="wrapper">
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="card">
-            <div class="header">
-                <div class="product-feed-tab current" id="feed-dd">
-                    <br>
-                    <br>
-                    <br>
-                    <div class="post-project">
-                        <h3>claim list</h3>
-                        <div class="post-project-fields">
-                            <div class="row">
-            </div>
-            <div class="body table-responsive">
-                <table class="table table-borderless ">
-                    <thead>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Objet</th>
-                <th>Contenu</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<section class="companies-info">
+    <div class="container">
+        <div class="company-title">
+            <h3>All Claims</h3>
+        </div><!--company-title end-->
+        <div class="companies-list">
+            <div class="row">
         {% for reclamation in reclamations %}
-            <tr>
-                <td><a href="{{ path('reclamation_show', { 'id': reclamation.id }) }}">{{ reclamation.id }}</a></td>
-                <td>{{ reclamation.objet }}</td>
-                <td>{{ reclamation.contenu }}</td>
-                <td>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('reclamation_show', { 'id': reclamation.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reclamation_edit', { 'id': reclamation.id }) }}">edit</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reclamation_delete', { 'id': reclamation.id }) }}">delete</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <div class="col-lg-3 col-md-4 col-sm-10 col-80">
+                <div class="company_profile_info">
+                    <div class="company-up-info">
+                        <h1>{{ reclamation.reclamer }} </h1>
+                        <br> <br>
+                        <h4>Date : {% if reclamation.date %}{{ reclamation.date|date('d-m-Y') }}{% endif %}</h4>
+                         <h5>about {{ reclamation.objet }}:{{ reclamation.contenu }} </h5>
+                        <br>
+                            <ul>
+                                <li><a href="{{ path('reclamation_delete', { 'id': reclamation.id }) }}" title="" class="follow">Delete</a></li>
+                                <li><a href="{{ path('reclamation_edit', { 'id': reclamation.id }) }}" title="" class="hire-us">Edit</a></li>
+                            </ul>
+                        <br><br><br>
+
+                            <a href="{{ path('reclamation_show', { 'id': reclamation.id }) }}" title="" class="btn btn-default">Show</a>
+                    </div>
+                </div><!--company_profile_info end-->
+            </div>
         {% endfor %}
-                </table>
-
             </div>
         </div>
     </div>
 </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+</section>
 
 {% endblock %}
