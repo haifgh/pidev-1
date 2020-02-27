@@ -117,11 +117,12 @@ class EvenementController extends Controller
      */
     public function editAction(Request $request, Evenement $evenement)
     {
-        $deleteForm = $this->createDeleteForm($evenement);
         $editForm = $this->createForm('EventBundle\Form\EvenementType', $evenement);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $evenement->UploaderProfilePicture();
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('evenement_edit', array('id' => $evenement->getId()));
