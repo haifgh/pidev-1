@@ -54,10 +54,17 @@
                                     <div class="product-item">
                                         <div class="pi-pic">
                                             <img src="{{ asset(product.photo) }}" style="width:4cm;height:5cm;" >
+
+                                                {% set test=null %}
+                                                {% for lp in product.lignesPromotion  %}
+                                                    {% set test=lp %}
+                                                {% endfor %}
+                                                {% if test is not null %}
                                             <div class="sale pp-sale">Sale</div>
 
+                                            {% endif %}
                                             <ul>
-                                                <li class="w-icon active "><a href="{{ path('panier_add',{'id': product.id} )}}" class="add"><i class="icon_bag_alt"></i></a></li>
+                                                <li class="w-icon active w-100 "><a href="{{ path('panier_add',{'id': product.id} )}}" class="add "><i class="icon_bag_alt"></i></a></li>
 
                                             </ul>
                                         </div>
@@ -66,13 +73,21 @@
                                             <a href="#">
                                                 <h5>{{ product.nom }}</h5>
                                             </a>
+                                            {% if test is not null  %}
+                                                <div class="product-price">
+                                                    {{ product.prixPromo }} T.N.D
+                                                    <span>{{ product.prix }} T.N.D</span> {#prix promo#}
+                                                </div>
+                                                {% else %}
                                             <div class="product-price">
                                                 {{ product.prix }} T.N.D
                                                 <span></span> {#prix promo#}
                                             </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
+
                                 {% endfor %}
                                 <br>
 

@@ -6,6 +6,7 @@ use AppBundle\AppBundle;
 use AppBundle\Entity\ligne_promotion;
 use AppBundle\Entity\Produit;
 use AppBundle\Entity\Promotion;
+use http\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +52,12 @@ class promotionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($promotion);
             $em->flush();
-
+            $twilio=$this->get('twilio.api');
+            $mm= $twilio->account->messages->sendMessage(
+                '+17608197805',
+                '+21629628289', 'New promotion at Huntkingdom.tn Visit us !'
+            );
+            dump($mm);
             //return $this->redirectToRoute('promotion_show', array('id' => $promotion->getId()));
             return $this ->redirectToRoute("promotion_index");
         }
@@ -78,15 +84,23 @@ class promotionController extends Controller
     /**
      * Finds and displays a promotion entity.
      *
-     * @Route("/{id}", name="promotion_AjoutProduct")
+     * @Route("/admin/{id}/{message}", name="promotion_AjoutProduct")
      * @Method("GET")
      */
-    public function showAllProductAction(promotion $promotion)//call onclick Add
-    {
+    public function showAllProductAction(Request $request,promotion $promotion,$message=null)//call onclick Add
+    {   $p=new Produit();
+        $form=$this->createForm('PromoBundle\Form\produitType',$p);
+        $form->handleRequest($request);
         $reader=$this->getDoctrine()->getRepository(Produit :: class)->findAll();
+        if($form->isSubmitted()&&$form->isValid()){
+            $q=$this->getDoctrine()->getManager()->createQuery('select p from AppBundle:Produit p where p.nom like :pr')->setParameter('pr','%'.$p->getNom().'%');
+            $reader=$q->getResult();
+        }
         return $this->render('@Promo/promotion/showProduct.html.twig', array(
             'reader'=>$reader,
-            'promo'=>$promotion
+            'promo'=>$promotion,
+            'message'=>$message,
+            'form'=>$form->createView()
         ));
 
     }
@@ -143,7 +157,7 @@ class promotionController extends Controller
         $product = $em -> getRepository(ligne_promotion::class)->find($id);
         $em -> remove($product);
         $em -> flush();
-        return $this ->redirectToRoute("ligne_promotion_index");
+        return $this ->redirectToRoute("promotion_index");
 
     }
 

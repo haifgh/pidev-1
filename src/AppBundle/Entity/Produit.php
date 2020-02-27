@@ -53,6 +53,34 @@ class Produit
      */
     private $prix_promo;
 
+
+    /**
+     *
+     * @OneToMany(targetEntity="ligne_promotion", mappedBy="produit",cascade="remove")
+     */
+    private $lignes_promotion;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLignesPromotion()
+    {
+        return $this->lignes_promotion;
+    }
+
+    /**
+     * @param ArrayCollection $lignes_promotion
+     */
+    public function setLignesPromotion($lignes_promotion)
+    {
+        $this->lignes_promotion = $lignes_promotion;
+    }
+    // ...
+
+    public function __construct() {
+        $this->lignes_promotion = new ArrayCollection();
+    }
+
     /**
      * @return float
      */

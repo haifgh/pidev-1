@@ -1,6 +1,3 @@
-app_ligne.commande:
-    resource: "@CommandeBundle/Controller/ligne_commandeController.php"
-    type:     annotation
 
 commande:
     resource: "@CommandeBundle/Resources/config/routing.yml"

@@ -1,21 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
-{% block content %}
-    <h1>Ligne_promotion edit</h1>
+{% block content %}{{ form_start(edit_form) }}
+    <div class="container-fluid mt--7 mb-5"> {# this #}
+        <div class="row"> {# this #}
+            <div class="col"></div>
+            <div class="col-7"> {# this #}
+                <div class="card shadow p-2">
+                    <div class="card-header border-0">
+                        <a class="btn btn-outline-danger float-right" href="{{ path('promotion_show',{'id':ligne_promotion.promotion.id}) }}">Back</a>
+                        <input class="btn btn-outline-success float-right" type="submit" value="Save" />
+                        <h1>Edit product: {{ ligne_promotion.produit.nom }}
+                            <br>in promotion: {{ ligne_promotion.promotion.nom }}</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row"><div class="col"></div>
+                            <div class="col-7">
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+                                {{ form_widget(edit_form) }}
+
+
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('ligne_promotion_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

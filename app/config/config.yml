@@ -104,9 +104,15 @@ fos_user:
 
 
 flosch_stripe:
-    stripe_api_key: "%stripe_api_key%"
+    stripe_api_key: "sk_test_UAe411cwz5wIeEJMQW8cXSgs00whcLY6Pw"
 
 
 
 cmen_google_charts:
     version: "current"
+
+vresh_twilio:
+    #(Required) Your Account SID from www.twilio.com/user/account
+    sid: 'AC964c4cf37a35177c15341d2fd50e993d'
+    #(Required) Your Auth Token from www.twilio.com/user/account
+    authToken: 'b4c869693d42d8ffd699329fc42d0b57'

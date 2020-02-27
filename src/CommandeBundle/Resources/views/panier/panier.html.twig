@@ -15,7 +15,16 @@
                     <td class="si-pic"><img src="{{asset('img/cart-page/product-2.jpg')}}" width="100px" alt=""></td>
                     <td class="si-text">
                         <div class="product-selected">
+                            {% set test=null %}
+                            {% for lp in item.product.lignesPromotion  %}
+                                {% set test=lp %}
+                            {% endfor %}
+                            {% if test is not null %}
+                                <p>{{item.product.prixPromo}} T.N.D x {{ item.quantity }}</p>
+
+                            {% else %}
                             <p>{{item.product.prix}} T.N.D x {{ item.quantity }}</p>
+                                {% endif %}
                             <h6>{{item.product.nom}}</h6>
                         </div>
                     </td>
@@ -23,7 +32,11 @@
                        <a class="remove" href="{{ path('panier_remove',{'id':item.product.id}) }}"><i class="ti-close"></i></a>
                     </td>
                 </tr>
-                    {% set prix = prix+ item.product.prix*item.quantity %}
+                    {% if test is not null %}
+                        {% set prix = prix+ item.product.prixPromo*item.quantity %}
+                    {% else %}
+                        {% set prix = prix+ item.product.prix*item.quantity %}
+                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>

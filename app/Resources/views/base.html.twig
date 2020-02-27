@@ -71,16 +71,16 @@
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-7">
-                                <div class="advanced-search">                                               {#todo#}
-                                    <div class="input-group">
-                                        <form method="post" action="{{ path('searchProduct') }}">
-                                        <input type="text" placeholder="What do you need?" name="nom">
-                                        <button type="submit"><i class="ti-search"></i></button>
+                                                                             {#todo#}
+
+                                        <form method="post" class="form-group row mt-3"  action="{{ path('searchProduct') }}">
+                                            <input type="text" class="form-control col" placeholder="What do you need?" name="nom">
+                                        <button type="submit" class="btn btn-dark ml-2 col-2"><i class="ti-search"></i></button>
                                         </form>
-                                    </div>
-                                </div>
+
+
                             </div>
-                            <div class="col-md-3 text-right" id="refresh">
+                            <div class="col-md-3 text-right mt-2" id="refresh">
                                 <ul class="nav-right" >
                                     {{ render(controller(
                                         'CommandeBundle:panier:index'

@@ -2,36 +2,30 @@
 
 namespace PromoBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-class ligne_promotionType extends AbstractType
+class produitType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('quantite', NumberType::class);
+        $builder->add('nom', TextType::class,[ 'required'   => false ,'attr'=>['placeholder'=>'search a product']]);
     }/**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ligne_promotion'
-        ));
-    }
+
 
     /**
      * {@inheritdoc}
      */
     public function getBlockPrefix()
     {
-        return 'promobundle_ligne_promotion';
+        return 'produit_promotion';
     }
 
 

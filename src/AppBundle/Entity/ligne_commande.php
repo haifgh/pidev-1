@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -33,7 +34,7 @@ class ligne_commande
 
     /**
      * @var int
-     *
+     * @Assert\LessThan(propertyPath="Produit.qte")
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;

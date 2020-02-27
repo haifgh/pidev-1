@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Flosch\Bundle\StripeBundle\FloschStripeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Vresh\TwilioBundle\VreshTwilioBundle(),
 
 			
         ];

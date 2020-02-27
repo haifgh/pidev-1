@@ -133,13 +133,7 @@ class DefaultController extends Controller
         $this->getDoctrine()->getManager()->flush();
         return $this->redirectToRoute('users');
     }
-    /**
-     * @Route("/test", name="test")
-     */
-    public function testAction(){
 
-        return $this->render('test.html.twig');
-    }
 
 
 

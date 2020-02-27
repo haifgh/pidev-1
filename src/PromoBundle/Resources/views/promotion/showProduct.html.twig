@@ -6,7 +6,17 @@
         <div class="col"> {# this #}
             <div class="card shadow">
                 <div class="card-header border-0">
+                    <a class="btn btn-outline-dark ml-5 float-right" href="{{ path('promotion_index') }}">Back to the list</a>
+<div class="float-right">
+                    {{form_start(form)}}
+                    {{ form_widget(form.nom) }}
+
+                    {{ form_end(form) }}
+
+</div>
+
                     <h3 class="mb-0">Products</h3>
+
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush">
@@ -26,19 +36,25 @@
             <td>{{p.nom }}</td>
             <td>{{ p.description }}</td>
             <td>{{ p.qte }}</td>
-            <form action="{{ path('ligne_promotion_new',{'produit': p.id ,'promotion':promo.id}) }}">
-                <td><input type="number" name="qte"></td>
-                <td><button type="submit">add</button></td>
+            <form class="form-group" action="{{ path('ligne_promotion_new',{'produit': p.id ,'promotion':promo.id}) }}">
+                <td><input class="form-control w-50" type="number" name="qte"></td>
+                <td><button  class="btn btn-outline-success" type="submit">Add</button></td>
             </form>
         </tr>
 
     {% endfor %}
     
 </table>
-                    <ul>
 
-                        <button><a href="{{ path('promotion_index') }}">Back to the list</a></button></td>
 
-                    </ul>
-
+    <script>
+        {% if message is not null %}
+       let message="{{ message }}";
+        if(message==='success'){
+            alert('successfully added');
+        }
+        else {
+            alert('invalid quantity');
+        }{% endif %}
+    </script>
 {% endblock %}

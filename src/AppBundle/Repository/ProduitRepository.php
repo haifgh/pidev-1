@@ -16,7 +16,7 @@ class ProduitRepository extends EntityRepository
     {
         $query=$this->getEntityManager()->createQuery("SELECT p FROM AppBundle:Produit p where p.nom= :name")
             ->setParameter('name', $name);
-        return $query->getResult();
+        return $query->getResult();}
     public function getAllProduct($promotion){
       $query=$this->getEntityManager()->createQuery( "select p.nom ,lp.id,lp.quantite
     FROM AppBundle:Produit as p INNER JOIN AppBundle:ligne_promotion as lp with lp.produit=p.id

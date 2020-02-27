@@ -11,6 +11,8 @@
         <div class="col"> {# this #}
             <div class="card shadow">
                 <div class="card-header border-0">
+                    <a class="btn btn-outline-dark float-right" href="{{ path('promotion_index') }}">Back</a>
+
                     <h3 class="mb-0">Promotion List Product</h3>
                 </div>
                 <div class="table-responsive">
@@ -30,8 +32,10 @@
             <tr>
                 <td>{{ x.produit.nom }}</td>
                 <td>{{ x.quantite }}</td>
-               <td> <button><a href="{{ path('promotion_edit', { 'id': x.id }) }}">Edit</a></button>
-                 <button><a href="{{ path('prod_delete', { 'id': x.id }) }}">Remove</a></button></td>
+               <td>
+                   <a class="btn btn-sm btn-outline-warning" href="{{ path('ligne_promotion_edit', { 'id': x.id }) }}">Edit</a>
+                 <a class="btn btn-sm btn-outline-danger" href="{{ path('prod_delete', { 'id': x.id }) }}">Remove</a>
+               </td>
 
 
             </tr>
@@ -39,9 +43,5 @@
         </tbody>
     </table>
 
-    <ul>
 
-            <button><a href="{{ path('promotion_index') }}">Back</a></button></td>
-
-    </ul>
 {% endblock %}

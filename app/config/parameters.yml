@@ -10,4 +10,4 @@ parameters:
     mailer_user: pidevsmtp@gmail.com
     mailer_password: iheb2020
     secret: ThisTokenIsNotSoSecretChangeIt
-    stripe_api_key: sk_test_UAe411cwz5wIeEJMQW8cXSgs00whcLY6Pw
+    stripe_api_key:

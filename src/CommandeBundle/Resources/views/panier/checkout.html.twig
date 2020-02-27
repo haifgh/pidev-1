@@ -68,8 +68,20 @@
                                         <li>Product <span>Total</span></li>
                                         {% set total = 0 %}
                                         {% for item in panier %}
-                                            {% set total = total+item.product.prix*item.quantity %}
-                                        <li class="fw-normal">{{ item.product.nom}} x {{ item.quantity }} <span>{{ item.product.prix*item.quantity }} T.N.D</span></li>
+                                            {% set test=null %}
+                                            {% for lp in item.product.lignesPromotion  %}
+                                                {% set test=lp %}
+                                            {% endfor %}
+
+                                            {% if test is not null %}
+                                                {% set total = total+ item.product.prixPromo*item.quantity %}
+                                                <li class="fw-normal">{{ item.product.nom}} x {{ item.quantity }} <span>{{ item.product.prixPromo*item.quantity }} T.N.D</span></li>
+
+                                            {% else %}
+                                                {% set total = total+item.product.prix*item.quantity %}
+                                                <li class="fw-normal">{{ item.product.nom}} x {{ item.quantity }} <span>{{ item.product.prix*item.quantity }} T.N.D</span></li>
+
+                                            {% endif %}
                                         {% endfor %}
                                         <li class="total-price">Total <span>{{ total }} T.N.D</span></li>
                                     </ul>

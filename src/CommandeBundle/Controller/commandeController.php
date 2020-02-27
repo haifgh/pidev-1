@@ -36,33 +36,7 @@ class commandeController extends Controller
         ));
     }
 
-    /**
-     * Creates a new commande entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $commande = new Commande();
-        $form = $this->createForm('CommandeBundle\Form\commandeType', $commande);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $date= new \DateTime();
-            $commande->setDate($date);
-            $commande->setStatus('Pending');
-            $commande->setUser($this->getUser());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commande);
-            $em->flush();
-
-            return $this->redirectToRoute('commande_show', array('id' => $commande->getId()));
-        }
-
-        return $this->render('@Commande/commande/new.html.twig', array(
-            'commande' => $commande,
-            'form' => $form->createView(),
-        ));
-    }
 
     /**
      * Finds and displays a commande entity.
@@ -118,18 +92,6 @@ class commandeController extends Controller
 
     }
 
-    /**
-     * Deletes a commande entity.
-     *
-     */
-    public function deleteAction($id)
-    {
-        $cmd=$this->getDoctrine()->getRepository(commande::class)->find($id);
-        $em=$this->getDoctrine()->getManager();
-        $em->remove($cmd);
-        $em->flush();
-        return $this->redirectToRoute('commande_index');
-    }
 
 
 }

@@ -1,15 +1,33 @@
 {% extends 'adminBase.html.twig' %}
 
-{% block content %}
-    <h1>Promotion edit</h1>
+{% block content %}{{ form_start(edit_form) }}
+<div class="container-fluid mt--7 mb-5"> {# this #}
+    <div class="row"> {# this #}
+        <div class="col"></div>
+        <div class="col-7"> {# this #}
+            <div class="card shadow p-2">
+                <div class="card-header border-0">
+             <a class="btn btn-outline-danger float-right" href="{{ path('promotion_index') }}">Back</a>
+                    <input class="btn btn-outline-success float-right" type="submit" value="Save" />
+                     <h1>Promotion edit</h1>
+                </div>
+                <div class="container">
+                    <div class="row"><div class="col"></div>
+                        <div class="col-7">
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    <button ><a href="{{ path('promotion_index') }}">Back</a></button>
+                    {{ form_widget(edit_form) }}
+
+
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
     {{ form_end(edit_form) }}
-
-
-
 
 {% endblock %}

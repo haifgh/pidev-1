@@ -155,7 +155,12 @@ class panierController extends Controller
                 $produit=$this->getDoctrine()->getRepository(Produit::class)->find($id);
                 $lq->setProduit($produit);
                 $lq->setQuantite($qte);
-                $lq->setPrix($produit->getPrix()*$qte);
+                if($produit->getPrixPromo()){
+                    $lq->setPrix($produit->getPrixPromo()*$qte);
+                }else{
+                    $lq->setPrix($produit->getPrix()*$qte);
+                }
+
                 $commande->setPrixTotal($commande->getPrixTotal()+$lq->getPrix());
                 $lq->setCommande($commande);
                 $em->persist($lq);

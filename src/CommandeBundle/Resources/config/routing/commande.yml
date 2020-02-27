@@ -8,19 +8,14 @@ commande_show:
     defaults: { _controller: "CommandeBundle:commande:show" }
     methods:  GET
 
-commande_new:
-    path:     /admin/commande/new
-    defaults: { _controller: "CommandeBundle:commande:new" }
-    methods:  [GET, POST]
+
 
 commande_edit:
     path:     /admin/commande/{id}/edit/{type}
     defaults: { _controller: "CommandeBundle:commande:edit" }
     methods:  [GET, POST]
 
-commande_delete:
-    path:     /admin/commande/{id}/delete
-    defaults: { _controller: "CommandeBundle:commande:delete" }
+
 orders:
     path:  /user/orders
     defaults: { _controller: "CommandeBundle:commande:orders" }

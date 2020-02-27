@@ -1,18 +1,34 @@
 {% extends 'adminBase.html.twig' %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-{% block content %}
- <div class="focused">
+{% block content %}{{ form_start(form) }}
+    <div class="container-fluid mt--7 mb-5"> {# this #}
+        <div class="row"> {# this #}
+            <div class="col"></div>
+            <div class="col-7"> {# this #}
+                <div class="card shadow p-2">
+                    <div class="card-header border-0">
+                        <a class="btn btn-outline-danger float-right" href="{{ path('promotion_index') }}">Back</a>
+                        <input class="btn btn-outline-success float-right" type="submit" value="Save" />
+                        <h1>Promotion edit</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row"><div class="col"></div>
+                            <div class="col-7">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input  style="color:#b3d7ff" type="submit" value="Create" />
+                                {{ form_widget(form) }}
+
+
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
     {{ form_end(form) }}
 
-     <button  style="color: #b3d7ff"> <a href="{{ path('promotion_index') }}">Back to the list</a></button>
+{% endblock %}
 
-</div>
-    </div>
-</div>
-
-    {% endblock %}
