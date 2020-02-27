@@ -1,0 +1,49 @@
+{% extends 'adminBase.html.twig.' %}
+
+{% block content %}
+    <h1>Commentaires list</h1>
+
+    <div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="card">
+    <div class="header">
+
+    </div>
+    <div class="body table-responsive">
+    <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>username</th>
+                <th>Actions</th>
+            </tr>
+        <tbody>
+        {% for commentaire in commentaires %}
+            <tr>
+                <td><a href="{{ path('commentaire_show', { 'id': commentaire.id }) }}">{{ commentaire.id }}</a></td>
+                <td>{{  commentaire.contenu  }}</td>
+                <td>{% if  commentaire.date %}{{  commentaire.date|date('Y-m-d') }}{% endif %}</td>
+                <td> {{commentaire.user}}</td>
+               <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentaire_show', { 'id': commentaire.id }) }}">show comment</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentaire_edit', { 'id': commentaire.id }) }}">edit comment</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentaire_new') }}">Create a new comment</a>
+        </li>
+    </ul>
+
+{% endblock %}

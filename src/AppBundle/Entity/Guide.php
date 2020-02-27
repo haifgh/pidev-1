@@ -60,6 +60,41 @@ class Guide
      */
     private $lien;
 
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="note", type="float" )
+     */
+    private $note;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255)
+     */
+    private $photo ;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Likes", mappedBy="guide")
+     */
+    private $likes;
+
+    /**
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param string $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
 
     /**
      * Get id
@@ -193,13 +228,20 @@ class Guide
     }
     /**
      * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="Commentaire", mappedBy="guide")
+     * @OneToMany(targetEntity="Commentaire", mappedBy="guide",cascade="remove")
      */
     private $commentaires;
     // ...
 
+    public function getCountLikes()
+    {
+        return count($this->getLikes());
+    }
     public function __construct() {
         $this->commentaires = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->rating = new ArrayCollection();
+
     }
 
     /**
@@ -217,5 +259,61 @@ class Guide
     {
         $this->commentaires = $commentaires;
     }
+
+    public function getWebPath()
+    {
+        return null===$this->photo ? null : $this->getUploadDir().'/'.$this->photo;
+    }
+    protected function getUploadRootDir()
+    {
+        return dirname(__FILE__).'/../../../web/'.$this->getUploadDir();
+    }
+    protected function getUploadDir()
+    {
+        return 'images';
+    }
+    public function UploadProfilePicture()
+    {
+        $this->photo->move($this->getUploadRootDir(),$this->photo->getClientOriginalName());
+        $this->photo=$this->photo->getClientOriginalName();
+        $this->file=null;
+    }
+
+    /**
+     * @return float
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param float $note
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+    }
+
+
+
+
+
 }
 

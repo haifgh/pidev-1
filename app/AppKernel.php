@@ -1,5 +1,6 @@
 <?php
 
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -18,6 +19,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new AppBundle\AppBundle(),
+            new GuidesBundle\GuidesBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new PromoBundle\PromoBundle(),
             new CommandeBundle\CommandeBundle(),
             new ProduitBundle\ProduitBundle(),

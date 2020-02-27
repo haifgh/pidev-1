@@ -1,0 +1,79 @@
+{%  extends 'base.html.twig' %}
+{% block content %}
+    <center><h1>Welcome to the Guides</h1></center>
+
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <div class="search-form">
+                            <h4>Search</h4>
+                            <form method="post" action="{{ path('rechercher') }}">
+                                <input type="text" id="search" name="titre" class="form-control" placeholder="Search here">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        {% if guide is defined %}
+                        <div class="recent-post">
+                            <h4>Recent Guide</h4>
+
+                            {% for g in guide %}
+                            <div class="recent-blog">
+                                <a href=" {{ path('guide_details',{'id': g.id}) }} ">
+                                    <div class="rb-pic">
+                                        <img src=" {{ asset('img/blog/') }}{{ g.photo}}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>{{ g.titre }}</h6>
+                                        <p> <span>{{ g.dateCreation|date  }}</span></p>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                        {% endfor %}</div>{% endif %}
+
+
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+
+                                    {% for guide in guides %}
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="blog-item">
+                                <div class="bi-pic">
+                                    <img src="{{ asset('img/blog/') }}{{ guide.photo}}" alt="">
+                                </div>
+                                <div class="bi-text">
+                                    <a href="{{ path('guide_details',{'id': guide.id}) }}">
+                                        <h4>{{ guide.titre }}</h4>
+                                    </a>
+                                    <span>- {{ guide.datecreation|date  }}</span>
+                                </div>
+                                <div class="listing-review">
+                                    <span class="review-avg">{{ guide.commentaires|length }} commentaires</span>
+                                    <span class="review-avg">{{ guide.countLikes }} like{{ guide.countLikes >= 2 ? 's' : '' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                            {% endfor %}
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="loading-more">
+                                {{ knp_pagination_render(guides) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+

@@ -1,0 +1,337 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <style type="text/css">
+        .unliked {
+            color: black;
+        }
+
+        .liked {
+            color: cornflowerblue;
+        }
+    </style>
+    <br class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog-details-inner">
+                    <div class="blog-detail-title">
+                        <h2 class="mt-4">{{ titre|upper }}</h2>
+                        <p>{{ datecreation|date }}</p>
+                    </div>
+                    <div class="blog-large-pic">
+                        <img alt="" src="{{ asset('img/blog/') }}{{ photos }}" style="...">
+                    </div>
+                    <div class="blog-detail-desc">
+                        <p>
+                            {{ description }}
+                        </p>
+                    </div>
+
+                    <div class="tag-share">
+                        <div class="details-tag">
+                            <ul>
+                                <li><i class="fa fa-tags"></i></li>
+                                <li>Peche</li>
+                                <li>Chasse</li>
+                                <li>Hunt</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="blog-post">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6">
+                                <a href="#" class="prev-blog">
+                                    <div class="pb-pic">
+                                        <i class="ti-arrow-left"></i>
+                                        <img src="img/blog/prev-blog.png" alt="">
+                                    </div>
+                                    <div class="pb-text">
+                                        <span>Previous Post:</span>
+                                        <h5>The Personality Trait That Makes People Happier</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-5 offset-lg-2 col-md-6">
+                                <a href="#" class="next-blog">
+                                    <div class="nb-pic">
+                                        <img src="img/blog/next-blog.png" alt="">
+                                        <i class="ti-arrow-right"></i>
+                                    </div>
+                                    <div class="nb-text">
+                                        <span>Next Post:</span>
+                                        <h5>The Personality Trait That Makes People Happier</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="detailsInfoBox" align="right">
+                            <h3>Donner une note</h3>
+                            <div class="listingReview">
+
+                                <ul class="list-inline rating rating-review">
+                                    <div class="stars">
+                                            <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                            <label class="star star-5" for="star-5"></label>
+                                            <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                            <label class="star star-4" for="star-4"></label>
+                                            <input class="star star-3" id="star-3" type="radio" name="star"/>
+                                            <label class="star star-3" for="star-3"></label>
+                                            <input class="star star-2" id="star-2" type="radio" name="star"/>
+                                            <label class="star star-2" for="star-2"></label>
+                                            <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                            <label class="star star-1" for="star-1"></label>
+                                    </div>
+                                            <style>
+                                                div.stars {
+                                                    width: 270px;
+                                                    display: inline-block;
+                                                }
+                                                input.star { display: none; }
+                                                label.star {
+                                                    float: right;
+                                                    padding: 10px;
+                                                    font-size: 36px;
+                                                    color: #444;
+                                                    transition: all .2s;
+                                                }
+                                                input.star:checked ~ label.star:before {
+                                                    content: '\f005';
+                                                    color: #FD4;
+                                                    transition: all .25s;
+                                                }
+                                                input.star-5:checked ~ label.star:before {
+                                                    color: #FE7;
+                                                    text-shadow: 0 0 20px #952;
+                                                }
+                                                input.star-1:checked ~ label.star:before { color: #F62; }
+                                                label.star:hover { transform: rotate(-15deg) scale(1.3); }
+                                                label.star:before {
+                                                    content: '\f006';
+                                                    font-family: FontAwesome;
+                                                }
+                                            </style>
+                                            </ul>
+                            </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Alert </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="{{ path('PDF',{'id':id}) }}" >
+                        <button type="button" class="btn btn-danger">PDF</button>
+                    </a>
+
+                    <br>  <br>
+
+                    <div class="like">
+                       <span id="nbLikes"> {{ nbLikes }}</span>
+                        <a href="" class="fa fa fa-thumbs-up unliked" id="like-guide"
+                           data-href="{{ path('guide_aimer', {'id':id}) }}" style="display: {{ isGuideLiked == true ? 'none' : 'block' }}">Like</a>
+
+                        <a href="" class="fa fa fa-thumbs-up liked" id="unlike-guide"
+                           data-href="{{ path('guide_pasaimer', {'id':id}) }}" style="display: {{ isGuideLiked == true ? 'block' : 'none' }}">Unlike</a>
+
+                       </div>
+                    {% for c in commentaire %}
+                    <div class="posted-by">
+                        <div class="pb-pic">
+                            <img src="img/blog/post-by.png" alt="">
+                        </div>
+                        <div class="pb-text">
+                            <a href="#">
+                                <h5>{{ c.user.username }}</h5>
+                            </a>
+                            <p>{{ c.contenu }}</p>
+
+                            {% if app.user.id==c.user.id %}
+
+                            <a href="{{ path('commentaire_edit', {'id':c.id}) }}">
+                                <button type="button" class="btn btn-primary">Edit Comment</button>
+                            </a>
+                            <a href="{{ path('commentaire_delete_2',{'id':c.id, 'idGuide':id}) }}">
+                                <button type="button" class="btn btn-primary">Delete Comment</button>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="card my-4">
+                        <h5 class="card-header">Leave a Comment:</h5>
+                        <div class="card-body">
+                            <form action="{{ path('commentaire_new') }}" method="POST" id="comment">
+                                <div class="form-group">
+                                    <input type="text" name="id" value="{{ id }}" style="display: none">
+                                    <textarea class="form-control" rows="3" name="comment"
+                                              placeholder="Comment here"></textarea>
+
+                                </div>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var originalNbLikes = parseInt($('#nbLikes').text());
+
+        $(document).on('click', "#like-guide", function (e) {
+            e.preventDefault();
+            var url = $(this).attr('data-href');
+            var nbLikes = parseInt($('#nbLikes').text());
+
+            $('#nbLikes').text(nbLikes + 1);
+            $(this).hide();
+            $('#unlike-guide').show();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: url,
+                success: function () {
+                    console.log('Success');
+                },
+                error: function () {
+                    $('#nbLikes').text(originalNbLikes);
+                    $('#unlike-guide').hide();
+                    $(this).show();
+                }
+            });
+        });
+
+        $(document).on('click', "#unlike-guide", function (e) {
+            e.preventDefault();
+            var url = $(this).attr('data-href');
+            var nbLikes = parseInt($('#nbLikes').text());
+
+            $('#nbLikes').text(nbLikes - 1);
+            $(this).hide();
+            $('#like-guide').show();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: url,
+                success: function () {
+                    console.log('Success');
+                },
+                error: function () {
+                    $('#like-guide').hide();
+                    $(this).show();
+                    $('#nbLikes').text(originalNbLikes);
+                }
+            });
+        });
+
+    </script>
+    <script>
+        var valeur = 0 ;
+        $("#star-2")
+            .click(function () {
+                valeur = 2 ;
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+
+                    console.log(data);
+                    if(data == "error"){
+                        alert("Vous avez déja mis une note");
+                    }
+                    if(data == "Done"){
+                        alert("Done !");
+                    }
+
+                });
+
+
+            });
+        $("#star-3")
+            .click(function () {
+                valeur = 3 ;
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+
+                    console.log(data);
+                    if(data == "error"){
+                        alert("Vous avez déja mis une note");
+                    }
+                    if(data == "Done"){
+                        alert("Done !");
+                    }
+
+                });
+
+            });
+        $("#star-4")
+            .click(function () {
+                valeur = 4 ;
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+
+                    console.log(data);
+                    if(data == "error"){
+                        alert("Vous avez déja mis une note");
+                    }
+                    if(data == "Done"){
+                        alert("Done !");
+                    }
+
+                });
+
+            });
+        $("#star-5")
+            .click(function () {
+                valeur = 5 ;
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+
+                    console.log(data);
+                    if(data == "error"){
+                        alert("Vous avez déja mis une note");
+                    }
+                    if(data == "Done"){
+                        alert("Done !");
+                    }
+
+                });
+            });
+        $("#star-1")
+            .click(function () {
+                valeur = 1 ;
+                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+
+                    console.log(data);
+                    if(data == "error"){
+                        alert("Vous avez déja mis une note");
+                    }
+                    if(data == "Done"){
+                        alert("Done !");
+                    }
+
+                });
+            })
+    </script>
+{% endblock %}

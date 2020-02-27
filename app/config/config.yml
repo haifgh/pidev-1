@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@GuidesBundle/Resources/config/services.yml" }
     - { resource: "@EventBundle/Resources/config/services.yml" }
     - { resource: "@PromoBundle/Resources/config/services.yml" }
     - { resource: "@CommandeBundle/Resources/config/services.yml" }
@@ -78,6 +79,11 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            string_functions:
+                MONTH: DoctrineExtensions\Query\Mysql\Month
+                YEAR: DoctrineExtensions\Query\Mysql\Year
+                WEEK: DoctrineExtensions\Query\Mysql\Week
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -102,6 +108,18 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:    []
+    image:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        options:    []
+    temporary_folder: "%kernel.cache_dir%/snappy"
+    process_timeout: 20
+    process_timeout: 20
 
 nomaya_social:
     buttons:

@@ -1,0 +1,7 @@
+
+app_commentaire:
+    resource: "@GuidesBundle/Resources/config/routing/commentaire.yml"
+    prefix:   /commentaire
+app_guide:
+    resource: "@GuidesBundle/Resources/config/routing/guide.yml"
+    prefix:   /
