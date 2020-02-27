@@ -6,7 +6,6 @@ use AppBundle\Entity\Follow;
 use AppBundle\Entity\Jaime;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\User;
-use AppBundle\Entity\User;
 use AppBundle\Entity\categorie;
 use AppBundle\Entity\Produit;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
@@ -154,8 +153,8 @@ class DefaultController extends Controller
             $em->flush();
             return new Response('added');
 
-        }
-
+        }}
+    /**
      * @Route("/admin/users", name="users")
      */
     public function showusersAction(Request $request)
@@ -181,7 +180,9 @@ class DefaultController extends Controller
             'user' => $user,
             'edit_form' => $editForm->createView(),
 
-        ));}
+        ));
+    }
+
         /**
          * @Route("/admin/user/{id}/disable", name="user_disable")
          */
