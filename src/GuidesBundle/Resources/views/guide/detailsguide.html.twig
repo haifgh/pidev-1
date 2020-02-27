@@ -10,7 +10,7 @@
             color: cornflowerblue;
         }
     </style>
-    <br class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="blog-details-inner">
@@ -19,7 +19,7 @@
                         <p>{{ datecreation|date }}</p>
                     </div>
                     <div class="blog-large-pic">
-                        <img alt="" src="{{ asset('img/blog/') }}{{ photos }}" style="...">
+                        <img alt="" src="{{ asset('images/') }}{{ photos }}" style="...">
                     </div>
                     <div class="blog-detail-desc">
                         <p>
@@ -38,34 +38,7 @@
                         </div>
 
                     </div>
-                    <div class="blog-post">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-6">
-                                <a href="#" class="prev-blog">
-                                    <div class="pb-pic">
-                                        <i class="ti-arrow-left"></i>
-                                        <img src="img/blog/prev-blog.png" alt="">
-                                    </div>
-                                    <div class="pb-text">
-                                        <span>Previous Post:</span>
-                                        <h5>The Personality Trait That Makes People Happier</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-5 offset-lg-2 col-md-6">
-                                <a href="#" class="next-blog">
-                                    <div class="nb-pic">
-                                        <img src="img/blog/next-blog.png" alt="">
-                                        <i class="ti-arrow-right"></i>
-                                    </div>
-                                    <div class="nb-text">
-                                        <span>Next Post:</span>
-                                        <h5>The Personality Trait That Makes People Happier</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
 
 
 
@@ -192,10 +165,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    </div>
+
 
 {% endblock %}
 
@@ -253,11 +223,13 @@
 
     </script>
     <script>
-        var valeur = 0 ;
+
+
+
         $("#star-2")
             .click(function () {
-                valeur = 2 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+
+                $.get("{{ path('guide_rate',{'id':app.user.id,'g':id,'note':2}) }}",function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -274,7 +246,7 @@
         $("#star-3")
             .click(function () {
                 valeur = 3 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("{{ path('guide_rate',{'id':app.user.id,'g':id,'note':3}) }}",function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -290,7 +262,7 @@
         $("#star-4")
             .click(function () {
                 valeur = 4 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("{{ path('guide_rate',{'id':app.user.id,'g':id,'note':4}) }}",function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -306,7 +278,7 @@
         $("#star-5")
             .click(function () {
                 valeur = 5 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("{{ path('guide_rate',{'id':app.user.id,'g':id,'note':5}) }}",function (data) {
 
                     console.log(data);
                     if(data == "error"){
@@ -321,7 +293,7 @@
         $("#star-1")
             .click(function () {
                 valeur = 1 ;
-                $.get("http://localhost/pidev/web/app_dev.php/guide/rate/"+ {{ app.user.id }} +"/" +{{ id }}+"/"+ valeur,function (data) {
+                $.get("{{ path('guide_rate',{'id':app.user.id,'g':id,'note':1}) }}",function (data) {
 
                     console.log(data);
                     if(data == "error"){

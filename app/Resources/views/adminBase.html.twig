@@ -117,37 +117,37 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('commande_index') }}">
-                        <i class="ni ni-cart text-success"></i> Orders
+                        <i class="ni ni-cart text-primary"></i> Orders
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('produit_index') }}">
-                        <i class="ni ni-shop text-red"></i> Gestion Produits
+                        <i class="ni ni-shop text-primary"></i> Products
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('categorie_index') }}">
-                        <i class="ni ni-shop text-red"></i> Gestion categories
+                        <i class="ni ni-shop text-primary"></i> Categories
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('promotion_index')}}">
-                        <i class="ni ni-single-02 text-yellow"></i> Promotions
+                        <i class="ni ni-diamond text-primary"></i> Promotions
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('evenement_index') }}">
-                        <i class="ni ni-air-baloon text-yellow"></i> Events
+                        <i class="ni ni-air-baloon text-primary"></i> Events
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('guide_index') }}">
-                        <i class="ni ni-bullet-list-67 text-yellow"></i> Gestion des Guides
+                        <i class="ni ni-bullet-list-67 text-primary"></i> Guides
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path('commentaire_index') }}">
-                        <i class="ni ni-bullet-list-67 text-yellow"></i> Gestion des Commentaires
+                        <i class="ni ni-bullet-list-67 text-primary"></i> Guides' comments
                     </a>
                 </li>
 
@@ -183,29 +183,30 @@
 
                     {% if produit is defined %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="media align-items-center">
-              <span class="avatar avatar-sm rounded-circle">
-                <img  src="{{ asset('assets/images.png') }}">
-              </span>
-                        </div>
-                    </a>
+
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                             <div class=" dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Welcome!</h6>
                             </div>
-
+                    {% set x=0 %}
                             {% for pro in produit %}
                                 {% if pro.qte==0 %}
                                     <a href="{{ path('produit_show',{'id':pro.id}) }}" class="dropdown-item">
                                         <img alt="Image placeholder" src="{{ asset(pro.photo) }}" height="25" width="25">
-                                        <span>Ce produit est épuisé : {{pro.nom}}</span>
+                                        <span>Out of stock : {{pro.nom}}</span>
                                     </a>
+                                    {% set x=x+1 %}
                                 {% endif %}
                             {% endfor %}
 
                         </div>
-
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle{% if x>0 %} bg-red {% endif %}">
+               <i class="fa fa-bell "></i> {{ x }}
+              </span>
+                        </div>
+                    </a>
                 </li>
                     {% endif %}
                 <li class="nav-item dropdown">

@@ -43,7 +43,7 @@ class categorieController extends Controller
     /**
      * Creates a new categorie entity.
      *
-     * @Route("/new", name="categorie_new")
+     * @Route("/admin/new", name="categorie_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -69,7 +69,7 @@ class categorieController extends Controller
     /**
      * Finds and displays a categorie entity.
      *
-     * @Route("/show/{id}", name="categorie_show")
+     * @Route("/admin/show/{id}", name="categorie_show")
      * @Method("GET")
      */
     public function showAction($id)
@@ -83,7 +83,7 @@ class categorieController extends Controller
     /**
      * Displays a form to edit an existing categorie entity.
      *
-     * @Route("/{id}/edit", name="categorie_edit")
+     * @Route("/admin/{id}/edit", name="categorie_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, categorie $categorie)
@@ -108,7 +108,7 @@ class categorieController extends Controller
     /**
      * Deletes a categorie entity.
      *
-     * @Route("/delete/{id}", name="categorie_delete")
+     * @Route("/admin/delete/{id}", name="categorie_delete")
      * @Method("DELETE")
      */
     public function deleteAction($id)

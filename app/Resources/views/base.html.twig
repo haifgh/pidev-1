@@ -32,13 +32,10 @@
                     <div class="container">
                         <div class="ht-left">
                             <div class="mail-service">
-                                <i class=" fa fa-envelope"></i>
-                                HuntKingdom@esprit.tn
+
+                                <h3><b>Hunt Kingdom</b></h3>
                             </div>
-                            <div class="phone-service">
-                                <i class=" fa fa-phone"></i>
-                                +216 ** *** ***
-                            </div>
+
                         </div>
                         <div class="ht-right">
                             {% if is_granted('ROLE_ADMIN') %}
@@ -102,9 +99,9 @@
                                     <a href="{{ path('shop') }}">Shop</a>
                                 </li>
                                 
-                                <li><a href="#">Events</a></li>
-                                <li class="active"><a href="{{ path('guide_index2') }}">Guides</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li class="{{ app.request.attributes.get('_route') == 'evenement_view' ? 'active' }}" ><a href="{{ path('evenement_view') }}">Events</a></li>
+                                <li class="{{ app.request.attributes.get('_route') == 'guide_index2' ? 'active' }}"><a href="{{ path('guide_index2') }}">Guides</a></li>
+
 
                             </ul>
                         </nav>

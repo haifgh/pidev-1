@@ -17,7 +17,9 @@
                         <div class="product-selected">
                             {% set test=null %}
                             {% for lp in item.product.lignesPromotion  %}
-                                {% set test=lp %}
+                                {% if lp.promotion.valid %}
+                                    {% set test=lp %}
+                                {% endif %}
                             {% endfor %}
                             {% if test is not null %}
                                 <p>{{item.product.prixPromo}} T.N.D x {{ item.quantity }}</p>

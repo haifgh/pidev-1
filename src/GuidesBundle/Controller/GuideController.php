@@ -308,7 +308,7 @@ class GuideController extends Controller
                 '@Guides/guide/PDF.html.twig', array('guide' => $guide)
 
             ),
-            "C:/Users/haifa/Desktop/" . $name . ".pdf"
+            "C:/Users/rejeb/". $name . ".pdf"
         );
         return $this->redirectToRoute('guide_details', array('id' => $id));
     }

@@ -32,7 +32,7 @@ guide_details:
     defaults: { _controller: "GuidesBundle:Guide:details" }
     methods:  [GET, POST]
 ajax_search:
-    path:     /search
+    path:     /guide/search
     defaults: { _controller: "GuidesBundle:Guide:search"}
 guide_aimer:
     path:   /Aimer/{id}

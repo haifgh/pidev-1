@@ -51,7 +51,7 @@ class DefaultController extends Controller
 
             ]
         );
-        $pieChart->getOptions()->setTitle('Mes Produits');
+        $pieChart->getOptions()->setTitle('Products');
         $pieChart->getOptions()->setHeight(500);
         $pieChart->getOptions()->setWidth(1376);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
@@ -143,11 +143,12 @@ class DefaultController extends Controller
     public function searchByNameAction(Request $request){
         $c = $this->getDoctrine()->getRepository(categorie::class)->findAll();
 
-
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findByNom($request->get('nom'));
+        $nom=$request->get('nom');
+        $produits = $this->getDoctrine()->getManager()
+            ->createQuery('select p from AppBundle:Produit p where p.nom like :par and p.qte>0')->setParameter('par','%'.$nom.'%');
 
         return $this->render('@Produit/Default/searchByName.html.twig', array(
-            'produits' => $produits,'c'=>$c
+            'produits' => $produits->getResult(),'c'=>$c
         ));
     }
     /**

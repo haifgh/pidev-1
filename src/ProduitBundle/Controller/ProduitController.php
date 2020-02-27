@@ -22,7 +22,7 @@ class ProduitController extends Controller
     /**
      * Lists all produit entities.
      *
-     * @Route("/", name="produit_index")
+     * @Route("/admin", name="produit_index")
      */
     public function indexAction(Request $request)
     {
@@ -47,7 +47,7 @@ class ProduitController extends Controller
     /**
      * Creates a new produit entity.
      *
-     * @Route("/new", name="produit_new")
+     * @Route("/admin/new", name="produit_new")
      */
     public function newAction(Request $request)
     {
@@ -74,7 +74,7 @@ class ProduitController extends Controller
     /**
      * Finds and displays a produit entity.
      *
-     * @Route("/{id}", name="produit_show")
+     * @Route("/admin/{id}", name="produit_show")
      */
     public function showAction(Produit $produit)
     {
@@ -87,7 +87,7 @@ class ProduitController extends Controller
     /**
      * Displays a form to edit an existing produit entity.
      *
-     * @Route("/{id}/edit", name="produit_edit")
+     * @Route("/admin/{id}/edit", name="produit_edit")
      */
     public function editAction(Request $request, Produit $produit)
     {
@@ -110,7 +110,7 @@ class ProduitController extends Controller
     /**
      * Deletes a produit entity.
      *
-     * @Route("/delete/{id}", name="produit_delete")
+     * @Route("/admin/delete/{id}", name="produit_delete")
      */
     public function deleteAction($id)
     {

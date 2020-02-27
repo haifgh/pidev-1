@@ -4,6 +4,7 @@ namespace CommandeBundle\Controller;
 
 use AppBundle\Entity\commande;
 use AppBundle\Entity\ligne_commande;
+use AppBundle\Entity\ligne_promotion;
 use AppBundle\Entity\Produit;
 
 use Stripe\Error\Base;
@@ -153,9 +154,15 @@ class panierController extends Controller
             foreach ($panier as $id => $qte){
                 $lq= new ligne_commande();
                 $produit=$this->getDoctrine()->getRepository(Produit::class)->find($id);
+                $lp=$this->getDoctrine()->getRepository(ligne_promotion::class)->findByProduit($produit);
                 $lq->setProduit($produit);
                 $lq->setQuantite($qte);
-                if($produit->getPrixPromo()){
+                $test=false;
+                foreach ($lp as $test){
+                    if($test->getPromotion()->getValid()==true)
+                        $test=true;
+                }
+                if($test==true){
                     $lq->setPrix($produit->getPrixPromo()*$qte);
                 }else{
                     $lq->setPrix($produit->getPrix()*$qte);

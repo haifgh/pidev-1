@@ -53,10 +53,12 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="pi-pic">
-                                            <img src="{{asset(product.photo)}}" alt="" style="width:3cm;height: 5cm;">
+                                            <img src="{{asset(product.photo)}}" alt="" style="width:3cm;height: 7cm;">
                                             {% set test=null %}
                                             {% for lp in product.lignesPromotion  %}
-                                                {% set test=lp %}
+                                                {% if lp.promotion.valid %}
+                                                    {% set test=lp %}
+                                                {% endif %}
                                             {% endfor %}
                                             {% if test is not null %}
                                                 <div class="sale pp-sale">Sale</div>
@@ -65,7 +67,7 @@
 
 
                                             <ul>
-                                                <li class="w-icon active "><a href="{{ path('panier_add',{'id': product.id} )}}" class="add"><i class="icon_bag_alt"></i></a></li>
+                                                <li class="w-icon active  w-100"><a href="{{ path('panier_add',{'id': product.id} )}}" class="add"><i class="icon_bag_alt"></i></a></li>
 
                                             </ul>
                                         </div>

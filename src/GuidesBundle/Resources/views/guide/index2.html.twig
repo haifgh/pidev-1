@@ -1,11 +1,11 @@
 {%  extends 'base.html.twig' %}
 {% block content %}
-    <center><h1>Welcome to the Guides</h1></center>
+    <center><h1>Guides</h1></center>
 
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 border-right">
                     <div class="blog-sidebar">
                         <div class="search-form">
                             <h4>Search</h4>
@@ -15,14 +15,14 @@
                             </form>
                         </div>
                         {% if guide is defined %}
-                        <div class="recent-post">
+                        <div class="recent-post w-75">
                             <h4>Recent Guide</h4>
 
                             {% for g in guide %}
                             <div class="recent-blog">
                                 <a href=" {{ path('guide_details',{'id': g.id}) }} ">
                                     <div class="rb-pic">
-                                        <img src=" {{ asset('img/blog/') }}{{ g.photo}}" alt="">
+                                        <img src=" {{ asset('images/') }}{{ g.photo}}" alt="">
                                     </div>
                                     <div class="rb-text">
                                         <h6>{{ g.titre }}</h6>
@@ -42,9 +42,9 @@
 
                                     {% for guide in guides %}
                         <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
+                            <div class="blog-item w-75">
                                 <div class="bi-pic">
-                                    <img src="{{ asset('img/blog/') }}{{ guide.photo}}" alt="">
+                                    <img src="{{ asset('images/') }}{{ guide.photo}}" alt="">
                                 </div>
                                 <div class="bi-text">
                                     <a href="{{ path('guide_details',{'id': guide.id}) }}">
@@ -53,8 +53,8 @@
                                     <span>- {{ guide.datecreation|date  }}</span>
                                 </div>
                                 <div class="listing-review">
-                                    <span class="review-avg">{{ guide.commentaires|length }} commentaires</span>
-                                    <span class="review-avg">{{ guide.countLikes }} like{{ guide.countLikes >= 2 ? 's' : '' }}</span>
+                                    <span class="review-avg">{{ guide.commentaires|length }} comments</span>
+                                    <span class="review-avg">{{ guide.countLikes }} likes{{ guide.countLikes >= 2 ? 's' : '' }}</span>
                                 </div>
                             </div>
                         </div>

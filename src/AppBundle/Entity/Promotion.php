@@ -54,7 +54,24 @@ class Promotion
      * @ORM\Column(name="nom", type="string")
      */
     private $nom;
+    private $valid;
 
+   
+    public function getValid()
+    {
+        $date=new DateTime('now');
+        if ($this->getDateDebut()<$date && $this->getDateFin()>$date)
+        return true;
+        return false;
+    }
+
+    /**
+     * @param mixed $valid
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+    }
 
     /**
      *
@@ -154,5 +171,7 @@ class Promotion
     {
         $this->tauxReduction = $tauxReduction;
     }
+
+
 }
 

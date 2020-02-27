@@ -53,11 +53,13 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="pi-pic">
-                                            <img src="{{ asset(product.photo) }}" style="width:4cm;height:5cm;" >
+                                            <img src="{{ asset(product.photo) }}" style="width:4cm;height:7cm;" >
 
                                                 {% set test=null %}
                                                 {% for lp in product.lignesPromotion  %}
+                                                    {% if lp.promotion.valid %}
                                                     {% set test=lp %}
+                                                    {% endif %}
                                                 {% endfor %}
                                                 {% if test is not null %}
                                             <div class="sale pp-sale">Sale</div>
