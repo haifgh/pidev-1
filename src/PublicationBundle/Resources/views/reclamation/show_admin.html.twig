@@ -1,0 +1,26 @@
+{% extends 'adminBase.html.twig' %}
+{% block content %}
+    <div class="container">
+    <h1>Reclamation {{ reclamation.id }} {% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</h1>
+    <table>
+        <tbody>
+        <th>from</th>
+        <td>{{ reclamation.user }}</td>
+        <tr>
+            <th>about</th>
+            <td>{{ reclamation.objet }}</td>
+        </tr>
+        <tr>
+            <th>description</th>
+            <td>{{ reclamation.contenu }}</td>
+        </tr>
+        <tr>
+        <th>target</th>
+        <td>{{ reclamation.reclamer }}</td>
+        <tr>
+        </tbody>
+    </table>
+    </div>
+
+
+{% endblock %}

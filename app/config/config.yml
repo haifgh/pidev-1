@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@PublicationBundle/Resources/config/services.yml" }
     - { resource: "@GuidesBundle/Resources/config/services.yml" }
     - { resource: "@EventBundle/Resources/config/services.yml" }
     - { resource: "@PromoBundle/Resources/config/services.yml" }
@@ -42,7 +43,10 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    form_themes: ['bootstrap_4_layout.html.twig']
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        - 'bootstrap_4_layout.html.twig'
+   
 
 knp_paginator:
     page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
@@ -105,6 +109,15 @@ fos_user:
     from_email:
         address: "pidevsmtp@gmail.com"
         sender_name: "pidevmaster"
+knp_paginator:
+    template:
+        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
+
+fos_message:
+    db_driver: orm
+    thread_class:  FOS\MessageBundle\Entity\Thread
+    message_class: FOS\MessageBundle\Entity\Message
+    message_class: FOS\MessageBundle\Entity\Message
     registration:
         confirmation:
             enabled: true

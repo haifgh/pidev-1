@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h1>Posts list</h1>
+
+<div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+
+                            </div>
+                            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Datecreation</th>
+            <th>username</th>
+            <th>Contenu</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <td>
+        {% for post in posts %}
+            <td>
+                <td><a href="{{ path('post_show', { 'id': post.id }) }}">{{ post.id }}</a></td>
+                <td>{% if post.dateCreation %}{{ post.dateCreation|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ post.user.username }}</td>
+            {% set strategy = 'html' %}
+             <td>
+            {% autoescape 'html' %}
+                {{ var|escape( post.contenu)|raw }} {# won't be double-escaped #}
+            {% endautoescape %}</td>
+                <td>{{ post.contenu|escape }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('post_show', { 'id': post.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('post_edit', { 'id': post.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('post_delete', { 'id': post.id }) }}">delete</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <ul>
+        <li>
+            <a href="{{ path('post_new') }}">Create a new post</a>
+        </li>
+    </ul>
+{% endblock %}

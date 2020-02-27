@@ -32,6 +32,11 @@ class AppKernel extends Kernel
 			
             new EventBundle\EventBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new PublicationBundle\PublicationBundle(),
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
+
+            new FOS\MessageBundle\FOSMessageBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

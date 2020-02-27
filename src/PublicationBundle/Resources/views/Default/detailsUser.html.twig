@@ -1,0 +1,139 @@
+{% extends 'search.html.twig' %}
+{% block search %}
+    <div class="wrapper">
+        <main>
+            <div class="main-section">
+                <div class="container">
+                    <div class="main-section-data">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="main-left-sidebar">
+                                    <div class="user_profile">
+                                        <div class="user-pro-img">
+                                            <img src="http://via.placeholder.com/170x170" alt="">
+                                            <a href="#" title=""><i class="fa fa-camera"></i></a>
+                                        </div><!--user-pro-img end-->
+                                        <div class="user_pro_status">
+                                            <div class="user-tab-sec">
+                                                <div class="user_pro_status">
+                                                    <ul class="flw-hr">
+                                                        <li><a class="flww" id="follow"><i class="la la-plus"></i>follow</a></li>
+                                                        <li><a class="flww" id="unfollow"><i class="la la-plus"></i>unfollow</a></li>
+                                                        <li> <a href="{{ path('reclamation_new',{ 'id': user.id })}}" class="hre" > claim </a></li>
+                                                    </ul>
+
+                                                </div><!--user-tab-sec end-->
+                                            </div><!--user_pro_status end-->
+                                        </div>
+                                    </div><!--user_profile end-->
+
+                                </div><!--main-left-sidebar end-->
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="main-ws-sec">
+                                    <div class="main-ws-sec">
+                                        <div class="user-tab-sec">
+                                            <h3>{{ user.username }}</h3>
+                                        </div><!--user-tab-sec end-->
+                                    </div>
+                                </div>
+                                <div class="product-feed-tab current" id="feed-dd">
+                                    <div class="posts-section">
+                                        {% for post in posts %}
+                                            <div class="post-bar">
+                                                <div class="post_topbar">
+                                                    <div class="usy-dt">
+                                                        <img src="http://via.placeholder.com/50x50" alt="">
+                                                        <div class="usy-name">
+                                                            <h3>{{ post.user.username }}</h3>
+                                                            <span><img src= {{ asset("img/clock.png") }} alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="job_descp">
+                                                    <p>{{ post.contenu|raw}}<a href="#" title=""></a></p>
+                                                </div>
+                                                <div class="job-status-bar">
+                                                    <ul class="like-com">
+                                                        <li>
+                                                            {% set x=0 %}
+                                                            {% for jaime in post.jaimes %}
+                                                                {% if jaime.user == app.user %}
+                                                                    {% set x=1 %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <a class="jaime" href="{{ path('jaime', {'id': post.id}) }}">
+                                                                <i class="la la-heart {% if x==1 %}text-danger{% endif %}"></i><p>{{ post.jaimes|length }}</p></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!--post-bar end-->
+                                        {% endfor %}
+                                        <div class="process-comm">
+                                            <div class="spinner">
+                                                <div class="bounce1"></div>
+                                                <div class="bounce2"></div>
+                                                <div class="bounce3"></div>
+                                            </div>
+                                        </div><!--process-comm end-->
+                                    </div><!--posts-section end-->
+                                </div><!--product-feed-tab end-->
+                            </div><!--main-ws-sec end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+
+{% endblock %}
+{% block js %}
+    <script>
+
+        $(document).ready(function () {
+            let test=false;
+            {% if follow ==null  %}
+            test=true;
+            {% endif %}
+            if(test){
+                $("#unfollow").hide();
+            }
+            else {
+                $("#follow").hide();
+            }
+        })
+        $("#follow").click(function () {
+            $.get('{{ path('follow',{'id':user.id}) }}',function (data) {
+
+                $("#follow").hide();
+                $("#unfollow").show();
+            })
+        })
+        $("#unfollow").click(function () {
+            $.get('{{ path('follow',{'id':user.id}) }}',function (data) {
+
+                $("#unfollow").hide();
+                $("#follow").show();
+            })
+        })
+        $(".jaime").click(function (e) {
+            let x=$(this);
+            e.preventDefault();
+            $.ajax({url: $(this).attr('href'), success: function(r){
+                    if(r==='added'){
+                        x.children("p").html((parseInt(x.children("p").html())+1));
+                        x.children(".la").addClass("text-danger");
+                    }
+                    if(r==='removed'){
+                        x.children("p").html((parseInt(x.children("p").html())-1));
+                        x.children(".la").removeClass("text-danger");
+                    }
+                }});
+
+        })
+    </script>
+{% endblock %}

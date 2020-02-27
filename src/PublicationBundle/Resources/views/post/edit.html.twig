@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+<div class="col-lg-6">
+    <div class="main-ws-sec">
+        <div class="user-tab-sec">
+            <h3>{{ app.user.username }}</h3>
+        </div><!--user-tab-sec end-->
+        <div class="product-feed-tab current" id="feed-dd">
+            <div class="post-project">
+                <h3>Post edit</h3>
+                <div class="post-project-fields">
+                    <div class="row">
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit"/>
+    {{ form_end(edit_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

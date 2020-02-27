@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * reclamation
@@ -25,15 +27,26 @@ class reclamation
 
     /**
      * @var string
-     *
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 255,
+     *      minMessage = "Your object must be at least 5 characters long",
+     *      maxMessage = "Your object cannot be longer than 255 characters"
+     * )
      * @ORM\Column(name="objet", type="string", length=255)
      */
     private $objet;
 
     /**
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 400,
+     *      minMessage = "Your object must be at least 5 characters long",
+     *      maxMessage = "Your object cannot be longer than 400 characters"
+     * )
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="contenu", type="string", length=400)
      */
     private $contenu;
 
@@ -134,6 +147,13 @@ class reclamation
     private $user;
 
     /**
+     *
+     * @ManyToOne(targetEntity="User", inversedBy="reclamations")
+     * @JoinColumn(name="reclamer", referencedColumnName="id")
+     */
+    private $reclamer;
+
+    /**
      * @return mixed
      */
     public function getUser()
@@ -148,5 +168,22 @@ class reclamation
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReclamer()
+    {
+        return $this->reclamer;
+    }
+
+    /**
+     * @param mixed $reclamer
+     */
+    public function setReclamer($reclamer)
+    {
+        $this->reclamer = $reclamer;
+    }
+
 }
 

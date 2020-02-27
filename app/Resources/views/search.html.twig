@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="wrapper">
+<div class="heade">
+    <div class="container">
+        <div class="header-data pb-2">
+
+            <div class="search-bar">
+<form>
+                    <input type="text" id="search" name="nom" placeholder="Search...">
+                    <button  type="submit"><i class="la la-search"></i></button>
+</form>
+                   <ul id="ulrechercher" class="container" width="100px"></ul>
+            </div><!--search-bar end-->
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('home') }}" title="">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('reclamation_index') }}" title="">
+                            claims
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('post_index') }}" id="user">
+                          {{ app.user.username }}
+                        </a>
+                    </li>
+                </ul>
+            </nav><!--nav end-->
+
+        </div><!--header-data end-->
+    </div>
+</div><!--header end-->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script>
+
+        $('#search').keyup(function (e) {
+
+            let v= $(this).val();
+            let url = '{{ path('recherche_utilisteur',{'param':'x'}) }}';
+            url = url.replace("x", v);
+
+            $.ajax({
+                url:url,
+                success: function(data){
+                    $('#ulrechercher').html('');
+                    data.forEach((eee)=> {
+                        let urle =  '{{ path('detail_user',{'id':'x'}) }}';
+                        urle = urle.replace("x", eee.id);
+                        $('#ulrechercher').append('<li><a href=' + urle + '>' + eee.username + '</a></li>')
+                    });
+                }
+            })
+
+        })
+    </script>
+
+
+{% block search %}
+{% endblock %}
+    </div>
+{% endblock %}

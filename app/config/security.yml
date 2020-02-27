@@ -8,6 +8,7 @@ security:
 
     providers:
         fos_userbundle:
+
             id: fos_user.user_provider.username
 
     firewalls:
@@ -31,5 +32,7 @@ security:
         - { path: ^/user, role: ROLE_USER }
         - { path: ^/produit/, role: ROLE_USER }
         - { path: ^/categorie/, role: ROLE_USER }
+        - { path: ^/post, role: ROLE_USER }
+        - { path: ^/reclamation/reclamationShow , role: ROLE_ADMIN }
 
 

@@ -21,8 +21,17 @@ promo:
     type:     annotation
     prefix:   /promo
 
+publication:
+    resource: "@PublicationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /optional_routing_prefix
+    prefix: /optional_routing_prefix
