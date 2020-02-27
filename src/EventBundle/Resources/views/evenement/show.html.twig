@@ -1,0 +1,64 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block content %}
+<div class="container mt--7 ">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 ">
+            <div class="card shadow border-0">
+    <h1>Evenement</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ evenement.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{% if evenement.dateDebut %}{{ evenement.dateDebut|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{% if evenement.dateFin %}{{ evenement.dateFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nbreplaces</th>
+                <td>{{ evenement.nbrePlaces }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{asset('images/')}}{{ evenement.photo }}" alt="" style="width: 20%;height: 20%"></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <h3>Liste Participants</h3>
+   <table>
+    {% for e in evenement.listesParticipants %}
+           <tr>
+               <th>User Name</th>
+               <td>{{ e.user.username }}</td>
+           </tr>
+           <tr>
+               <th>Date Participation</th>
+               <td>{{ e.dateParticipation |date('Y-m-d') }}</td>
+           </tr>
+    {% endfor %}
+    </table>
+
+
+         <button class="btn btn-sm btn-primary">   <a style="color: white" href="{{ path('evenement_index') }}">Back to the list</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

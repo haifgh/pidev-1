@@ -1,3 +1,7 @@
+event:
+    resource: "@EventBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 commande:
     resource: "@CommandeBundle/Resources/config/routing.yml"

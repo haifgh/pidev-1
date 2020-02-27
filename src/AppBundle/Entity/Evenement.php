@@ -2,11 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -34,35 +36,61 @@ class Evenement
 
     /**
      * @var string
-     *
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_debut", type="date")
+     * @var DateTime
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @ORM\Column(name="date_debut", type="datetime")
      */
     private $dateDebut;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_fin", type="date")
+     * @var DateTime
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @Assert\GreaterThan(propertyPath="dateDebut")
+     * @ORM\Column(name="date_fin", type="datetime")
      */
     private $dateFin;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="validite", type="string", length=255)
+     * @ORM\Column(name="validite", type="string", length=255 , nullable=true)
      */
     private $validite;
 
     /**
-     * @var int
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param string $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * @var string
      *
+     * @ORM\Column(name="photo", type="string", length=255)
+     */
+    private $photo;
+
+
+    /**
+     * @var int
+     * @Assert\GreaterThan(value="0")
      * @ORM\Column(name="nbre_places", type="integer")
      */
     private $nbrePlaces;
@@ -129,7 +157,7 @@ class Evenement
     /**
      * Set dateDebut
      *
-     * @param \DateTime $dateDebut
+     * @param DateTime $dateDebut
      *
      * @return Evenement
      */
@@ -143,7 +171,7 @@ class Evenement
     /**
      * Get dateDebut
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateDebut()
     {
@@ -153,7 +181,7 @@ class Evenement
     /**
      * Set dateFin
      *
-     * @param \DateTime $dateFin
+     * @param DateTime $dateFin
      *
      * @return Evenement
      */
@@ -167,7 +195,7 @@ class Evenement
     /**
      * Get dateFin
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateFin()
     {
@@ -229,7 +257,7 @@ class Evenement
     private $user;
     /**
      *
-     * @OneToMany(targetEntity="liste_participants", mappedBy="evenement")
+     * @OneToMany(targetEntity="liste_participants", mappedBy="evenement",cascade="remove")
      */
     private $listes_participants;
     // ...
@@ -268,6 +296,24 @@ class Evenement
     public function setListesParticipants($listes_participants)
     {
         $this->listes_participants = $listes_participants;
+    }
+    public function getWebPath()
+    {
+        return null === $this->photo ? null : $this->getUploadDir().'/'.$this->photo;
+    }
+    protected function getUploadRootDir()
+    {
+        //return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return dirname(__FILE__).'/../../../web'.$this->getUploadDir();
+    }
+    protected function getUploadDir(){
+        return 'images';
+    }
+    public function UploaderProfilePicture()
+    {
+        $this->photo->move($this->getUploadRootDir(),$this->photo->getClientOriginalName());
+        $this->photo=$this->photo->getClientOriginalName();
+        $this->file=null;
     }
 }
 

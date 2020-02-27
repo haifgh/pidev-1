@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    <section class="blog-section spad pt-5">
+        <div class="row mb-5">
+            <div class="col-8"></div>
+            <button class=" primary-btn col "><a style="color: white" href="{{  path('evenement_newUser')}}">Create Event</a> </button>
+            <div class="col-2"></div>
+        </div>
+        <div class="row">
+        <div class="col"></div>
+        <div class="col-9">
+
+                <div class="row ">
+                {% for event in events %}
+
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="blog-item">
+                        <div class="bi-pic">
+                            <img src="{{asset('images/')}}{{ event.photo }}" alt="" >
+                        </div>
+                <div class="bi-text">
+                    <h4>{{ event.nom }}</h4>
+                    <p> Description <span>{{ event.description }}</span></p>
+                    <p> Date Start <span>{{ event.dateDebut|date('Y-m-d')  }}</span></p>
+                    <p> Date End<span>{{ event.dateFin|date('Y-m-d')  }}</span></p>
+                    <p> Number of Places <span>{{ event.nbrePlaces  }}</span></p>
+                </div>
+
+                {% set x=false  %}
+                {% for lp in event.getListesParticipants() %}
+                    {% if lp.user == app.user %}
+                        {% set x=true  %}
+                    {% endif %}
+                {% endfor %}
+                {% if x %}
+                    <button class=" primary-btn "><a href="{{ path('quitter', {'id': event.id}) }}" id="part" style="color: white">leave</a></button>
+                {% else %}
+                    <button class=" primary-btn "><a href="{{ path('participer', {'id': event.id}) }}" id="part" style="color: white">join</a></button>
+                {% endif %}
+                             {{ twitterButton() }}
+
+                        </div>
+                        </div>
+
+
+                {% endfor %}
+                </div>
+        </div><div class="col"></div>
+        </div>
+    </section>
+{% endblock %}

@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@EventBundle/Resources/config/services.yml" }
     - { resource: "@PromoBundle/Resources/config/services.yml" }
     - { resource: "@CommandeBundle/Resources/config/services.yml" }
     - { resource: "@ProduitBundle/Resources/config/services.yml" }
@@ -102,6 +103,39 @@ fos_user:
         confirmation:
             enabled: true
 
+nomaya_social:
+    buttons:
+        facebook:
+            url:            null
+            locale:         "fr_FR"
+            send:           false
+            width:          300
+            showFaces:      false
+            layout:         "button_count"
+        twitter:
+            url:            null
+            locale:         "fr"
+            message:        "Je veux partager ça avec vous"
+            text:           "Tweet"
+            via:            "L'Equipe cartedevisitevirtuelle.fr"
+            tag:            "ttot"
+        googleplus:
+            url:            null
+            locale :        "fr"
+            size :          "medium"
+            annotation :    "bubble"
+            width :         300
+        linkedin:
+            url:            null
+            locale:         "fr_FR"
+            counter:        "right"
+        pinterest:
+            url:            null
+    links:
+        facebook:           "http://www.facebook.com/yann.chauvel"
+        googleplus:         "https://plus.google.com/105931415830389032796"
+    theme:                  'default' # optional
+    theme:                  'default' # optional
 
 flosch_stripe:
     stripe_api_key: "sk_test_UAe411cwz5wIeEJMQW8cXSgs00whcLY6Pw"
@@ -115,4 +149,5 @@ vresh_twilio:
     #(Required) Your Account SID from www.twilio.com/user/account
     sid: 'AC964c4cf37a35177c15341d2fd50e993d'
     #(Required) Your Auth Token from www.twilio.com/user/account
+    authToken: 'b4c869693d42d8ffd699329fc42d0b57'
     authToken: 'b4c869693d42d8ffd699329fc42d0b57'
