@@ -95,6 +95,7 @@ class promotionController extends Controller
         if($form->isSubmitted()&&$form->isValid()){
             $q=$this->getDoctrine()->getManager()->createQuery('select p from AppBundle:Produit p where p.nom like :pr')->setParameter('pr','%'.$p->getNom().'%');
             $reader=$q->getResult();
+            $message=null;
         }
         return $this->render('@Promo/promotion/showProduct.html.twig', array(
             'reader'=>$reader,
