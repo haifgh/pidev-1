@@ -75,7 +75,7 @@ class Guide
     private $photo ;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Likes", mappedBy="guide")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Likes", mappedBy="guide",cascade="remove")
      */
     private $likes;
 

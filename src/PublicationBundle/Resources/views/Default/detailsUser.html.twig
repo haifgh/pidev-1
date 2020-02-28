@@ -1,5 +1,7 @@
 {% extends 'search.html.twig' %}
 {% block search %}
+    <link rel="stylesheet" href="{{ asset('css/stylee.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     <div class="wrapper">
         <main>
             <div class="main-section">
@@ -10,8 +12,8 @@
                                 <div class="main-left-sidebar">
                                     <div class="user_profile">
                                         <div class="user-pro-img">
-                                            <img src="http://via.placeholder.com/170x170" alt="">
-                                            <a href="#" title=""><i class="fa fa-camera"></i></a>
+                                            <img src="{{ asset('images/') }}{{ user.photo }}" alt="">
+
                                         </div><!--user-pro-img end-->
                                         <div class="user_pro_status">
                                             <div class="user-tab-sec">
@@ -44,7 +46,7 @@
                                             <div class="post-bar">
                                                 <div class="post_topbar">
                                                     <div class="usy-dt">
-                                                        <img src="http://via.placeholder.com/50x50" alt="">
+                                                        <img src="{{ asset('images/') }}{{ user.photo }}" width="50px" alt="">
                                                         <div class="usy-name">
                                                             <h3>{{ post.user.username }}</h3>
                                                             <span><img src= {{ asset("img/clock.png") }} alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
@@ -91,7 +93,7 @@
 
 
 {% endblock %}
-{% block js %}
+{% block customscript %}
     <script>
 
         $(document).ready(function () {

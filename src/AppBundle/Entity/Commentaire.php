@@ -26,7 +26,7 @@ class Commentaire
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="contenu", type="string", length=255)
      */
     private $contenu;

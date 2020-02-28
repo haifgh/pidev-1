@@ -12,7 +12,8 @@
                 <tbody>
                 {% for item in items %}
                 <tr>
-                    <td class="si-pic"><img src="{{asset('img/cart-page/product-2.jpg')}}" width="100px" alt=""></td>
+
+                    <td class="si-pic"><img src="{{ asset(item.product.photo) }}" width="100px" height="100px" alt=""></td>
                     <td class="si-text">
                         <div class="product-selected">
                             {% set test=null %}

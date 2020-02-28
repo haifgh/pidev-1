@@ -109,18 +109,15 @@ fos_user:
     from_email:
         address: "pidevsmtp@gmail.com"
         sender_name: "pidevmaster"
-knp_paginator:
-    template:
-        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
+    registration:
+         confirmation:
+                enabled: true
 
 fos_message:
     db_driver: orm
     thread_class:  FOS\MessageBundle\Entity\Thread
     message_class: FOS\MessageBundle\Entity\Message
-    message_class: FOS\MessageBundle\Entity\Message
-    registration:
-        confirmation:
-            enabled: true
+
 knp_snappy:
     pdf:
         enabled:    true
@@ -132,7 +129,7 @@ knp_snappy:
         options:    []
     temporary_folder: "%kernel.cache_dir%/snappy"
     process_timeout: 20
-    process_timeout: 20
+
 
 nomaya_social:
     buttons:
@@ -166,7 +163,7 @@ nomaya_social:
         facebook:           "http://www.facebook.com/yann.chauvel"
         googleplus:         "https://plus.google.com/105931415830389032796"
     theme:                  'default' # optional
-    theme:                  'default' # optional
+
 
 flosch_stripe:
     stripe_api_key: "sk_test_UAe411cwz5wIeEJMQW8cXSgs00whcLY6Pw"
@@ -181,4 +178,4 @@ vresh_twilio:
     sid: 'AC964c4cf37a35177c15341d2fd50e993d'
     #(Required) Your Auth Token from www.twilio.com/user/account
     authToken: 'b4c869693d42d8ffd699329fc42d0b57'
-    authToken: 'b4c869693d42d8ffd699329fc42d0b57'
+

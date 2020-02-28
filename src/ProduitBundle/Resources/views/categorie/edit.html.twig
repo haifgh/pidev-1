@@ -1,25 +1,24 @@
 {% extends 'adminBase.html.twig' %}
 
 {% block content %}
-div class="row clearfix">
+<div class="container-fluid mt--7">
+
+<div class="row clearfix">
 <div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="card">
+    <div class="card p-4">
     <h1>Categorie edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn center mb-2 btn-warning" type="submit" value="save" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('categorie_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('categorie_delete', { 'id': categorie.id }) }}">delete</a>
-        </li>
-    </ul>
+<center>
+            <a class="btn btn-success" href="{{ path('categorie_index') }}">Back to the list</a>
+
+            <a class="btn btn-danger" href="{{ path('categorie_delete', { 'id': categorie.id }) }}">delete</a>
+</center>
     </div>
 </div>
-
+</div></div>
 {% endblock %}

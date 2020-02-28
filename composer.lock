@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06b6439f750d4f51ff8082f27ccfc4f7",
+    "content-hash": "f56d250fec2e8702e995adf0f5ab4974",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1053,6 +1053,157 @@
                 "webpayment"
             ],
             "time": "2018-10-14T21:08:46+00:00"
+        },
+        {
+            "name": "friendsofsymfony/ckeditor-bundle",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle.git",
+                "reference": "7d428b16154a7136e1dd4c11062573afa1bfb3df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/7d428b16154a7136e1dd4c11062573afa1bfb3df",
+                "reference": "7d428b16154a7136e1dd4c11062573afa1bfb3df",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "php": "^5.6 || ^7.0",
+                "symfony/asset": "^2.7 || ^3.0 || ^4.0",
+                "symfony/config": "^2.7 || ^3.0 || ^4.0",
+                "symfony/dependency-injection": "^2.7 || ^3.0 || ^4.0",
+                "symfony/expression-language": "^2.7 || ^3.0 || ^4.0",
+                "symfony/form": "^2.7 || ^3.0 || ^4.0",
+                "symfony/framework-bundle": "^2.7 || ^3.0 || ^4.0",
+                "symfony/http-foundation": "^2.7 || ^3.0 || ^4.0",
+                "symfony/http-kernel": "^2.7 || ^3.0 || ^4.0",
+                "symfony/options-resolver": "^2.7 || ^3.0 || ^4.0",
+                "symfony/property-access": "^2.7 || ^3.0 || ^4.0",
+                "symfony/routing": "^2.7 || ^3.0 || ^4.0"
+            },
+            "conflict": {
+                "sebastian/environment": "<1.3.4",
+                "sebastian/exporter": "<2.0.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0",
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0 || ^2.0",
+                "phpunit/phpunit": "^5.0 || ^6.0",
+                "sensio/distribution-bundle": "^3.0.12 || ^4.0 || ^5.0",
+                "symfony/console": "^2.7 || ^3.0 || ^4.0",
+                "symfony/phpunit-bridge": "^4.0",
+                "symfony/templating": "^2.7 || ^3.0 || ^4.0",
+                "symfony/twig-bridge": "^2.7 || ^3.0 || ^4.0",
+                "symfony/yaml": "^2.7 || ^3.0 || ^4.0",
+                "twig/twig": "^1.34 || ^2.0"
+            },
+            "suggest": {
+                "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\CKEditorBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/graphs/contributors"
+                }
+            ],
+            "description": "Provides a CKEditor integration for your Symfony project.",
+            "keywords": [
+                "CKEditor"
+            ],
+            "time": "2018-10-03T20:51:58+00:00"
+        },
+        {
+            "name": "friendsofsymfony/message-bundle",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSMessageBundle.git",
+                "reference": "c5738d722f54042dbbe6e707eb49bf5aa6aeeda5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSMessageBundle/zipball/c5738d722f54042dbbe6e707eb49bf5aa6aeeda5",
+                "reference": "c5738d722f54042dbbe6e707eb49bf5aa6aeeda5",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/collections": "^1.3",
+                "php": ">=5.5.9",
+                "symfony/form": "^3.4|^4.0",
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/security": "^3.4|^4.0",
+                "symfony/twig-bundle": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.0",
+                "symfony/browser-kit": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^4.2.8",
+                "symfony/security-bundle": "^3.4|^4.0",
+                "symfony/templating": "^3.4|^4.0",
+                "symfony/translation": "^3.4|^4.0",
+                "symfony/validator": "^3.4|^4.0",
+                "symfony/yaml": "^3.4|^4.0"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "dev-master",
+                "doctrine/mongodb-odm-bundle": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\MessageBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSMessageBundle/contributors"
+                }
+            ],
+            "description": "Provides user-to-user messaging features for your Symfony application.",
+            "homepage": "https://github.com/FriendsOfSymfony/FOSMessageBundle",
+            "keywords": [
+                "message",
+                "messaging",
+                "symfony"
+            ],
+            "time": "2019-05-21T21:27:53+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",

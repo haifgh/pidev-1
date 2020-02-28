@@ -24,7 +24,7 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick-theme.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/stylee.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
             <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
 
 
@@ -58,7 +58,7 @@
 
                             <a href="{{ path('fos_user_security_logout') }}" class="login-panel" ><i class="fa fa-sign-out"></i>Log out</a>
                             <h1 class="login-panel">|</h1>
-                            <a href="{{ path('fos_user_profile_show') }}" class="login-panel" ><i class="fa fa-user-circle"></i>Profil</a>
+                            <a href="{{ path('post_index') }}" class="login-panel" ><i class="fa fa-user-circle"></i>Profil</a>
                         {% else %}
 
                                 <a href="{{ path('fos_user_registration_register') }}" class="login-panel" ><i class="fa fa-user-plus"></i>Sign up</a>

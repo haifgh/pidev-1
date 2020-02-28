@@ -109,6 +109,8 @@ class GuideController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $guide->UploadProfilePicture();
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('guide_show', array('id' => $guide->getId()));
@@ -125,18 +127,11 @@ class GuideController extends Controller
      * Deletes a guide entity.
      *
      */
-    public function deleteAction(Request $request, Guide $guide)
+    public function deleteAction(Guide $guide)
     {
-        $form = $this->createDeleteForm($guide);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($guide);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('guide_index');
+     $this->getDoctrine()->getManager()->remove($guide);
+        $this->getDoctrine()->getManager()->flush();
+     return $this->redirectToRoute('guide_index');
     }
 
     public function detailsAction($id)

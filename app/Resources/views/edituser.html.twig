@@ -1,4 +1,4 @@
-{% extends 'adminBase.html.twig' %}
+{% extends 'Base.html.twig' %}
 {% form_theme edit_form 'bootstrap_4_layout.html.twig' %}
 {% block content %}
     <div class="register-login-section spad">
@@ -6,21 +6,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
-                        <h3>User edit</h3>
+                        <h3>Edit your personal info</h3>
 
                         {{ form_start(edit_form) }}
 
                         {{ form_widget(edit_form) }}
-
-                        <input type="submit" value="Edit" />
+                        <a class="btn btn-outline-dark float-right" href="{{ path('post_index') }}">Back</a>
+                        <input class="btn btn-dark " type="submit" value="save" />
                         {{ form_end(edit_form) }}
 
-                        <ul>
-                            <li>
-                                <a href="{{ path('users') }}">Back</a>
-                            </li>
 
-                        </ul>
+
+
+
+
+
                     </div>
                 </div>
             </div>

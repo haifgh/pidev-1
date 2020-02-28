@@ -95,6 +95,8 @@ class ProduitController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $produit->UploadProfilePicture();
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));

@@ -79,7 +79,7 @@ class CommentaireController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
 
-            return $this->redirectToRoute('commentaire_edit', array('id' => $commentaire->getId()));
+            return $this->redirectToRoute('guide_details', array('id' => $commentaire->getGuide()->getId()));
         }
 
         return $this->render('@Guides/commentaire/edit.html.twig', array(

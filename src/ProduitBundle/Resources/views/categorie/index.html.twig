@@ -1,9 +1,11 @@
 {% extends 'adminBase.html.twig.' %}
 
 {% block content %}
+    <div class="container-fluid mt--7">
+
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="card">
+        <div class="card p-4">
             <div class="header">
                 <h1>Categories list</h1>
 
@@ -40,13 +42,16 @@
         </tbody>
                     {% endfor %}
                 </table>
-                {{ knp_pagination_render(categories) }}
+<div class="container">
+                    <div class="row">
+                        <div class="col"></div>
+                   <div class="col-4">{{ knp_pagination_render(categories) }}<a href="{{ path('categorie_new') }}"  class="btn btn-success">Create a new categorie</a></div>
+                   <div class="col"></div></div>
 
-                <a href="{{ path('categorie_new') }}"  class="btn btn-success">Create a new categorie</a>
             </div>
         </div>
     </div>
 </div>
 
-
+    </div>
 {% endblock %}

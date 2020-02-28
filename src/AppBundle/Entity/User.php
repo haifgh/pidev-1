@@ -260,7 +260,45 @@ class User extends BaseUser implements ParticipantInterface
     {
         $this->follower = $follower;
     }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255,nullable=true)
+     */
+    private $photo;
+    public function getWebPath()
+    {
+        return null === $this->photo ? null : $this->getUploadDir().'/'.$this->photo;
+    }
+    protected function getUploadRootDir()
+    {
+        //return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return dirname(__FILE__).'/../../../web/'.$this->getUploadDir();
+    }
+    protected function getUploadDir(){
+        return 'images';
+    }
+    public function UploaderProfilePicture()
+    {
+        $this->photo->move($this->getUploadRootDir(),$this->photo->getClientOriginalName());
+        $this->photo=$this->photo->getClientOriginalName();
+        $this->file=null;
+    }
 
+    /**
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
 
+    /**
+     * @param string $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
 }
 

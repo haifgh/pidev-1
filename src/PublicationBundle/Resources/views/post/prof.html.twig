@@ -1,5 +1,7 @@
 {% extends 'search.html.twig' %}
-{% block search %}
+{% block search %}<link rel="stylesheet" href="{{ asset('css/stylee.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+
     <div class="wrapper">
         <main>
             <div class="main-section">
@@ -9,8 +11,8 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="http://via.placeholder.com/170x170" alt="">
-                                        <a href="#" title=""><i class="fa fa-camera"></i></a>
+                                        <img src="{{asset('images')}}/{{ app.user.photo }}" style="width: 200px;" alt="">
+
                                     </div><!--user-pro-img end-->
                                     <br>
                                     <br>
@@ -23,9 +25,8 @@
                                                     <div class="suggestions full-width">
                                                         <div class="acc-leftbar">
                                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                                <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
-                                                                <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>edit</a>
-                                                                <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-lock"></i>change password</a>
+                                                                <a class="nav-item nav-link" href="{{path('user_edit')}}"  ><i class="fa fa-line-chart"></i>edit profile</a>
+                                                                <a class="nav-item nav-link"  href="{{path('fos_user_change_password')}}" ><i class="fa fa-lock"></i>change password</a>
                                                             </div>
                                                         </div><!--acc-leftbar end-->
                                                     </div>
@@ -45,9 +46,7 @@
                                 <div class="product-feed-tab current" id="feed-dd">
                                     <div class="posts-section">
                                         <div class="post-topbar">
-                                            <div class="user-picy">
-                                                <img src="http://via.placeholder.com/100x100" alt="">
-                                            </div>
+
                                             <div class="post-st">
                                                 <ul>
                                                     <li>  <a href="{{ path('post_new') }} " class="btn btn-dark">post</a></li>
@@ -58,7 +57,7 @@
                                             <div class="post-bar">
                                                 <div class="post_topbar">
                                                     <div class="usy-dt">
-                                                        <img src="http://via.placeholder.com/50x50" alt="">
+                                                        <img src="{{asset('images')}}/{{ post.user.photo }}" alt="" style="width: 50px;">
                                                         <div class="usy-name">
                                                             <h3>{{ post.user.username }}</h3>
                                                             <span><img src={{ asset ("img/clock.png") }} alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>

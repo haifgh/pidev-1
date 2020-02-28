@@ -128,25 +128,23 @@
 
                        </div>
                     {% for c in commentaire %}
-                    <div class="posted-by">
+                    <div class="posted-by border m-2" >
                         <div class="pb-pic">
-                            <img src="img/blog/post-by.png" alt="">
-                        </div>
-                        <div class="pb-text">
-                            <a href="#">
-                                <h5>{{ c.user.username }}</h5>
-                            </a>
-                            <p>{{ c.contenu }}</p>
-
                             {% if app.user.id==c.user.id %}
 
-                            <a href="{{ path('commentaire_edit', {'id':c.id}) }}">
-                                <button type="button" class="btn btn-primary">Edit Comment</button>
-                            </a>
-                            <a href="{{ path('commentaire_delete_2',{'id':c.id, 'idGuide':id}) }}">
-                                <button type="button" class="btn btn-primary">Delete Comment</button>
-                            </a>
+
+                                <a class="btn btn-danger btn-sm float-right m-2" href="{{ path('commentaire_delete_2',{'id':c.id, 'idGuide':id}) }}">
+                                    Delete Comment
+                                </a>
                             {% endif %}
+                            <img class="m-2 float-left" src="{{asset('images/')}}/{{ c.user.photo }}" width="50px" alt=""><h5>{{ c.user.username }}</h5>
+
+                        </div>
+                        <div class="pb-text">
+
+                            <p>{{ c.contenu }}</p>
+
+
                         </div>
                     </div>
                     {% endfor %}

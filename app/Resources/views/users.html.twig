@@ -45,7 +45,6 @@
 
                                     <td class="text-center">
 
-                                        <a class="btn btn-sm btn-warning" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
                                         {% if user.isEnabled %}
                                         <a class="btn btn-sm btn-danger" href="{{ path('user_disable', { 'id': user.id }) }}">ban</a>
                                             {% else %}

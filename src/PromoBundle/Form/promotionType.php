@@ -16,8 +16,10 @@ class promotionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom')
-            ->add('dateDebut',DateTimeType::class)
-            ->add('dateFin',DateTimeType::class)
+            ->add('dateDebut',DateTimeType::class,array(
+                'data' => new \DateTime()))
+            ->add('dateFin',DateTimeType::class,array(
+                'data' => new \DateTime()))
             ->add('tauxReduction');
     }/**
      * {@inheritdoc}

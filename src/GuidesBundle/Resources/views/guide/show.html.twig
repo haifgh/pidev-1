@@ -2,6 +2,10 @@
 {% extends 'adminBase.html.twig' %}
 
 {% block content %}
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col"></div>
+        <div class="card col-6 p-4">
     <h1>Guide</h1>
 
     <table>
@@ -36,17 +40,12 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('guide_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('guide_edit', { 'id': guide.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<div class="mt-5"></div>
+<center>
+            <a class="btn btn-danger" href="{{ path('guide_index') }}">Back to the list</a>
+
+            <a class="btn btn-success" href="{{ path('guide_edit', { 'id': guide.id }) }}">Edit</a>
+</center>
+
+  </div><div class="col"></div></div></div>
 {% endblock %}

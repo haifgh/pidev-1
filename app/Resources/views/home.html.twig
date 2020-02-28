@@ -1,0 +1,118 @@
+{% extends 'search.html.twig' %}
+{% block search%}
+    <link rel="stylesheet" href="{{ asset('css/stylee.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+
+    <main>
+    <div class="main-section">
+        <div class="container">
+         <div class="main-section-data">
+                 <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+          <div class="main-left-sidebar no-margin">
+              <div class="user-data full-width">
+                  <div class="user_profile">
+                              <div class="username-dt">
+                                  <div class="usr-pic">
+                                      <img src="{{asset('images/')}}{{app.user.photo}}" alt="">
+                                  </div>
+                              </div>
+                              <div class="user-specs">
+                                  <h3>{{ app.user.username }}</h3>
+                              </div>
+                  </div>
+                          {% set count = 0 %}
+                          {% for f in followed %}
+                              {% set count = count + 1 %}
+                          {% endfor %}
+                          <ul class="user-fw-status">
+                              <li>
+                                  <h4>Following</h4>
+                                  <span>{{ count }}</span>
+                              </li>
+                          </ul>
+              </div><!--user-tab-sec end-->
+              <div class="suggestions full-width">
+                                <div class="sd-title">
+                                    <h3>People following</h3>
+                                </div><!--sd-title end-->
+                                <div class="suggestions-list">
+                                    {% for f in followed %}
+                                    <div class="suggestion-usd">
+                                        <img src="{{ asset('images/') }}{{ f.followed.photo }}" width="100px" alt="">
+                                        <div class="sgt-text">
+                                            <h4> {{ f.followed }}</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+              </div>
+          </div><!--main-left-sidebar end-->
+  </div>
+                  <div class="col-lg-8 col-md-8 no-pd">
+    <div class="main-ws-sec">
+                <div class="posts-section">
+                    {% for f in followed %}
+                        {% for post in f.followed.posts %}
+                        <div class="post-bar">
+                            <div class="post_topbar">
+                                <div class="usy-dt">
+                                    <img src="{{asset('images/')}}{{ post.user.photo }}" width="50px" alt="">
+                                    <div class="usy-name">
+                                        <h3>{{ post.user.username }}</h3>
+                                        <span><img src="{{ asset('img/clock.png') }}" alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job_descp">
+                                <p>{{ post.contenu|raw}}<a href="#" title=""></a></p>
+                            </div>
+                            <div class="job-status-bar">
+                                <ul class="like-com">
+                                    <li>
+                                        {% set x=0 %}
+                                        {% for jaime in post.jaimes %}
+                                            {% if jaime.user == app.user %}
+                                                {% set x=1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <a class="jaime" href="{{ path('jaime', {'id': post.id}) }}">
+                                            <i class="la la-heart {% if x==1 %}text-danger{% endif %}"></i><p>{{ post.jaimes|length }}</p></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!--post-bar end-->
+                    {% endfor %}
+                    {% endfor %}
+                    </div>
+    </div><!--process-comm end-->
+</div>
+            </div>
+          </div>
+        </div>
+</main>
+
+
+    <script>
+        $(".jaime").click(function (e) {
+            let x=$(this);
+            e.preventDefault();
+            $.ajax({url: $(this).attr('href'), success: function(r){
+                    if(r==='added'){
+                        x.children("p").html((parseInt(x.children("p").html())+1));
+                        x.children(".la").addClass("text-danger");
+                    }
+                    if(r==='removed'){
+                        x.children("p").html((parseInt(x.children("p").html())-1));
+                        x.children(".la").removeClass("text-danger");
+                    }
+                }});
+
+        })
+    </script>
+
+
+{% endblock %}
+
+
+

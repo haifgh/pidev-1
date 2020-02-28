@@ -25,7 +25,7 @@ guide_edit:
 guide_delete:
     path:     /admin/guide/{id}/delete
     defaults: { _controller: "GuidesBundle:Guide:delete" }
-    methods:  DELETE
+
 
 guide_details:
     path:     /guide/{id}/details

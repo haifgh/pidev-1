@@ -34,9 +34,9 @@
                     {% endif %}
                 {% endfor %}
                 {% if x %}
-                    <button class=" primary-btn "><a href="{{ path('quitter', {'id': event.id}) }}" id="part" style="color: white">leave</a></button>
+                    <a class="primary-btn" href="{{ path('quitter', {'id': event.id}) }}" id="part" style="color: white">leave</a>
                 {% else %}
-                    <button class=" primary-btn "><a href="{{ path('participer', {'id': event.id}) }}" id="part" style="color: white">join</a></button>
+                    <a class=" primary-btn " href="{{ path('participer', {'id': event.id}) }}" id="part" style="color: white">join</a>
                 {% endif %}
                              {{ twitterButton() }}
 

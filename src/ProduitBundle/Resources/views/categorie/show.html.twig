@@ -3,10 +3,11 @@
 {% block content %}
     <div class="container-fluid mt--7">
 <div class="row clearfix">
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="card">
+<div class="col">
+    <div class="card p-4">
+    <div class="card-header">
     <h1>Categorie</h1>
-
+    </div>
     <table>
         <tbody>
             <tr>
@@ -18,26 +19,21 @@
                 <td>{{ categorie.nom }}</td>
             </tr>
         </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('categorie_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('categorie_edit', { 'id': categorie.id }) }}">Edit</a>
-        </li>
-        <li>
-            <a href="{{ path('categorie_delete', { 'id': categorie.id }) }}">delete</a>
-        </li>
-    </ul>
+<td><center>
+            <a class="btn btn-outline-dark" href="{{ path('categorie_index') }}">Back to the list</a>
+
+            <a class="btn btn-outline-dark" href="{{ path('categorie_edit', { 'id': categorie.id }) }}">Edit</a>
+
+            <a class="btn btn-outline-dark" href="{{ path('categorie_delete', { 'id': categorie.id }) }}">delete</a></center></td>
+    </table>
     </div>
 </div>
-
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="row clearfix">
+</div></div>
+        <div class="row clearfix mt-5">
+            <div class="col">
+                <div class="card shadow p-3">
+                    <div class="card-header">
                         <h1>Produits list</h1>
 
                     </div>
@@ -50,7 +46,7 @@
                                 <th>Qte</th>
                                 <th>Prix</th>
                                 <th>Description</th>
-                                <th>Actions</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -61,27 +57,14 @@
                                 <td>{{ produit.qte }}</td>
                                 <td>{{ produit.prix }}</td>
                                 <td>{{ produit.description }}</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('produit_edit', { 'id': produit.id }) }}">edit</a>
-                                        </li>
-                                    </ul>
-                                </td>
+
                             </tr>
                             </tbody>
                             {% endfor %}
                         </table>
 
 
-                        <td>
-                            <li>
-                                <a href="{{ path('produit_new') }}">Create a new produit</a>
-                            </li>
-                        </td>
+
                     </div>
                 </div>
             </div>

@@ -163,17 +163,18 @@ class DefaultController extends Controller
         return $this->render('users.html.twig',['users'=>$users]);
     }
     /**
-     * @Route("/admin/user/{id}/edit", name="user_edit")
+     * @Route("/user/edit", name="user_edit")
      */
-    public function editusersAction(Request $request,User $user)
-    {
+    public function editusersAction(Request $request)
+    {   $user=$this->getUser();
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('users');
+            $user->UploaderProfilePicture();
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('post_index');
         }
 
         return $this->render('edituser.html.twig', array(

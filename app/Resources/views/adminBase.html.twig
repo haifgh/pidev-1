@@ -48,7 +48,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome!</h6>
                     </div>
-                    <a href="{{ path('fos_user_profile_show') }}" class="dropdown-item">
+                    <a href="{{ path('post_index') }}" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>My profile</span>
                     </a>
@@ -150,6 +150,11 @@
                         <i class="ni ni-bullet-list-67 text-primary"></i> Guides' comments
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('reclamationa_index') }}">
+                        <i class="ni ni-chat-round text-primary"></i> claims
+                    </a>
+                </li>
 
 
             </ul>                                                                   {#end of navigation#}
@@ -224,7 +229,7 @@
                         <div class=" dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
-                        <a href="{{ path('fos_user_profile_show') }}" class="dropdown-item">
+                        <a href="{{ path('post_index') }}" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>My profile</span>
                         </a>

@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,7 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')->add('prenom')->add('email')->add('tel')->add('adresse');
+        $builder->add('nom',TextType::class, ['label'=>'name'])->add('prenom',TextType::class, ['label'=>'lastname'])->add('email')->add('tel',TextType::class, ['label'=>'N°:'])->add('adresse',TextType::class, ['label'=>'address'])->add('photo',fileType::class, array('data_class' => null));;
     }/**
      * {@inheritdoc}
      */
