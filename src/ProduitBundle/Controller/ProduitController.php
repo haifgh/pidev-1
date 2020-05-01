@@ -33,7 +33,7 @@ class ProduitController extends Controller
 		$pagination=$paginator->paginate(
 		$produits,
 		$request->query->getInt('page',1),
-		$request->query->getInt('limit',6)
+		$request->query->getInt('limit',2)
 		);
         return $this->render('@Produit/produit/index.html.twig', array(
             'produits' => $pagination,

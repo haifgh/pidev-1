@@ -1,7 +1,12 @@
 {% extends 'adminBase.html.twig' %}
 {% block content %}
+<div class="container-fluid mt--7">
+
+    <div class="row clearfix ">
+        <div class="col">
+            <div class="card p-5">
     <div class="container">
-    <h1>Reclamation {{ reclamation.id }} {% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</h1>
+    <h1>Reclamation {{ reclamation.id }}: {% if reclamation.date %}{{ reclamation.date|date('d-m-Y') }}{% endif %}</h1>
     <table>
         <tbody>
         <th>from</th>
@@ -21,6 +26,6 @@
         </tbody>
     </table>
     </div>
-
+            </div></div></div></div>
 
 {% endblock %}

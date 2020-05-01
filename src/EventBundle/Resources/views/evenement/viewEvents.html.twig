@@ -4,13 +4,19 @@
     <section class="blog-section spad pt-5">
         <div class="row mb-5">
             <div class="col-8"></div>
-            <button class=" primary-btn col "><a style="color: white" href="{{  path('evenement_newUser')}}">Create Event</a> </button>
+            <a class=" primary-btn col " style="color: white" href="{{  path('evenement_newUser')}}">Create Event</a>
+
             <div class="col-2"></div>
         </div>
         <div class="row">
+
         <div class="col"></div>
         <div class="col-9">
-
+            <div class="row mb-4">
+                <div class="col"></div>
+            {{ knp_pagination_render(events) }}
+                <div class="col"></div>
+            </div>
                 <div class="row ">
                 {% for event in events %}
 
@@ -47,6 +53,7 @@
                 {% endfor %}
                 </div>
         </div><div class="col"></div>
+
         </div>
     </section>
 {% endblock %}

@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Guide
  *
@@ -25,7 +25,7 @@ class Guide
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
@@ -41,21 +41,21 @@ class Guide
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="categorie", type="string", length=255)
      */
     private $categorie;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="lien", type="string", length=255)
      */
     private $lien;

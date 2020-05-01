@@ -25,14 +25,19 @@ class promotionController extends Controller
      * @Route("/admin/promotion", name="promotion_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $promotions = $em->getRepository('AppBundle:Promotion')->findAll();
-
+        $paginator=$this->get('knp_paginator');
+        $pagination=$paginator->paginate(
+            $promotions,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',1)
+        );
         return $this->render('@Promo/promotion/index.html.twig', array(
-            'promotions' => $promotions,
+            'promotions' => $pagination,
         ));
     }
 

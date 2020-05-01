@@ -40,7 +40,7 @@ class DefaultController extends Controller
         $pagination=$paginator->paginate(
             $p,
             $request->query->getInt('page',1),
-            $request->query->getInt('limit',6)
+            $request->query->getInt('limit',2)
         );
 
         return $this->render('@Produit/Default/shop.html.twig', array(
@@ -63,7 +63,7 @@ class DefaultController extends Controller
         $pagination=$paginator->paginate(
             $catp,
             $request->query->getInt('page',1),
-            $request->query->getInt('limit',6)
+            $request->query->getInt('limit',2)
         );
         return $this->render('@Produit/Default/shopcat.html.twig', array(
             'c'=>$c,

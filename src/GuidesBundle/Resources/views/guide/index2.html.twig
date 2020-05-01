@@ -38,9 +38,14 @@
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
-                    <div class="row">
+                    <div class="row mb-5">
+                        <div class="col"></div>
+                        {{ knp_pagination_render(guides) }}
+                        <div class="col"></div>
+                    </div>
 
-                                    {% for guide in guides %}
+                    <div class="row">
+                            {% for guide in guides %}
                         <div class="col-lg-6 col-sm-6">
                             <div class="blog-item w-75">
                                 <div class="bi-pic">
@@ -66,7 +71,7 @@
 
                         <div class="col-lg-12">
                             <div class="loading-more">
-                                {{ knp_pagination_render(guides) }}
+
                             </div>
                         </div>
                     </div>

@@ -50,7 +50,7 @@ class GuideController extends Controller
         $pagination = $paginator->paginate(
             $guides,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 2)
+            $request->query->getInt('limit', 1)
         );
         return $this->render('@Guides/guide/index2.html.twig', array(
             'guides' => $pagination,'guide'=>$guide

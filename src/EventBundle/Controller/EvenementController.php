@@ -205,14 +205,20 @@ class EvenementController extends Controller
      * @Route("/user/evenement", name="evenement_view")
      *
      */
-    public function afficheAction()
+    public function afficheAction(Request $request)
     {
         $q=$this->getDoctrine()->getManager()->createQuery('select n from AppBundle:Evenement n
         where n.dateFin > CURRENT_DATE() order by n.nbrePlaces desc ') ;
-        $events=$q->getResult();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $q,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 1)
+        );
         //$events=$this->getDoctrine()->getRepository(Evenement::class)->findAll();
         return $this->render('@Event/evenement/viewEvents.html.twig', array(
-            'events'=>$events
+            'events'=>$pagination
         ));
 
     }

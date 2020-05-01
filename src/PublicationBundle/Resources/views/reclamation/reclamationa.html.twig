@@ -4,10 +4,11 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <div class="header">
+                <div class="card-header">
+                    <h3>claim list</h3></div>
                     <div class="product-feed-tab current" id="feed-dd">
                         <div class="post-project">
-                            <h3>claim list</h3>
+
 
                             <div class="post-project-fields">
                                 <div class="body table-responsive">
@@ -34,23 +35,20 @@
                                                 <td>{{ reclamation.user}}</td>
                                                 <td>{{ reclamation.reclamer}}</td>
                                                 <td>
-                                                    <ul>
+
                                                         {% if reclamation.reclamer.enabled == 1 %}
-                                                        <li>
+
                                                             <a class="btn btn-warning" href="{{ path('block_user', { 'id': reclamation.reclamer.id }) }}">block</a>
-                                                        </li>
+
                                                         {% endif %}
                                                         {% if reclamation.reclamer.enabled == 0 %}
-                                                            <li>
+
                                                                 <a class="btn btn-success" href="{{ path('unblock_user', { 'id': reclamation.reclamer.id }) }}">Unblock</a>
-                                                            </li>
+
                                                         {% endif %}
-                                                        <li>
+
                                                             <a class="btn btn-primary" href="{{ path('reclamationa_show',{ 'id': reclamation.id }) }}">show</a>
-                                                        </li>
 
-
-                                                    </ul>
 
                                                 </td>
                                             </tr>

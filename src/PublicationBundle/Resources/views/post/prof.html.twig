@@ -42,7 +42,6 @@
                                 <div class="user-tab-sec">
                                     <h3>{{app.user.username}}</h3>
                                 </div>
-
                                 <div class="product-feed-tab current" id="feed-dd">
                                     <div class="posts-section">
                                         <div class="post-topbar">
@@ -59,7 +58,8 @@
                                                     <div class="usy-dt">
                                                         <img src="{{asset('images')}}/{{ post.user.photo }}" alt="" style="width: 50px;">
                                                         <div class="usy-name">
-                                                            <h3>{{ post.user.username }}</h3>
+                                                            <h3>{{ post.user.username }}</h3>                             {{ twitterButton() }}
+
                                                             <span><img src={{ asset ("img/clock.png") }} alt="">{% if post.dateCreation %}{{ post.dateCreation|date() }}{% endif %}</span>
                                                         </div>
                                                     </div>
@@ -90,13 +90,8 @@
                                                 </div>
                                             </div><!--post-bar end-->
                                         {% endfor %}
-                                        <div class="process-comm">
-                                            <div class="spinner">
-                                                <div class="bounce1"></div>
-                                                <div class="bounce2"></div>
-                                                <div class="bounce3"></div>
-                                            </div>
-                                        </div><!--process-comm end-->
+
+
                                     </div><!--posts-section end-->
                                 </div><!--product-feed-tab end-->
                             </div><!--main-ws-sec end-->
@@ -104,6 +99,7 @@
                     </div>
                 </div>
             </div>
+
         </main>
     </div>
     <script>
