@@ -109,9 +109,7 @@ fos_user:
     from_email:
         address: "pidevsmtp@gmail.com"
         sender_name: "pidevmaster"
-    registration:
-         confirmation:
-                enabled: true
+   
 
 fos_message:
     db_driver: orm
