@@ -2,11 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * commande
@@ -18,7 +20,7 @@ class commande
 {
     /**
      * @var int
-     *
+     * @Groups("commande")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,22 +28,22 @@ class commande
     private $id;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
+     *@Groups("commande")
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
+     *@Groups("commande")
      * @ORM\Column(name="date_livraison", type="datetime",nullable=true)
      */
     private $dateLivraison;
 
     /**
      * @var string
-     *
+     *@Groups("commande")
      * @ORM\Column(name="status", type="string", length=255)
      */
     private $status;
@@ -49,6 +51,7 @@ class commande
     /**
      * @var string
      * @Assert\NotBlank
+     * @Groups("commande")
      * @Assert\Length(min="12")
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
@@ -56,10 +59,37 @@ class commande
     /**
      * @var string
      * @Assert\NotBlank
+     * @Groups("commande")
      * @Assert\Length(min="8",max="8")
      * @ORM\Column(name="tel", type="string", length=255, nullable=true)
      */
     private $tel;
+
+
+    /**
+     * @var float
+     *@Groups("commande")
+     * @ORM\Column(name="prix_total", type="float",nullable=true)
+     */
+    private $prixTotal;
+
+    /**
+     * @Groups("commande")
+     * @ManyToOne(targetEntity="User", inversedBy="commandes")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    /**
+     * @Groups("commande")
+     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",orphanRemoval=true)
+     */
+    private $lignes_commande;
+    /**
+     * @Groups("commande")
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    protected $chargeId;
+
 
     /**
      * @return string
@@ -76,29 +106,6 @@ class commande
     {
         $this->tel = $tel;
     }
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix_total", type="float",nullable=true)
-     */
-    private $prixTotal;
-
-    /**
-     * @ManyToOne(targetEntity="User", inversedBy="commandes")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-    /**
-     * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",orphanRemoval=true)
-     */
-    private $lignes_commande;
-    /**
-     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
-     */
-    protected $chargeId;
-
-
 
     /**
      * @return mixed
@@ -136,7 +143,7 @@ class commande
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      *
      * @return commande
      */
@@ -150,7 +157,7 @@ class commande
     /**
      * Get date
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -160,7 +167,7 @@ class commande
     /**
      * Set dateLivraison
      *
-     * @param \DateTime $dateLivraison
+     * @param DateTime $dateLivraison
      *
      * @return commande
      */
@@ -174,7 +181,7 @@ class commande
     /**
      * Get dateLivraison
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateLivraison()
     {

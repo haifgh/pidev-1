@@ -13,6 +13,9 @@ commande:
 panier:
     resource: '@CommandeBundle/Controller/panierController.php'
     type:     annotation
+api_commande:
+    resource: '@CommandeBundle/Controller/apiController.php'
+    type:     annotation
 produit:
     resource: "@ProduitBundle/Controller/"
     type: annotation
@@ -34,4 +37,4 @@ fos_user:
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /optional_routing_prefix
-    prefix: /optional_routing_prefix
+

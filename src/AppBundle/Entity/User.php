@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\MessageBundle\Model\ParticipantInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -20,7 +21,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @var int
-     *
+     * @Groups("user")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -128,6 +129,7 @@ class User extends BaseUser implements ParticipantInterface
 
 
     /**
+     * @Groups("commande_details")
      * One product has many features. This is the inverse side.
      * @OneToMany(targetEntity="commande", mappedBy="user",cascade="remove")
      */
