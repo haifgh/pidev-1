@@ -19,7 +19,7 @@ class ligne_commande
 {
     /**
      * @var int
-     *@Groups("commande")
+     *@Groups("commande_lc")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,14 +28,14 @@ class ligne_commande
 
     /**
      * @var float
-     *@Groups("l_commande")
+     *@Groups("commande_lc")
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
 
     /**
      * @var int
-     * @Groups("l_commande")
+     * @Groups("commande_lc")
      * @Assert\LessThan(propertyPath="Produit.qte")
      * @ORM\Column(name="quantite", type="integer")
      */
@@ -109,10 +109,12 @@ class ligne_commande
     /**
      *
      * @ManyToOne(targetEntity="Produit")
-     * @Groups("commande_produit")
+     * @Groups("commande_lc")
      * @JoinColumn(name="produit_id", referencedColumnName="id")
      */
     private $produit;
+
+
 
     /**
      * @return mixed

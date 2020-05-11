@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\OneToMany;
 
@@ -28,13 +29,14 @@ class Produit
 
     /**
      * @var string
-     *
+     *  @Groups("produit")
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var int
+     * @Groups("produit")
      * @Assert\GreaterThan(-1)
      * @ORM\Column(name="qte", type="integer")
      */
@@ -42,13 +44,14 @@ class Produit
 
     /**
      * @var int
+     * @Groups("produit")
      * @Assert\GreaterThan(0)
      * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
     /**
      * @var float
-     *
+     * @Groups("produit")
      * @ORM\Column(name="$prix_promo", type="float",nullable=true)
      */
     private $prix_promo;
@@ -60,45 +63,15 @@ class Produit
      */
     private $lignes_promotion;
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getLignesPromotion()
-    {
-        return $this->lignes_promotion;
-    }
 
-    /**
-     * @param ArrayCollection $lignes_promotion
-     */
-    public function setLignesPromotion($lignes_promotion)
-    {
-        $this->lignes_promotion = $lignes_promotion;
-    }
-    // ...
 
     public function __construct() {
         $this->lignes_promotion = new ArrayCollection();
     }
 
     /**
-     * @return float
-     */
-    public function getPrixPromo()
-    {
-        return $this->prix_promo;
-    }
-
-    /**
-     * @param float $prix_promo
-     */
-    public function setPrixPromo($prix_promo)
-    {
-        $this->prix_promo = $prix_promo;
-    }
-    /**
      * @var string
-     *
+     * @Groups("produit")
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
@@ -136,6 +109,21 @@ class Produit
     }
 
     /**
+     * @return float
+     */
+    public function getPrixPromo()
+    {
+        return $this->prix_promo;
+    }
+
+    /**
+     * @param float $prix_promo
+     */
+    public function setPrixPromo($prix_promo)
+    {
+        $this->prix_promo = $prix_promo;
+    }
+    /**
      * Set nom
      *
      * @param string $nom
@@ -158,7 +146,22 @@ class Produit
     {
         return $this->nom;
     }
+    /**
+     * @return ArrayCollection
+     */
+    public function getLignesPromotion()
+    {
+        return $this->lignes_promotion;
+    }
 
+    /**
+     * @param ArrayCollection $lignes_promotion
+     */
+    public function setLignesPromotion($lignes_promotion)
+    {
+        $this->lignes_promotion = $lignes_promotion;
+    }
+    // ...
     /**
      * Set qte
      *

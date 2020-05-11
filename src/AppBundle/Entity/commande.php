@@ -74,13 +74,13 @@ class commande
     private $prixTotal;
 
     /**
-     * @Groups("commande")
+     * @Groups("commande_user")
      * @ManyToOne(targetEntity="User", inversedBy="commandes")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
     /**
-     * @Groups("commande")
+     * @Groups("commande_lc")
      * @OneToMany(targetEntity="ligne_commande", mappedBy="commande",orphanRemoval=true)
      */
     private $lignes_commande;
@@ -138,6 +138,14 @@ class commande
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
