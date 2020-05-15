@@ -28,18 +28,22 @@ class User extends BaseUser implements ParticipantInterface
      */
     protected $id;
     /**
+     * @Groups("user")
      * @ORM\Column(name="nom", type="string",nullable=true)
     */
     private $nom;
     /**
+     * @Groups("user")
      * @ORM\Column(name="prenom", type="string",nullable=true)
      */
     private $prenom;
     /**
+     * @Groups("user")
      * @ORM\Column(name="tel", type="string",nullable=true)
      */
     private $tel;
     /**
+     * @Groups("user")
      * @ORM\Column(name="adresse", type="string",nullable=true)
      */
     private $adresse;

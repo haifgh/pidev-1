@@ -9,12 +9,17 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\categorie;
 use AppBundle\Entity\Produit;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -254,6 +259,46 @@ class DefaultController extends Controller
 
         return $this->render('@Produit/Default/index.html.twig', array());
         //return new Response($array[0]);
+    }
+    /**
+     * @Route("/api/login/{uname}/{pass}", name="api_login")
+     */
+    public function loginapiAction($uname,$pass)
+    {
+
+        $_username = $uname;
+        $_password = $pass;
+        $factory = $this->get('security.encoder_factory');
+        $user_manager = $this->get('fos_user.user_manager');
+        $user = $user_manager->findUserByUsername($_username);
+
+
+        if(!$user){
+            return new Response(
+                'Username doesnt exists',
+                Response::HTTP_UNAUTHORIZED,
+                array('Content-type' => 'application/json')
+            );
+        }
+
+        /// Start verification
+        $encoder = $factory->getEncoder($user);
+        $salt = $user->getSalt();
+
+        if(!$encoder->isPasswordValid($user->getPassword(), $_password, $salt)) {
+            return new Response(
+                'Username or Password not valid.',
+                Response::HTTP_UNAUTHORIZED,
+                array('Content-type' => 'application/json')
+            );
+        }
+        $encoders = [new JsonEncoder()];
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(['commandes','evenements','reclamations','posts','participations']);
+        $serializer = new Serializer([$normalizer], $encoders);
+        $jsonContent = $serializer->serialize($user, 'json');
+        return new Response($jsonContent);
     }
 
 }

@@ -28,7 +28,7 @@ class ligne_commande
 
     /**
      * @var float
-     *@Groups("commande_lc")
+     * @Groups("commande_lc")
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
