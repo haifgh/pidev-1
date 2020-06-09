@@ -21,29 +21,29 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @var int
-     * @Groups("user")
+     * @Groups("User")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
     /**
-     * @Groups("user")
+     * @Groups("User")
      * @ORM\Column(name="nom", type="string",nullable=true)
     */
     private $nom;
     /**
-     * @Groups("user")
+     * @Groups("User")
      * @ORM\Column(name="prenom", type="string",nullable=true)
      */
     private $prenom;
     /**
-     * @Groups("user")
+     * @Groups("User")
      * @ORM\Column(name="tel", type="string",nullable=true)
      */
     private $tel;
     /**
-     * @Groups("user")
+     * @Groups("User")
      * @ORM\Column(name="adresse", type="string",nullable=true)
      */
     private $adresse;

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Promotion;
+
 /**
  * PromotionRepository
  *
@@ -14,4 +16,41 @@ class PromotionRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("");
 
     }
+    /**
+     * @return Promotion[] Returns an array of Articles objects
+     */
+    public function apiFindAll() : array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id', 'p.dateDebut', 'p.dateFin', 'p.tauxReduction')
+            ->orderBy('p.dateDebut', 'DESC');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
+    public function findArticle($id_article)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT  p,p
+            FROM AppBundle:Promotion p
+            INNER JOIN a.articles c
+            WHERE c.id =:id')->setParameter('id',$id_article);
+        return $query
+            ->getResult();
+    }
+    public function findCom($id_article)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT p.contenu, a.id,c.id
+            FROM AppBundle:Commentaire a
+            Left JOIN a.articles c
+            WHERE c.id =:id')->setParameter('id',$id_article);
+        return $query
+            ->getResult();
+    }
+
 }

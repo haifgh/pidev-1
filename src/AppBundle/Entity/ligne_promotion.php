@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
@@ -16,7 +17,7 @@ class ligne_promotion
 {
     /**
      * @var int
-     *
+     *@Groups("ligne_promotion")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -27,18 +28,19 @@ class ligne_promotion
 
     /**
      * @var int
-     *
+     *@Groups("ligne_promotion")
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
     /**
+     * @Groups("ligne_promotion")
      * Many features have one product. This is the owning side.
      * @ManyToOne(targetEntity="AppBundle\Entity\Promotion", inversedBy="lignes_promotion")
      * @JoinColumn(name="Promotion_id", referencedColumnName="id")
      */
     private $promotion;
     /**
-     *
+     *@Groups("ligne_promotion")
      * @ManyToOne(targetEntity="Produit", inversedBy="lignes_promotion")
      * @JoinColumn(name="produit_id", referencedColumnName="id")
      */

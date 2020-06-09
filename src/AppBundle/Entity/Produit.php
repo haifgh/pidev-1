@@ -20,7 +20,7 @@ class Produit
 {
     /**
      * @var int
-     *
+     *@Groups("Produit")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -29,14 +29,14 @@ class Produit
 
     /**
      * @var string
-     *  @Groups("produit")
+     * @Groups("Produit")
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var int
-     * @Groups("produit")
+     * @Groups("Produit")
      * @Assert\GreaterThan(-1)
      * @ORM\Column(name="qte", type="integer")
      */
@@ -44,14 +44,14 @@ class Produit
 
     /**
      * @var int
-     * @Groups("produit")
+     * @Groups("Produit")
      * @Assert\GreaterThan(0)
      * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
     /**
      * @var float
-     * @Groups("produit")
+     * @Groups("Produit")
      * @ORM\Column(name="$prix_promo", type="float",nullable=true)
      */
     private $prix_promo;
@@ -71,7 +71,7 @@ class Produit
 
     /**
      * @var string
-     * @Groups("produit")
+     *@Groups("Produit")
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;

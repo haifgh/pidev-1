@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Promotion
  *
@@ -22,12 +23,14 @@ class Promotion
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @Groups("Promotion")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
     /**
      * @var DateTime
      * @Assert\DateTime()
+     * @Groups("Promotion")
      * @Assert\Type(type="DateTime")
      * @ORM\Column(name="date_debut", type="datetime")
      */
@@ -36,6 +39,7 @@ class Promotion
     /**
      * @var DateTime
      * @Assert\DateTime()
+     * @Groups("Promotion")
      * @Assert\Type(type="DateTime")
      * @Assert\GreaterThan(propertyPath="dateDebut")
      * @ORM\Column(name="date_fin", type="datetime")
@@ -44,13 +48,13 @@ class Promotion
 
     /**
      * @var float
-     *
+     *@Groups("Promotion")
      * @ORM\Column(name="taux_reduction", type="float")
      */
     private $tauxReduction;
     /**
      * @var string
-     *
+     *@Groups("Promotion")
      * @ORM\Column(name="nom", type="string")
      */
     private $nom;
@@ -82,6 +86,14 @@ class Promotion
 
     public function __construct() {
         $this->lignes_promotion = new ArrayCollection();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
 
