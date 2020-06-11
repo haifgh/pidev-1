@@ -46,7 +46,7 @@ class apiController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['commande','produit','commande_lc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['commande','Produit','commande_lc']]);
         return new Response($jsonContent);
     }
     /**

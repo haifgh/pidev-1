@@ -81,34 +81,44 @@ class apiController extends Controller
         $user->setLastLogin($request->get('date'));
         $em->persist($user);
         $em->flush();
-        $serializer=new Serializer([new ObjectNormalizer()]);
-        $formatted=$serializer->normalize($user);
+        //$serializer=new Serializer([new ObjectNormalizer()]);
+        //$formatted=$serializer->normalize($user);
         return new Response('ok');
 
 
     }
+
     /**
      * @Route("/newpromo", name="add")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Exception
      */
     public function newPromoAction(Request $request){
         $em=$this->getDoctrine()->getManager();
         $promo= new Promotion();
         $promo->setNom($request->get('nom'));
         $promo->setTauxReduction($request->get('rate'));
+
+
+
+        $promo->setDateDebut( new \DateTime($request->get('dateDebut')));
+        $promo->setDateFin(new \DateTime($request->get('dateFin')));
+        dump($promo);
         $em->persist($promo);
         $em->flush();
-        $serializer=new Serializer([new ObjectNormalizer()]);
-        $formatted=$serializer->normalize($promo);
+       // $serializer=new Serializer([new ObjectNormalizer()]);
+        //$formatted=$serializer->normalize($promo);
         return new Response('ok');
 
 
     }
+
     /**
      * @Route("/newligne/{idpdt}/{idpromo}", name="add_ligne")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function newLigneAction(Request $request,$idpdt,$idpromo){
 
@@ -207,35 +217,22 @@ class apiController extends Controller
      * @Route("/promo/update/{id}", name="u")
      *
      */
-        public function updatePromoAction(Request $request, $id)
-        {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Promotion')->find($id);
-    if($request->isMethod('GET'))
+    public function updatePromoAction(Request $request, $id)
     {
-    $entity->setNom($request->get('nom'));
-    $entity->setTauxReduction($request->get('rate'));
-      //  $date= new \DateTime();
-      //  $date=$request->get('date');
-        //$entity->setDateDebut($date);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Promotion')->find($id);
+        if($request->isMethod('GET'))
+        {
+            $entity->setNom($request->get('nom'));
+            $entity->setTauxReduction($request->get('rate'));
+            $entity->setDateDebut(new \DateTime($request->get('dateDebut')));
+            $entity->setDateFin(new \DateTime($request->get('dateFin')));
+            $em->flush();
 
-    $em->flush();
-    $normalizer = new ObjectNormalizer();
-    $normalizer->setCircularReferenceLimit(2);
-    // Add Circular reference handler
-    $normalizer->setCircularReferenceHandler(function ($object) {
-        return $object->getId();
-    });
-    $normalizers = array($normalizer);
-    $encoders=[new JsonEncoder()];
-    $serializer = new Serializer($normalizers, $encoders);
-    $formate=$serializer->normalize($entity);
-    return new Response('ok');
-
-
-}
-            return new Response('Failed', 404);
+            return new Response('ok');
         }
+                return new Response('Failed', 404);
+    }
     /**
      * @Route("/quantitysupdate/{id}", name="update_promo")
      *
