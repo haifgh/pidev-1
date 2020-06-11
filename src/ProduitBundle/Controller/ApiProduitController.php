@@ -209,7 +209,7 @@ class ApiProduitController extends Controller
         $res=$em->getRepository('AppBundle:categorie')->findByNom($nom);
         $catp=$this->getDoctrine()->getManager()->createQuery('select p from AppBundle:Produit p where p.qte>0 AND p.categorie=:p')->setParameter('p', $res);
         $rest=$catp ->getResult();
-        dump($rest);
+      
         $encoders = [new JsonEncoder()];
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
