@@ -40,7 +40,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
     /**
@@ -53,7 +53,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
 
@@ -89,21 +89,20 @@ class ApiProduitController extends Controller
         return new Response("product added successfully");
     }
     /**
-     * @Route("/api/newcat/{nom}/{produit}", name="add_cat")
+     * @Route("/api/newcat/{nom}", name="add_cat")
      *
      * @return JsonResponse
      *
      */
-    public function addCategorieAction($nom , $produit)
+    public function addCategorieAction($nom)
     {
         $em = $this->getDoctrine()->getManager();
         $categorie = new categorie();
         $categorie->setNom($nom);
-        $categorie->setProduit($produit);
+        $categorie->setProduit(0);
         $em->persist($categorie);
         $em->flush();
-        $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted= $serializer->normalize($categorie);
+
         return new Response("category added successfully");
     }
 
@@ -193,7 +192,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
 
@@ -214,7 +213,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($rest, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($rest, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
     /**
@@ -232,7 +231,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
 
@@ -251,7 +250,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
     /**
@@ -270,7 +269,7 @@ class ApiProduitController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['produit','produitc']]);
+        $jsonContent = $serializer->serialize($res, 'json',['groups' =>['Produit','produitc']]);
         return new Response($jsonContent);
     }
 

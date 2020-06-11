@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * categorie
@@ -16,7 +17,7 @@ class categorie
 {
     /**
      * @var int
-     *
+     *@Groups("produitc")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -25,14 +26,14 @@ class categorie
 
     /**
      * @var string
-     *
+     *@Groups("produitc")
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var int
-     *
+     *@Groups("produitc")
      * @ORM\Column(name="produit", type="integer", nullable=true)
      */
     private $produit;
@@ -73,6 +74,7 @@ class categorie
         return $this->nom;
     }
     /**
+     * @Groups("produitc")
      * One product has many features. This is the inverse side.
      * @OneToMany(targetEntity="Produit", mappedBy="categorie",cascade="remove")
      */

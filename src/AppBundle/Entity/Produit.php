@@ -77,7 +77,7 @@ class Produit
     private $description;
     /**
      * @var string
-     *
+     *@Groups("Produit")
      * @ORM\Column(name="photo", type="string", length=255)
      */
 
