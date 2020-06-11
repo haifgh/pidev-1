@@ -72,17 +72,20 @@ class apiController extends Controller
      */
     public function newAction(Request $request){
 
-        $em=$this->getDoctrine()->getManager();
-        $user= new User();
-        $user->setUsername($request->get('nom'));
-        $user->setPrenom($request->get('prenom'));
+        $user_manager = $this->get('fos_user.user_manager');
+        $encoder=$this->get('security.password_encoder');
+        $user=$user_manager->createUser();
+        $user->setUsername($request->get('username'));
         $user->setEmail($request->get('email'));
-        $user->setPassword($request->get('pass'));
-        $user->setLastLogin($request->get('date'));
-        $em->persist($user);
-        $em->flush();
-        //$serializer=new Serializer([new ObjectNormalizer()]);
-        //$formatted=$serializer->normalize($user);
+        $user->setPassword($encoder->encodePassword($user, $request->get('pass')));
+        $user->setTel($request->get('phone'));
+        $user->setEnabled(true);
+        $user_manager->updateUser($user);
+
+
+
+
+
         return new Response('ok');
 
 
