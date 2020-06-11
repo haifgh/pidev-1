@@ -197,18 +197,19 @@ class ApiProduitController extends Controller
     }
 
     /**
-     * @Route("/api/findcat/{nom}", name="getProdCat")
+     * @Route("/api/findcats/{nom}", name="getProdCats")
      * @param $nom
-     * @param Request $request
+     *
      * @return Response
      * @throws AnnotationException
      */
-    public function getCatProd($nom,Request $request)
+    public function getCatProd($nom)
     {
         $em=$this->getDoctrine()->getManager();
         $res=$em->getRepository('AppBundle:categorie')->findByNom($nom);
         $catp=$this->getDoctrine()->getManager()->createQuery('select p from AppBundle:Produit p where p.qte>0 AND p.categorie=:p')->setParameter('p', $res);
         $rest=$catp ->getResult();
+        dump($rest);
         $encoders = [new JsonEncoder()];
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(),new ObjectNormalizer($classMetadataFactory)];
