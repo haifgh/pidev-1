@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Commentaire
  *
@@ -17,7 +17,7 @@ class Commentaire
 {
     /**
      * @var int
-     *
+     *@Groups("commentaire")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,6 +26,7 @@ class Commentaire
 
     /**
      * @var string
+     * @Groups("commentaire")
      * @Assert\NotBlank()
      * @ORM\Column(name="contenu", type="string", length=255)
      */
@@ -33,7 +34,7 @@ class Commentaire
 
     /**
      * @var \DateTime
-     *
+     *@Groups("commentaire")
      * @ORM\Column(name="date", type="date")
      */
     private $date;
@@ -97,12 +98,13 @@ class Commentaire
         return $this->date;
     }
     /**
-     *
+     *@Groups("commentaire")
      * @ManyToOne(targetEntity="Guide", inversedBy="commentaires")
      * @JoinColumn(name="guide_id", referencedColumnName="id")
      */
     private $guide;
     /**
+     * @Groups("commentaire")
      * @ManyToOne(targetEntity="User")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */

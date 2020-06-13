@@ -13,16 +13,28 @@ use Doctrine\ORM\EntityRepository;
 class CommentaireRepository extends EntityRepository
 {
 
-    public function getPostComments($id){
-        return $this->getEntityManager()
+    /*public function getPostComments($id){
+        $query=$this->getEntityManager()
             ->createQuery(
                 "SELECT c, u.nom
-       FROM AppBundle:Commentaire c
-       JOIN c.user u
-       WHERE c.commentaire = :id"
+       FROM AppBundle:Commentaire c 
+       JOIN c.user u 
+       WHERE c.guide = :id "
             )
-            ->setParameter('id', $id)
+            ->setParameter('id', $id );
+            return $query->getResult();
+    }*/
+    public function getPostComments($guide_id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                "SELECT c, u.username
+       FROM AppBundle:Commentaire c 
+       JOIN c.user u 
+       WHERE c.guide = :id "
+            )
+            ->setParameter('id', $guide_id)
             ->getArrayResult();
-    }
 
+    }
 }

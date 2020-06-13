@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Guide
  *
@@ -16,7 +17,7 @@ class Guide
 {
     /**
      * @var int
-     *
+     * @Groups("guide")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -25,6 +26,7 @@ class Guide
 
     /**
      * @var string
+     * @Groups("guide")
      * @Assert\NotBlank()
      * @ORM\Column(name="titre", type="string", length=255)
      */
@@ -34,13 +36,14 @@ class Guide
 
     /**
      * @var \DateTime
-     *
+     *@Groups("guide")
      * @ORM\Column(name="date_creation", type="date")
      */
     private $dateCreation;
 
     /**
      * @var string
+     * @Groups("guide")
      * @Assert\NotBlank()
      * @ORM\Column(name="categorie", type="string", length=255)
      */
@@ -48,6 +51,7 @@ class Guide
 
     /**
      * @var string
+     * @Groups("guide")
      * @Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255)
      */
@@ -55,6 +59,7 @@ class Guide
 
     /**
      * @var string
+     * @Groups("guide")
      * @Assert\NotBlank()
      * @ORM\Column(name="lien", type="string", length=255)
      */
@@ -62,14 +67,14 @@ class Guide
 
     /**
      * @var double
-     *
+     *@Groups("guide")
      * @ORM\Column(name="note", type="float" )
      */
     private $note;
 
     /**
      * @var string
-     *
+     *@Groups("guide")
      * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo ;

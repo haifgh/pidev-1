@@ -55,6 +55,12 @@ class GuideRepository extends EntityRepository
         } catch (NonUniqueResultException $e) {
         }
     }
+    public function findCommentDQL($id)
+    {
+        $query=$this->getEntityManager()->createQuery(" SELECT e from AppBundle:Commentaire e  WHERE e.guide= :id  ")
+            ->setParameter('id',$id )  ;
+        return $query->getResult();
+    }
 
 
 }

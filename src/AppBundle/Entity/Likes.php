@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,18 +14,20 @@ class Likes
 {
     /**
      * @var int
-     *
+     *@Groups("likes")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
     /**
+     * @Groups("likes")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(name="id_user",referencedColumnName="id")
      */
     private $user;
     /**
+     * @Groups("likes")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Guide", inversedBy="likes")
      * @ORM\JoinColumn(name="id_guide",referencedColumnName="id")
      */

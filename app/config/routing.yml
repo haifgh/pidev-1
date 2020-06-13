@@ -1,7 +1,9 @@
 guides:
     resource: "@GuidesBundle/Resources/config/routing.yml"
     prefix:   /
-
+api_guides:
+    resource: '@GuidesBundle/Controller/api_guideController.php'
+    type:     annotation
 event:
     resource: "@EventBundle/Controller/"
     type:     annotation
