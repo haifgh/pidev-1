@@ -43,7 +43,7 @@ class api_guideController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($guides, 'json', ['groups' => ['guide', 'user']]);
+        $jsonContent = $serializer->serialize($guides, 'json', ['groups' => ['guide', 'User']]);
         return new Response($jsonContent);
     }
 
@@ -89,7 +89,7 @@ class api_guideController extends Controller
             'lien' => $guide->getLien(),
             'photos' => $guide->getPhoto(),
             'isGuideLiked' => $isGuideLiked,
-            'nbLikes' => $nbLikes), 'json', ['groups' => ['guide', 'user', 'commentaire', 'likes']]);
+            'nbLikes' => $nbLikes), 'json', ['groups' => ['guide', 'User', 'commentaire', 'likes']]);
         return new Response($jsonContent);
 
     }
@@ -108,7 +108,7 @@ class api_guideController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize( $guides, 'json', ['groups' => ['guide', 'user']]);
+        $jsonContent = $serializer->serialize( $guides, 'json', ['groups' => ['guide', 'User']]);
         return new Response($jsonContent);
         //return $this->render('@Guides/guide/index2.html.twig', array(
         //  'guides'=>$guides ,'guide'=>$guide
@@ -190,7 +190,7 @@ class api_guideController extends Controller
             $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
             $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer($classMetadataFactory)];
             $serializer = new Serializer($normalizers, $encoders);
-            $jsonContent = $serializer->serialize($rate, 'json', ['groups' => ['guide', 'user', 'rate',]]);
+            $jsonContent = $serializer->serialize($rate, 'json', ['groups' => ['guide', 'User', 'rate',]]);
             // return new Response($jsonContent);
             return new Response("done");
             // return new Response("Done");
@@ -288,7 +288,7 @@ class api_guideController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-       $formatted=$serializer->serialize( $commentaires,'json' ,['groups' => ['commentaire', 'user','guide']]);
+       $formatted=$serializer->serialize( $commentaires,'json' ,['groups' => ['commentaire', 'User','guide']]);
         return new Response($formatted);
     }
 //$data = $serializer->normalize($user, null, [AbstractNormalizer::ATTRIBUTES => ['familyName', 'company' => ['name']]]);
@@ -397,7 +397,7 @@ class api_guideController extends Controller
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer($classMetadataFactory)];
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize([$guide,$nbLikes], 'json', ['groups' => ['guide', 'user']]);
+        $jsonContent = $serializer->serialize([$guide,$nbLikes], 'json', ['groups' => ['guide', 'User']]);
         return new Response($jsonContent);
     }
 
